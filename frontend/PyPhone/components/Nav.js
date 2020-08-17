@@ -1,20 +1,14 @@
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
-import Home from './Home';
-import Login from './Login';
+import Home from '../screens/Home';
+import Login from '../screens/Login';
 
-const Nav = createStackNavigator(
-  {
-    Login: {
-      screen: Login,
-    },
-    Home: {
-      screen: Home,
-    },
+const Nav = createStackNavigator({
+  Login: {screen: Login, navigationOptions: {headerShown: false}},
+
+  Home: {
+    screen: Home,
   },
-  {
-    headerMode: 'none',
-  },
-);
+});
 
 export default createAppContainer(Nav);

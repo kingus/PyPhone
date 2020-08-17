@@ -1,16 +1,15 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
-import RouterComponent from './components/ComponentRouter';
-import Login from './components/Login';
-import Register from './components/Register';
+import Login from './screens/Login';
+import Register from './screens/Register';
 import Nav from './components/Nav';
-import Home from './components/Home';
+import Home from './screens/Home';
 const App = () => {
   return (
-    // <Nav></Nav>
+    <Nav></Nav>
     // {/* <Home></Home> */}
     // <View style={styles.container}>
-    <Login />
+    // <Login />
     // <Register></Register>
     // </View>
   );
