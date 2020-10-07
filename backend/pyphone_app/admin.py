@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Task, TaskType
+from .models import Exercise, ExerciseType, Course, UsersCourse
 
-admin.site.register(Task)
-admin.site.register(TaskType)
+admin.site.register(Exercise)
+admin.site.register(ExerciseType)
+admin.site.register(Course)
+admin.site.register(UsersCourse)

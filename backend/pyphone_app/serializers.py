@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from .models import TaskType, Task
+from .models import Exercise, ExerciseType
 
 
-class TaskSerializer(serializers.ModelSerializer):
+class ExerciseSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Task
+        model = Exercise
         fields = '__all__'
