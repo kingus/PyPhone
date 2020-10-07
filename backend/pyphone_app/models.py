@@ -5,11 +5,10 @@ User = get_user_model()
 
 
 class ExerciseType(models.Model):
-    type_id = models.IntegerField(primary_key=True)
-    task_type = models.CharField(max_length=50, null=False)
+    exercise_type = models.CharField(max_length=50, null=False)
 
     def __str__(self):
-        return self.task_type
+        return self.exercise_type
 
 
 class Course (models.Model):
@@ -24,9 +23,10 @@ class Exercise(models.Model):
     question = models.CharField(max_length=350, null=False)
     possible_answers = models.CharField(max_length=600, null=False)
     correct_answer = models.CharField(max_length=100, null=False)
-    task_type = models.OneToOneField(
-        ExerciseType, on_delete=models.CASCADE)
-    course_id = models.ForeignKey(Course, on_delete=models.CASCADE, default=1)
+    # task_type = models.OneToOneField(
+    #     ExerciseType, on_delete=models.CASCADE, default=None)
+    # task_type = models.CharField(max_length=350, null=True)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.question
