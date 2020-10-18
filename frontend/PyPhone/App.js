@@ -4,14 +4,21 @@ import Login from './screens/Login';
 import Register from './screens/Register';
 import Nav from './components/Nav';
 import Home from './screens/Home';
+import NavContainer from './navigation/NavContainer';
+import {Provider} from 'react-redux';
+import {createStore, combineReducers, applyMiddleware} from 'redux';
+import authReducer from './store/reducers/auth';
+import ReduxThunk from 'redux-thunk';
+const rootReducer = combineReducers({
+  auth: authReducer,
+});
+
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 const App = () => {
   return (
-    <Nav></Nav>
-    // {/* <Home></Home> */}
-    // <View style={styles.container}>
-    // <Login />
-    // <Register></Register>
-    // </View>
+    <Provider store={store}>
+      <NavContainer></NavContainer>
+    </Provider>
   );
 };
 

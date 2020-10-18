@@ -8,7 +8,7 @@ class ExerciseType(models.Model):
     exercise_type = models.CharField(max_length=50, null=False)
 
     def __str__(self):
-        return self.exercise_type
+        return str(self.id) + " " + self.exercise_type
 
 
 class Course (models.Model):
@@ -16,16 +16,16 @@ class Course (models.Model):
     level = models.IntegerField(null=False)
 
     def __str__(self):
-        return self.course_name
+        return str(self.id) + " " + self.course_name
 
 
 class Exercise(models.Model):
     question = models.CharField(max_length=350, null=False)
-    possible_answers = models.CharField(max_length=600, null=False)
+    code = models.CharField(max_length=350, null=False)
+    possible_answers = models.CharField(max_length=600, null=True)
     correct_answer = models.CharField(max_length=100, null=False)
-    # task_type = models.OneToOneField(
-    #     ExerciseType, on_delete=models.CASCADE, default=None)
-    # task_type = models.CharField(max_length=350, null=True)
+    exercise_type = models.ForeignKey(
+        ExerciseType, on_delete=models.CASCADE, default=None, unique=False)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, default=1)
 
     def __str__(self):

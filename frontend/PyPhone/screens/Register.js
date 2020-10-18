@@ -9,16 +9,19 @@ import {
   ScrollView,
 } from 'react-native';
 import {StyleSheet} from 'react-native';
-import axios from 'axios';
 import logo from '../images/logo.png';
-import Nav from '../components/Nav';
 import '../global.js';
+import {useDispatch} from 'react-redux';
+import * as authActions from '../store/actions/auth';
 
-const Register = () => {
+const Register = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [rePassword, setRePassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
   const [registerSuccess, setRegisterSuccess] = useState(false);
+  const dispatch = useDispatch();
 
   const changePasswordHandler = (password) => {
     console.log(password);
@@ -36,45 +39,34 @@ const Register = () => {
     setUsername(username);
   };
 
-  const onClickRegister = () => {
-    console.log(username);
+  const authHandler = async () => {
+    let action;
+    action = authActions.register(username, password);
+    setIsLoading(true);
     if (password === rePassword) {
-      register();
+      try {
+        await dispatch(action);
+        props.navigation.navigate({
+          routeName: 'SignIn',
+        });
+      } catch (err) {
+        console.log(err.message);
+        setIsLoading(false);
+      }
     } else {
       console.log('Passwords do not match.');
     }
   };
 
-  const register = () => {
-    console.log(username);
-    console.log(password);
-    const endpoint = global.url + '/auth/register/';
-    const payload = {username: username, password: password};
-    axios.defaults.timeout = 10000;
-
-    axios
-      .post(endpoint, payload)
-      .then((response) => {
-        const {token, user} = response.data;
-        console.log(response.data);
-        // We set the returned token as the default authorization header
-        // axios.defaults.headers.common.Authorization = `Token ${token}`;
-        setRegisterSuccess(true);
-        console.log(registerSuccess);
-
-        // // Navigate to the home screen
-        // Actions.main();
-      })
-      .catch((error) => {
-        console.log(error.message);
-        setRegisterSuccess(false);
-        console.log(registerSuccess);
-      });
+  const onClickLogin = () => {
+    console.log('SWITCH');
+    props.navigation.navigate({
+      routeName: 'SignIn',
+    });
   };
 
   return (
     <ScrollView style={styles.container}>
-      {/* <View style={styles.container}> */}
       <Text style={styles.appName}>PyPhone</Text>
       <View style={styles.logoContainer}>
         <Image source={logo} style={styles.logo}></Image>
@@ -114,12 +106,11 @@ const Register = () => {
         />
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => onClickRegister()}>
+        <TouchableOpacity style={styles.button} onPress={() => authHandler()}>
           <Text style={styles.buttonText}>REGISTER</Text>
         </TouchableOpacity>
       </View>
+      <Button onPress={() => onClickLogin()} title="Login"></Button>
 
       {/* </View> */}
     </ScrollView>

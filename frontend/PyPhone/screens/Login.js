@@ -7,16 +7,18 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
+  ActivityIndicator,
 } from 'react-native';
 import {StyleSheet} from 'react-native';
-import axios from 'axios';
 import logo from '../images/logo.png';
-import '../global.js';
+import * as authActions from '../store/actions/auth';
+import {useDispatch} from 'react-redux';
 
 const Login = (props) => {
+  const dispatch = useDispatch();
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
-  const [isAuthorized, setIsAuthorized] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const changePasswordHandler = (password) => {
     console.log(password);
@@ -25,41 +27,29 @@ const Login = (props) => {
 
   const changeUsernameHandler = (username) => {
     console.log(username);
-
     setUsername(username);
   };
 
-  const onClickLogin = () => {
-    console.log(username);
-    login();
+  const authHandler = async () => {
+    let action;
+    action = authActions.login(username, password);
+    setIsLoading(true);
+    try {
+      await dispatch(action);
+      props.navigation.navigate({
+        routeName: 'Home',
+      });
+    } catch (err) {
+      console.log(err.message);
+      setIsLoading(false);
+    }
   };
 
-  const login = () => {
-    console.log(username);
-    console.log(password);
-    console.log(global.url);
-    const endpoint = global.url + '/auth/login/';
-    console.log(endpoint);
-    const payload = {username: username, password: password};
-    axios.defaults.timeout = 10000;
-
-    axios
-      .post(endpoint, payload)
-      .then((response) => {
-        const {token, user} = response.data;
-        console.log(response.data);
-        setIsAuthorized(true);
-        console.log(isAuthorized);
-
-        props.navigation.navigate({
-          routeName: 'Home',
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-        setIsAuthorized(false);
-        console.log(isAuthorized);
-      });
+  const onClickRegister = () => {
+    console.log('SWITCH');
+    props.navigation.navigate({
+      routeName: 'SignUp',
+    });
   };
 
   return (
@@ -93,13 +83,23 @@ const Login = (props) => {
           onChangeText={(password) => changePasswordHandler(password)}
         />
       </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => onClickLogin()}>
+      {/* <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button} onPress={() => authHandler()}>
           <Text style={styles.buttonText}>LOGIN</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
 
-      {/* <Button onPress={() => onClickLogin()} title="Login"></Button> */}
+      {isLoading ? (
+        <ActivityIndicator size="small" color="grey" />
+      ) : (
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={() => authHandler()}>
+            <Text style={styles.buttonText}>LOGIN</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+
+      <Button onPress={() => onClickRegister()} title="Register"></Button>
     </ScrollView>
   );
 };
