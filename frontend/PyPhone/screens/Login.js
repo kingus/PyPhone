@@ -37,7 +37,7 @@ const Login = (props) => {
     try {
       await dispatch(action);
       props.navigation.navigate({
-        routeName: 'Home',
+        routeName: 'TabNav',
       });
     } catch (err) {
       console.log(err.message);

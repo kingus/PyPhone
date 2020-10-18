@@ -2,6 +2,7 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 
 export const LOGIN = 'LOGIN';
+export const LOGOUT = 'LOGOUT';
 
 export const login = (username, password) => {
   return async (dispatch) => {
@@ -42,6 +43,11 @@ export const register = (username, password) => {
         throw new Error('Something went wrong!');
       });
   };
+};
+
+export const logout = () => {
+  AsyncStorage.removeItem('userData');
+  return {type: LOGOUT};
 };
 
 const saveDataToStorage = (token, username) => {
