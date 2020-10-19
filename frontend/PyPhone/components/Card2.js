@@ -1,11 +1,21 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import ProgressBar from './ProgressBar';
 import Icon from 'react-native-vector-icons/FontAwesome';
 Icon.loadFont();
 
 const Card2 = (props) => {
+  const clickLecture = () => {
+    props.navToLecture();
+    console.log('LECTURE CLICKED');
+  };
+
+  const clickExercises = () => {
+    // props.navigation.navigate({
+    //   routeName: 'CourseSwitch',
+    // });
+    console.log('EXERCISES CLICKED');
+  };
   return (
     <View style={styles.card}>
       {/* <View>
@@ -16,11 +26,12 @@ const Card2 = (props) => {
         <Text style={styles.courseTitleText}>NUMBERS</Text>
       </View>
       <View style={styles.cardBar}>
-        <TouchableOpacity style={styles.lectureItem}>
+        <TouchableOpacity style={styles.lectureItem} onPress={clickLecture}>
           <Text style={styles.cardText}>LECTURE</Text>
           <Icon name="mortar-board" size={25} color="#abf0ff" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.exerciseItem}>
+
+        <TouchableOpacity style={styles.exerciseItem} onPress={clickExercises}>
           <Text style={styles.cardText}>EXERCISES</Text>
 
           <Icon name="sticky-note-o" size={25} color="#abf0ff" />

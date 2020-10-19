@@ -3,6 +3,7 @@ import {View, ActivityIndicator, StyleSheet, Text, Image} from 'react-native';
 import {useDispatch} from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
 import logo from '../images/logo.png';
+import LinearGradient from 'react-native-linear-gradient';
 
 import * as authActions from '../store/actions/auth';
 
@@ -24,22 +25,28 @@ const StartUp = (props) => {
   }, [dispatch]);
 
   return (
-    <View style={styles.screen}>
+    <LinearGradient
+      colors={['#34adf9', '#bae5ff', '#34adf9']}
+      style={styles.linearGradient}>
       <Text style={styles.appName}>PyPhone</Text>
       <View style={styles.logoContainer}>
         <Image source={logo} style={styles.logo}></Image>
       </View>
       <ActivityIndicator size="large" color="grey" />
-    </View>
+    </LinearGradient>
   );
 };
 
 const styles = StyleSheet.create({
-  screen: {
+  linearGradient: {
     flex: 1,
+    alignItems: 'center',
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderRadius: 5,
+    display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#3498db',
   },
   appName: {
     fontSize: 50,

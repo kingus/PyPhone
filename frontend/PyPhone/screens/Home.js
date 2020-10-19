@@ -1,6 +1,5 @@
 import React from 'react';
 import {View, Text, StyleSheet, ScrollView, Image} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import Card from '../components/Card';
 import Card2 from '../components/Card2';
 import trophy from '../images/trophy.png';
@@ -13,7 +12,20 @@ const windowHeight = Dimensions.get('window').height;
 import LinearGradient from 'react-native-linear-gradient';
 import XPBar from '../components/XPBar';
 
-const Home = () => {
+const Home = (props) => {
+  const navToLecture = () => {
+    props.navigation.navigate({
+      routeName: 'CourseSwitchNav',
+    });
+    console.log('NAV CLICKED');
+  };
+
+  const clickExercises = () => {
+    props.navigation.navigate({
+      routeName: 'Lecture',
+    });
+  };
+
   return (
     <ScrollView>
       <LinearGradient
@@ -42,12 +54,26 @@ const Home = () => {
             <XPBar completed="30%"></XPBar>
           </View>
         </View>
-        <Card2 completed="30%" category="STRINGS"></Card2>
-        <Card2 completed="50%" category="NUMBERS"></Card2>
-        <Card2 completed="60%" category="LISTS"></Card2>
-        <Card2 completed="70%" category="DICTIONARIES"></Card2>
-        <Card2 completed="70%" category="DICTIONARIES"></Card2>
-        <Card2 completed="70%" category="DICTIONARIES"></Card2>
+        <Card2
+          completed="30%"
+          category="STRINGS"
+          navToLecture={navToLecture}></Card2>
+        <Card2
+          completed="50%"
+          category="NUMBERS"
+          navToLecture={navToLecture}></Card2>
+        <Card2
+          completed="60%"
+          category="LISTS"
+          navToLecture={navToLecture}></Card2>
+        <Card2
+          completed="70%"
+          category="DICTIONARIES"
+          navToLecture={navToLecture}></Card2>
+        <Card2
+          completed="70%"
+          category="DICTIONARIES"
+          navToLecture={navToLecture}></Card2>
       </LinearGradient>
     </ScrollView>
   );

@@ -26,6 +26,7 @@
     "react-native-router-flux": "^4.2.0",
     "react-native-safe-area-context": "^3.1.4",
     "react-native-screens": "^2.10.1",
+    "react-native-swiper-flatlist": "^2.0.4",
     "react-native-vector-icons": "^7.1.0",
     "react-navigation-stack": "^2.8.2",
     "react-navigation-tabs": "^2.9.2",
@@ -45,5 +46,10 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts/"
+    ]
   }
 }
