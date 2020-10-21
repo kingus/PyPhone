@@ -3,9 +3,8 @@ import {createStackNavigator} from 'react-navigation-stack';
 import Register from '../screens/Register';
 import Login from '../screens/Login';
 import StartUp from '../screens/StartUp';
-import TabNavigator from './TabNavigator';
 
-const AuthNavigator = createStackNavigator(
+export default AuthNavigator = createStackNavigator(
   {
     StartUp: StartUp,
     SignIn: Login,
@@ -18,4 +17,4 @@ const AuthNavigator = createStackNavigator(
   },
 );
 
-export default createAppContainer(AuthNavigator);
+//export default createAppContainer(AuthNavigator);

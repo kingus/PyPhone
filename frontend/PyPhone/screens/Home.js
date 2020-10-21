@@ -13,16 +13,18 @@ import LinearGradient from 'react-native-linear-gradient';
 import XPBar from '../components/XPBar';
 
 const Home = (props) => {
-  const navToLecture = () => {
+  const navToLecture = (lesson) => {
     props.navigation.navigate({
-      routeName: 'CourseSwitchNav',
+      routeName: 'Lecture',
+      // params: {lectureTitle: 'TITLE'},
     });
+
     console.log('NAV CLICKED');
   };
 
-  const clickExercises = () => {
+  const navToExercise = () => {
     props.navigation.navigate({
-      routeName: 'Lecture',
+      routeName: 'Exercise',
     });
   };
 
@@ -57,23 +59,28 @@ const Home = (props) => {
         <Card2
           completed="30%"
           category="STRINGS"
-          navToLecture={navToLecture}></Card2>
+          navToLecture={navToLecture}
+          navToExercise={navToExercise}></Card2>
         <Card2
           completed="50%"
           category="NUMBERS"
-          navToLecture={navToLecture}></Card2>
+          navToLecture={navToLecture}
+          navToExercise={navToExercise}></Card2>
         <Card2
           completed="60%"
           category="LISTS"
-          navToLecture={navToLecture}></Card2>
+          navToLecture={navToLecture}
+          navToExercise={navToExercise}></Card2>
         <Card2
           completed="70%"
           category="DICTIONARIES"
-          navToLecture={navToLecture}></Card2>
+          navToLecture={navToLecture}
+          navToExercise={navToExercise}></Card2>
         <Card2
           completed="70%"
           category="DICTIONARIES"
-          navToLecture={navToLecture}></Card2>
+          navToLecture={navToLecture}
+          navToExercise={navToExercise}></Card2>
       </LinearGradient>
     </ScrollView>
   );

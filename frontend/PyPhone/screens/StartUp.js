@@ -18,7 +18,7 @@ const StartUp = (props) => {
         props.navigation.navigate('SignUp');
         return;
       }
-      props.navigation.navigate('Home');
+      props.navigation.navigate('AppNavigator');
     };
 
     tryLogin();

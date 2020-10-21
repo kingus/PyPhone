@@ -6,7 +6,8 @@ Icon.loadFont();
 
 const Card2 = (props) => {
   const clickLecture = () => {
-    props.navToLecture();
+    let lesson = 'Zmienne';
+    props.navToLecture(lesson);
     console.log('LECTURE CLICKED');
   };
 
@@ -14,6 +15,8 @@ const Card2 = (props) => {
     // props.navigation.navigate({
     //   routeName: 'CourseSwitch',
     // });
+    props.navToExercise();
+
     console.log('EXERCISES CLICKED');
   };
   return (

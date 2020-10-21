@@ -13,6 +13,7 @@ import {StyleSheet} from 'react-native';
 import logo from '../images/logo.png';
 import * as authActions from '../store/actions/auth';
 import {useDispatch} from 'react-redux';
+import LinearGradient from 'react-native-linear-gradient';
 
 const Login = (props) => {
   const dispatch = useDispatch();
@@ -54,52 +55,58 @@ const Login = (props) => {
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.appName}>PyPhone</Text>
-      <View style={styles.logoContainer}>
-        <Image source={logo} style={styles.logo}></Image>
-        <Text style={styles.sign_text}>
-          Sign in and keep on learning Python...
-        </Text>
-      </View>
+      <LinearGradient
+        colors={['#34adf9', '#67c4ff', '#34adf9']}
+        style={styles.linearGradient}>
+        <Text style={styles.appName}>PyPhone</Text>
+        <View style={styles.logoContainer}>
+          <Image source={logo} style={styles.logo}></Image>
+          <Text style={styles.sign_text}>
+            Sign in and keep on learning Python...
+          </Text>
+        </View>
 
-      <View style={styles.input_group}>
-        <TextInput
-          name="username"
-          placeholder="Username"
-          autoCapitalize="none"
-          placeholderTextColor="rgba(255,255,255,0.7)"
-          onChangeText={(username) => changeUsernameHandler(username)}
-          style={styles.input}
-          selectionColor={'white'}
-        />
-        <TextInput
-          name="password"
-          placeholder="Password"
-          secureTextEntry={true}
-          autoCapitalize="none"
-          placeholderTextColor="rgba(255,255,255,0.7)"
-          style={styles.input}
-          selectionColor={'white'}
-          onChangeText={(password) => changePasswordHandler(password)}
-        />
-      </View>
-      {/* <View style={styles.buttonContainer}>
+        <View style={styles.input_group}>
+          <TextInput
+            name="username"
+            placeholder="Username"
+            autoCapitalize="none"
+            placeholderTextColor="rgba(255,255,255,0.7)"
+            onChangeText={(username) => changeUsernameHandler(username)}
+            style={styles.input}
+            selectionColor={'white'}
+          />
+          <TextInput
+            name="password"
+            placeholder="Password"
+            secureTextEntry={true}
+            autoCapitalize="none"
+            placeholderTextColor="rgba(255,255,255,0.7)"
+            style={styles.input}
+            selectionColor={'white'}
+            onChangeText={(password) => changePasswordHandler(password)}
+          />
+        </View>
+        {/* <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button} onPress={() => authHandler()}>
           <Text style={styles.buttonText}>LOGIN</Text>
         </TouchableOpacity>
       </View> */}
 
-      {isLoading ? (
-        <ActivityIndicator size="small" color="grey" />
-      ) : (
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={() => authHandler()}>
-            <Text style={styles.buttonText}>LOGIN</Text>
-          </TouchableOpacity>
-        </View>
-      )}
+        {isLoading ? (
+          <ActivityIndicator size="small" color="grey" />
+        ) : (
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => authHandler()}>
+              <Text style={styles.buttonText}>LOGIN</Text>
+            </TouchableOpacity>
+          </View>
+        )}
 
-      <Button onPress={() => onClickRegister()} title="Register"></Button>
+        <Button onPress={() => onClickRegister()} title="Register"></Button>
+      </LinearGradient>
     </ScrollView>
   );
 };

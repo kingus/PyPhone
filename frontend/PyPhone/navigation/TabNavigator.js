@@ -1,11 +1,9 @@
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import {createAppContainer} from 'react-navigation';
 import React from 'react';
-
 import Home from '../screens/Home';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Lecture from '../screens/Lecture';
-import CourseSwitchNav from './CourseSwitchNav';
+
 const TabNavigator = createBottomTabNavigator(
   {
     Home: {
