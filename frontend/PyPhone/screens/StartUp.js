@@ -12,6 +12,9 @@ const StartUp = (props) => {
 
   useEffect(() => {
     const tryLogin = async () => {
+      AsyncStorage.removeItem('userData');
+      // AsyncStorage.removeItem('courses');
+
       const userData = await AsyncStorage.getItem('userData');
       console.log('USER', userData);
       if (!userData) {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet, ScrollView, Image} from 'react-native';
 import Card from '../components/Card';
 import Card2 from '../components/Card2';
@@ -11,14 +11,18 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 import LinearGradient from 'react-native-linear-gradient';
 import XPBar from '../components/XPBar';
+import * as courseActions from '../store/actions/course';
+import {useDispatch} from 'react-redux';
 
 const Home = (props) => {
+  const dispatch = useDispatch();
+  const [courses, setCourses] = useState([]);
+
   const navToLecture = (lesson) => {
     props.navigation.navigate({
       routeName: 'Lecture',
       // params: {lectureTitle: 'TITLE'},
     });
-
     console.log('NAV CLICKED');
   };
 
@@ -27,6 +31,24 @@ const Home = (props) => {
       routeName: 'Exercise',
     });
   };
+
+  const coursesHandler = async () => {
+    let action;
+    action = courseActions.getCourses();
+    try {
+      const data = await dispatch(action);
+      console.log('coursesHandler ', data);
+      setCourses(data);
+    } catch (err) {
+      console.log(err.message);
+      throw new Error('coursesHandler something went wrong!');
+    }
+  };
+
+  useEffect(() => {
+    coursesHandler();
+    console.log('Home useEffect', courses);
+  }, []);
 
   return (
     <ScrollView>
@@ -56,11 +78,14 @@ const Home = (props) => {
             <XPBar completed="30%"></XPBar>
           </View>
         </View>
-        <Card2
-          completed="30%"
-          category="STRINGS"
-          navToLecture={navToLecture}
-          navToExercise={navToExercise}></Card2>
+        {courses.map((number, index) => (
+          <Card2
+            completed="30%"
+            category={number['course_name']}
+            navToLecture={navToLecture}
+            navToExercise={navToExercise}></Card2>
+        ))}
+        {/*        
         <Card2
           completed="50%"
           category="NUMBERS"
@@ -80,7 +105,7 @@ const Home = (props) => {
           completed="70%"
           category="DICTIONARIES"
           navToLecture={navToLecture}
-          navToExercise={navToExercise}></Card2>
+          navToExercise={navToExercise}></Card2> */}
       </LinearGradient>
     </ScrollView>
   );

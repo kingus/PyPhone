@@ -35,6 +35,7 @@
 		7F16014729D74849B1E8FFF1 /* DancingScript-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B601C5B23F1D4495AC9A0675 /* DancingScript-VariableFont_wght.ttf */; };
 		2D23B372BC8B4E1092C728A2 /* OpenSansRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D917AE0076FE45099952E92F /* OpenSansRegular.ttf */; };
 		9E0C12614D6F4F1D96CEF9B6 /* OpenSansSemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46107E57FF2A40B796EA44B7 /* OpenSansSemiBold.ttf */; };
+		646A0DE60AA94B8FA81F424A /* Inconsolata.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC0617904F644C1A844D39B5 /* Inconsolata.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 		B601C5B23F1D4495AC9A0675 /* DancingScript-VariableFont_wght.ttf */ = {isa = PBXFileReference; name = "DancingScript-VariableFont_wght.ttf"; path = "../assets/fonts/DancingScript-VariableFont_wght.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		D917AE0076FE45099952E92F /* OpenSansRegular.ttf */ = {isa = PBXFileReference; name = "OpenSansRegular.ttf"; path = "../assets/fonts/OpenSansRegular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		46107E57FF2A40B796EA44B7 /* OpenSansSemiBold.ttf */ = {isa = PBXFileReference; name = "OpenSansSemiBold.ttf"; path = "../assets/fonts/OpenSansSemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BC0617904F644C1A844D39B5 /* Inconsolata.ttf */ = {isa = PBXFileReference; name = "Inconsolata.ttf"; path = "../assets/fonts/Inconsolata.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +220,7 @@
 				B601C5B23F1D4495AC9A0675 /* DancingScript-VariableFont_wght.ttf */,
 				D917AE0076FE45099952E92F /* OpenSansRegular.ttf */,
 				46107E57FF2A40B796EA44B7 /* OpenSansSemiBold.ttf */,
+				BC0617904F644C1A844D39B5 /* Inconsolata.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 				7F16014729D74849B1E8FFF1 /* DancingScript-VariableFont_wght.ttf in Resources */,
 				2D23B372BC8B4E1092C728A2 /* OpenSansRegular.ttf in Resources */,
 				9E0C12614D6F4F1D96CEF9B6 /* OpenSansSemiBold.ttf in Resources */,
+				646A0DE60AA94B8FA81F424A /* Inconsolata.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

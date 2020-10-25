@@ -14,6 +14,7 @@ import logo from '../images/logo.png';
 import * as authActions from '../store/actions/auth';
 import {useDispatch} from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
+import * as courseActions from '../store/actions/course';
 
 const Login = (props) => {
   const dispatch = useDispatch();
@@ -32,17 +33,35 @@ const Login = (props) => {
   };
 
   const authHandler = async () => {
-    let action;
+    let action, action2;
     action = authActions.login(username, password);
+
     setIsLoading(true);
     try {
       await dispatch(action);
+
       props.navigation.navigate({
         routeName: 'TabNav',
       });
+
+      coursesHandler();
     } catch (err) {
       console.log(err.message);
       setIsLoading(false);
+    }
+  };
+
+  const coursesHandler = async () => {
+    let action;
+    const token = await courseActions.getUserToken();
+    console.log('TU TOKEN ', token);
+    action = courseActions.course(token);
+    // action = courseActions.course('493e77275ee813c6a1aa7ab20aac0af7eb8a43bb');
+    try {
+      await dispatch(action);
+      console.log('COURSE SUCCESS');
+    } catch (err) {
+      console.log(err.message);
     }
   };
 

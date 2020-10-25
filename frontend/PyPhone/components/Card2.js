@@ -26,7 +26,7 @@ const Card2 = (props) => {
       </View>
       <ProgressBar completed={props.completed} /> */}
       <View style={styles.cardInfo}>
-        <Text style={styles.courseTitleText}>NUMBERS</Text>
+        <Text style={styles.courseTitleText}>{props.category}</Text>
       </View>
       <View style={styles.cardBar}>
         <TouchableOpacity style={styles.lectureItem} onPress={clickLecture}>

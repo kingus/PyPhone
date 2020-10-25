@@ -15,7 +15,7 @@ export const login = (username, password) => {
       .then((response) => {
         const {token} = response.data;
         console.log(response.status);
-        saveDataToStorage(token, username);
+        setUserData(token, username);
       })
       .catch((error) => {
         console.log(error);
@@ -50,12 +50,17 @@ export const logout = () => {
   return {type: LOGOUT};
 };
 
-const saveDataToStorage = (token, username) => {
-  AsyncStorage.setItem(
-    'userData',
-    JSON.stringify({
-      token: token,
-      username: username,
-    }),
-  );
+const setUserData = (token, username) => {
+  try {
+    AsyncStorage.setItem(
+      'userData',
+      JSON.stringify({
+        token: token,
+        username: username,
+      }),
+    );
+    console.log('setUserData SUCCESS');
+  } catch (error) {
+    console.log('ERROR');
+  }
 };
