@@ -33,8 +33,7 @@ const Home = (props) => {
   };
 
   const coursesHandler = async () => {
-    let action;
-    action = courseActions.getCourses();
+    let action = courseActions.getCourses();
     try {
       const data = await dispatch(action);
       console.log('coursesHandler ', data);
@@ -82,6 +81,7 @@ const Home = (props) => {
           <Card2
             completed="30%"
             category={number['course_name']}
+            key={number['course_name']}
             navToLecture={navToLecture}
             navToExercise={navToExercise}></Card2>
         ))}

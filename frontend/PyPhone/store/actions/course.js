@@ -6,7 +6,7 @@ export const LOAD_DATA = 'LOAD_DATA';
 export const course = () => {
   return async (dispatch) => {
     console.log('POCZĄTEK');
-    const endpoint = global.url + '/api/course/';
+    const endpoint = global.url + '/api/users-course/';
     const userData = '';
     axios.defaults.timeout = 10000;
     const token = await getUserToken();
@@ -23,14 +23,14 @@ export const course = () => {
         console.log('COURSE DATA');
         console.log(response.status);
         console.log(response.data);
-        const dane = response.data.courses;
+        const dane = response.data.users_courses;
         console.log(dane);
         dane.map(function (item) {
           console.log('ITEM ', item);
         });
 
         setCourses(dane);
-        return dane;
+        // return dane;
       })
       .catch((error) => {
         console.log(error);

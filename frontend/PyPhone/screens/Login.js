@@ -39,12 +39,11 @@ const Login = (props) => {
     setIsLoading(true);
     try {
       await dispatch(action);
+      await coursesHandler();
 
       props.navigation.navigate({
         routeName: 'TabNav',
       });
-
-      coursesHandler();
     } catch (err) {
       console.log(err.message);
       setIsLoading(false);
