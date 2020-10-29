@@ -17,32 +17,34 @@ const XPBar = (props) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.XPText}>20XP</Text>
-
       <View style={[styles.fullBar]}>
         <LinearGradient
           colors={['#fffba9', '#ffdb00']}
           style={completedBar}></LinearGradient>
       </View>
+      <Text style={styles.XPText}>20XP</Text>
+
       {/* <Text style={styles.completed}>{props.completed}</Text> */}
     </View>
   );
 };
 const styles = StyleSheet.create({
   container: {
-    width: 250,
+    width: 300,
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     flexDirection: 'row',
     alignItems: 'center',
   },
   fullBar: {
     height: 25,
-    width: '80%',
+    width: 200,
     backgroundColor: '#dedddb',
     borderRadius: 50,
     borderColor: 'white',
     borderWidth: 3,
+    flex: 15,
+    marginLeft: 40,
   },
   completed: {
     color: '#49a9c4',
@@ -55,6 +57,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     padding: 10,
+    flex: 3,
   },
 });
 

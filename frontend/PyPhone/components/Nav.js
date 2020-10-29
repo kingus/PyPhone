@@ -14,6 +14,9 @@ const Nav = createStackNavigator({
 
   Home: {
     screen: Home,
+    navigationOptions: {
+      headerShown: false,
+    },
   },
 });
 

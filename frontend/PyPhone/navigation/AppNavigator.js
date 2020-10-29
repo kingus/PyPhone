@@ -15,7 +15,13 @@ export default AppNavigator = createStackNavigator({
   //     header: null,
   //   },
   // },
-  TabNav: TabNavigator,
+  TabNav: {
+    screen: TabNavigator,
+    navigationOptions: {
+      headerShown: false,
+      showLabel: false,
+    },
+  },
 
   Exercise: {screen: Exercise},
 
@@ -27,6 +33,8 @@ export default AppNavigator = createStackNavigator({
         // borderBottomColor: '#eeeeee',
         // borderBottomWidth: 1,
       },
+      headerShown: false,
+
       headerTitle: 'Lekcja',
       headerTitleStyle: {color: '#676767'},
       // headerStyle: {backgroundColor: '#fff271'},

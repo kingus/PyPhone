@@ -10,14 +10,22 @@ const TabNavigator = createBottomTabNavigator(
       screen: Home,
       navigationOptions: {
         tabBarLabel: null,
-        tabBarIcon: () => <Icon name="home" size={25} color="grey" />,
+        headerShown: false,
+
+        tabBarIcon: ({focused}) => (
+          <Icon name="home" size={25} color={focused ? '#34adf9' : '#dbdbdb'} />
+        ),
       },
     },
 
     User: {
       screen: Home,
       navigationOptions: {
-        tabBarIcon: () => <Icon name="user" size={25} color="grey" />,
+        headerShown: false,
+        tabBarIcon: ({focused}) => (
+          <Icon name="user" size={25} color={focused ? '#34adf9' : 'grey'} />
+        ),
+        // tabBarIcon: () => <Icon name="user" size={25} color="grey" />,
       },
     },
     // Lecture: {
@@ -30,7 +38,7 @@ const TabNavigator = createBottomTabNavigator(
   {
     tabBarOptions: {
       showLabel: false,
-      style: {borderTopWidth: 0},
+      style: {borderTopWidth: 0, activeTintColor: '#81B247'},
     },
   },
 );
