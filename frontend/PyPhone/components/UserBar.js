@@ -100,7 +100,11 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+<<<<<<< HEAD
     marginTop: 20,
     marginBottom: 20,
+=======
+    marginTop: 40,
+>>>>>>> 08c577f475ebec72037418c4eaf3df15e5fa99ed
   },
 });

@@ -13,7 +13,11 @@ const TabNavigator = createBottomTabNavigator(
         headerShown: false,
 
         tabBarIcon: ({focused}) => (
+<<<<<<< HEAD
           <Icon name="home" size={25} color={focused ? '#abf0ff' : '#dbdbdb'} />
+=======
+          <Icon name="home" size={25} color={focused ? '#34adf9' : '#dbdbdb'} />
+>>>>>>> 08c577f475ebec72037418c4eaf3df15e5fa99ed
         ),
       },
     },
@@ -23,7 +27,11 @@ const TabNavigator = createBottomTabNavigator(
       navigationOptions: {
         headerShown: false,
         tabBarIcon: ({focused}) => (
+<<<<<<< HEAD
           <Icon name="user" size={25} color={focused ? '#abf0ff' : '#dbdbdb'} />
+=======
+          <Icon name="user" size={25} color={focused ? '#34adf9' : 'grey'} />
+>>>>>>> 08c577f475ebec72037418c4eaf3df15e5fa99ed
         ),
         // tabBarIcon: () => <Icon name="user" size={25} color="grey" />,
       },

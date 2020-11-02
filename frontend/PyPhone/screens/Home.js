@@ -12,7 +12,11 @@ const windowHeight = Dimensions.get('window').height;
 import LinearGradient from 'react-native-linear-gradient';
 import XPBar from '../components/XPBar';
 import * as courseActions from '../store/actions/course';
+<<<<<<< HEAD
 import {useDispatch, useSelector} from 'react-redux';
+=======
+import {useDispatch} from 'react-redux';
+>>>>>>> 08c577f475ebec72037418c4eaf3df15e5fa99ed
 import UserBar from '../components/UserBar';
 
 const Home = (props) => {
