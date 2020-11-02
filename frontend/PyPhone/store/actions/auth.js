@@ -16,13 +16,16 @@ export const login = (username, password) => {
         const {token} = response.data;
         console.log(response.status);
         setUserData(token, username);
+        dispatch({
+          type: LOGIN,
+          username: username,
+          token: token,
+        });
       })
       .catch((error) => {
         console.log(error);
         throw new Error('Something went wrong!');
       });
-
-    dispatch({type: LOGIN});
   };
 };
 

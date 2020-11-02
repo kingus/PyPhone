@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Exercise, ExerciseType, Course
+from .models import Exercise, ExerciseType, Course, UsersCourse
 
 
 class ExerciseSerializer(serializers.ModelSerializer):
@@ -18,3 +18,14 @@ class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
         fields = '__all__'
+        depth = 1
+
+
+class UsersCourseSerializer(serializers.ModelSerializer):
+    # course = serializers.StringRelatedField()
+    course = CourseSerializer(read_only=True)
+
+    class Meta:
+        model = UsersCourse
+        # fields = ('__all__')
+        fields = ('active', 'course')

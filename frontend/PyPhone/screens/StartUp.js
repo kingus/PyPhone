@@ -13,12 +13,13 @@ const StartUp = (props) => {
   useEffect(() => {
     const tryLogin = async () => {
       AsyncStorage.removeItem('userData');
+      AsyncStorage.removeItem('courses');
       // AsyncStorage.removeItem('courses');
 
       const userData = await AsyncStorage.getItem('userData');
       console.log('USER', userData);
       if (!userData) {
-        props.navigation.navigate('SignUp');
+        props.navigation.navigate('SignIn');
         return;
       }
       props.navigation.navigate('AppNavigator');

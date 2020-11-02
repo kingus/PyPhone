@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from rest_framework.views import APIView, Response
-from .serializers import ExerciseSerializer, ExerciseTypeSerializer, CourseSerializer
-from .models import Exercise, ExerciseType, Course
+from .serializers import ExerciseSerializer, ExerciseTypeSerializer, CourseSerializer, UsersCourseSerializer
+from .models import Exercise, ExerciseType, Course, UsersCourse
+from django.contrib.auth.models import User
+from rest_framework.authtoken.models import Token
+
 # Create your views here.
 
 
@@ -50,3 +53,21 @@ class CourseView(APIView):
             saved_course = serializer.save()
             return Response({"success": "Course '{}' created successfully".format(saved_course.course_name)})
         return Response(serializer.errors)
+
+
+class UsersCourseView(APIView):
+    def get(self, request):
+        token = request.headers['Authorization'].split(" ")[1]
+        user = Token.objects.get(
+            key=token).user
+        courses = UsersCourse.objects.filter(user=user).order_by('-active')
+        serializer = UsersCourseSerializer(courses, many=True)
+        print(serializer.data)
+        courses_data = serializer.data
+        response_data = []
+        for i in courses_data:
+            dane = i['course']
+            dane['active'] = i['active']
+            response_data.append(dane)
+        print("RESP", response_data)
+        return Response({"users_courses": response_data})

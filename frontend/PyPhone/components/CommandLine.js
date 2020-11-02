@@ -1,14 +1,12 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import image from '../images/project.png';
-import ProgressBar from './ProgressBar';
+import {View, Text, StyleSheet} from 'react-native';
+
 const CommandLine = (props) => {
   return (
     <View style={styles.cmd}>
-      <Text style={styles.cmdText}>x = 5</Text>
-      <Text style={styles.cmdText}>x = x + 1</Text>
-      <Text style={styles.cmdText}>print(x)</Text>
+      {props.lines.map((line) => (
+        <Text style={styles.cmdText}>{line}</Text>
+      ))}
     </View>
   );
 };
@@ -18,12 +16,12 @@ export default CommandLine;
 const styles = StyleSheet.create({
   cmd: {
     display: 'flex',
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-end',
     alignItems: 'flex-start',
     backgroundColor: '#00072b',
     padding: 15,
     borderRadius: 5,
-    width: '90%',
+    width: '95%',
   },
   cmdText: {
     color: '#5afffb',

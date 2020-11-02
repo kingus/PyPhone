@@ -6,9 +6,12 @@ import logo from '../images/logo.png';
 import python2 from '../images/python2.png';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import LinearGradient from 'react-native-linear-gradient';
+import SegmentedControlTab from 'react-native-segmented-control-tab';
+
 import QuizAnswerCheckBox from '../components/QuizAnswer';
 import QuizAnswerRadio from '../components/QuizAnswerRadio';
 import QuizAnswersRadio from '../components/QuizAnswersRadio';
+import SegmentedBar from '../components/SegmentedBar';
 
 Icon.loadFont();
 
@@ -23,6 +26,7 @@ const Exercise = () => {
 
   return (
     <View style={styles.container}>
+      <SegmentedBar></SegmentedBar>
       <View style={styles.navbar}>
         <Icon name="flag" size={30} color="#abf0ff" />
       </View>
@@ -32,7 +36,7 @@ const Exercise = () => {
         Jaki będzie wynik poniższego programu?
       </Text>
       <View style={styles.cmdContainer}>
-        <CommandLine></CommandLine>
+        {/* <CommandLine lines={['x = 1', 'x = x + 5', 'print(x)']}></CommandLine> */}
       </View>
       {/* <QuizAnswersRadio></QuizAnswersRadio> */}
       <View style={styles.answers}>

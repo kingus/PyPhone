@@ -39,12 +39,11 @@ const Login = (props) => {
     setIsLoading(true);
     try {
       await dispatch(action);
+      await coursesHandler();
 
       props.navigation.navigate({
         routeName: 'TabNav',
       });
-
-      coursesHandler();
     } catch (err) {
       console.log(err.message);
       setIsLoading(false);
@@ -56,7 +55,6 @@ const Login = (props) => {
     const token = await courseActions.getUserToken();
     console.log('TU TOKEN ', token);
     action = courseActions.course(token);
-    // action = courseActions.course('493e77275ee813c6a1aa7ab20aac0af7eb8a43bb');
     try {
       await dispatch(action);
       console.log('COURSE SUCCESS');
@@ -80,7 +78,7 @@ const Login = (props) => {
         <Text style={styles.appName}>PyPhone</Text>
         <View style={styles.logoContainer}>
           <Image source={logo} style={styles.logo}></Image>
-          <Text style={styles.sign_text}>
+          <Text style={styles.signText}>
             Sign in and keep on learning Python...
           </Text>
         </View>
@@ -124,7 +122,11 @@ const Login = (props) => {
           </View>
         )}
 
-        <Button onPress={() => onClickRegister()} title="Register"></Button>
+        <TouchableOpacity onPress={() => onClickRegister()}>
+          <Text style={styles.bottomText}>
+            Don't have an account? REGISTER.
+          </Text>
+        </TouchableOpacity>
       </LinearGradient>
     </ScrollView>
   );
@@ -132,8 +134,9 @@ const Login = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#3498db',
+    display: 'flex',
+    flex: 1,
     // alignItems: 'center',
   },
   appName: {
@@ -141,6 +144,8 @@ const styles = StyleSheet.create({
     color: 'white',
     paddingTop: 50,
     textAlign: 'center',
+    fontFamily: 'OpenSansRegular',
+    letterSpacing: 0,
   },
   logoContainer: {
     margin: 80,
@@ -163,10 +168,11 @@ const styles = StyleSheet.create({
     height: 120,
     width: 120,
   },
-  sign_text: {
+  signText: {
     color: 'rgba(255,255,255,0.6)',
     textAlign: 'center',
     width: 300,
+    fontFamily: 'OpenSansRegular',
   },
   buttonContainer: {
     alignItems: 'center',
@@ -180,6 +186,23 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#FFFFFF',
     fontWeight: '700',
+  },
+  linearGradient: {
+    flex: 1,
+    alignItems: 'center',
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderRadius: 5,
+    display: 'flex',
+  },
+
+  bottomText: {
+    fontSize: 14,
+    fontFamily: 'OpenSansRegular',
+    letterSpacing: 0,
+    marginTop: 20,
+    color: 'white',
+    marginEnd: 0,
   },
 });
 

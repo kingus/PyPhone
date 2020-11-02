@@ -12,11 +12,13 @@ const windowHeight = Dimensions.get('window').height;
 import LinearGradient from 'react-native-linear-gradient';
 import XPBar from '../components/XPBar';
 import * as courseActions from '../store/actions/course';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import UserBar from '../components/UserBar';
 
 const Home = (props) => {
   const dispatch = useDispatch();
   const [courses, setCourses] = useState([]);
+  const token = useSelector((state) => state.auth.token);
 
   const navToLecture = (lesson) => {
     props.navigation.navigate({
@@ -33,8 +35,7 @@ const Home = (props) => {
   };
 
   const coursesHandler = async () => {
-    let action;
-    action = courseActions.getCourses();
+    let action = courseActions.getCourses();
     try {
       const data = await dispatch(action);
       console.log('coursesHandler ', data);
@@ -48,6 +49,7 @@ const Home = (props) => {
   useEffect(() => {
     coursesHandler();
     console.log('Home useEffect', courses);
+    console.log('AAUTHH ', token);
   }, []);
 
   return (
@@ -73,39 +75,17 @@ const Home = (props) => {
               <Text style={styles.pointsCardText}>100</Text>
             </View>
           </View>
-          <View style={styles.userInfo}>
-            <Image source={girl} style={styles.profileImage}></Image>
-            <XPBar completed="30%"></XPBar>
-          </View>
+          <UserBar></UserBar>
         </View>
         {courses.map((number, index) => (
           <Card2
             completed="30%"
             category={number['course_name']}
+            key={number['course_name']}
             navToLecture={navToLecture}
+            isActive={number['active']}
             navToExercise={navToExercise}></Card2>
         ))}
-        {/*        
-        <Card2
-          completed="50%"
-          category="NUMBERS"
-          navToLecture={navToLecture}
-          navToExercise={navToExercise}></Card2>
-        <Card2
-          completed="60%"
-          category="LISTS"
-          navToLecture={navToLecture}
-          navToExercise={navToExercise}></Card2>
-        <Card2
-          completed="70%"
-          category="DICTIONARIES"
-          navToLecture={navToLecture}
-          navToExercise={navToExercise}></Card2>
-        <Card2
-          completed="70%"
-          category="DICTIONARIES"
-          navToLecture={navToLecture}
-          navToExercise={navToExercise}></Card2> */}
       </LinearGradient>
     </ScrollView>
   );
@@ -119,6 +99,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 15,
     paddingRight: 15,
+    paddingBottom: 50,
     borderRadius: 5,
     display: 'flex',
   },

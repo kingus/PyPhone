@@ -13,6 +13,11 @@ import logo from '../images/logo.png';
 import '../global.js';
 import {useDispatch} from 'react-redux';
 import * as authActions from '../store/actions/auth';
+import LinearGradient from 'react-native-linear-gradient';
+import {Dimensions} from 'react-native';
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const Register = (props) => {
   const [username, setUsername] = useState('');
@@ -67,60 +72,68 @@ const Register = (props) => {
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.appName}>PyPhone</Text>
-      <View style={styles.logoContainer}>
-        <Image source={logo} style={styles.logo}></Image>
-        <Text style={styles.sign_text}>
-          Sign up and keep on learning Python...
-        </Text>
-      </View>
-      <View style={styles.input_group}>
-        <TextInput
-          name="username"
-          placeholder="Username"
-          autoCapitalize="none"
-          placeholderTextColor="rgba(255,255,255,0.7)"
-          style={styles.input}
-          selectionColor={'white'}
-          onChangeText={(username) => changeUsernameHandler(username)}
-        />
-        <TextInput
-          name="password"
-          placeholder="Password"
-          secureTextEntry={true}
-          autoCapitalize="none"
-          placeholderTextColor="rgba(255,255,255,0.7)"
-          style={styles.input}
-          selectionColor={'white'}
-          onChangeText={(password) => changePasswordHandler(password)}
-        />
-        <TextInput
-          name="repassword"
-          placeholder="Repeat your password"
-          secureTextEntry={true}
-          autoCapitalize="none"
-          placeholderTextColor="rgba(255,255,255,0.7)"
-          style={styles.input}
-          selectionColor={'white'}
-          onChangeText={(rePassword) => changeRePasswordHandler(rePassword)}
-        />
-      </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => authHandler()}>
-          <Text style={styles.buttonText}>REGISTER</Text>
+      <LinearGradient
+        colors={['#34adf9', '#67c4ff', '#34adf9']}
+        style={styles.linearGradient}>
+        <Text style={styles.appName}>PyPhone</Text>
+        <View style={styles.logoContainer}>
+          <Image source={logo} style={styles.logo}></Image>
+          <Text style={styles.sign_text}>
+            Sign up and keep on learning Python...
+          </Text>
+        </View>
+        <View style={styles.input_group}>
+          <TextInput
+            name="username"
+            placeholder="Username"
+            autoCapitalize="none"
+            placeholderTextColor="rgba(255,255,255,0.7)"
+            style={styles.input}
+            selectionColor={'white'}
+            onChangeText={(username) => changeUsernameHandler(username)}
+          />
+          <TextInput
+            name="password"
+            placeholder="Password"
+            secureTextEntry={true}
+            autoCapitalize="none"
+            placeholderTextColor="rgba(255,255,255,0.7)"
+            style={styles.input}
+            selectionColor={'white'}
+            onChangeText={(password) => changePasswordHandler(password)}
+          />
+          <TextInput
+            name="repassword"
+            placeholder="Repeat your password"
+            secureTextEntry={true}
+            autoCapitalize="none"
+            placeholderTextColor="rgba(255,255,255,0.7)"
+            style={styles.input}
+            selectionColor={'white'}
+            onChangeText={(rePassword) => changeRePasswordHandler(rePassword)}
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={() => authHandler()}>
+            <Text style={styles.buttonText}>REGISTER</Text>
+          </TouchableOpacity>
+        </View>
+        <TouchableOpacity onPress={() => onClickLogin()} title="Login">
+          <Text style={styles.bottomText}>
+            Already have an account? LOG IN.
+          </Text>
         </TouchableOpacity>
-      </View>
-      <Button onPress={() => onClickLogin()} title="Login"></Button>
 
-      {/* </View> */}
+        {/* </View> */}
+      </LinearGradient>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#3498db',
+    display: 'flex',
+    height: windowHeight,
   },
   scroll: {
     flex: 1,
@@ -169,6 +182,19 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#FFFFFF',
     fontWeight: '700',
+  },
+  bottomText: {
+    fontSize: 14,
+    fontFamily: 'OpenSansRegular',
+    letterSpacing: 0,
+    marginTop: 20,
+    color: 'white',
+    marginEnd: 0,
+  },
+  linearGradient: {
+    flex: 1,
+    alignItems: 'center',
+    display: 'flex',
   },
 });
 

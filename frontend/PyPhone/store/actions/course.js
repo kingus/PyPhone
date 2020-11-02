@@ -2,11 +2,16 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 export const COURSE = 'COURSE';
 export const LOAD_DATA = 'LOAD_DATA';
+export const GET_COURSES = 'GET_COURSES';
+export const SET_COURSES = 'SET_COURSES';
 
 export const course = () => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     console.log('POCZĄTEK');
-    const endpoint = global.url + '/api/course/';
+    const username = getState().auth.username;
+    console.log('REDUCER, ', username);
+
+    const endpoint = global.url + '/api/users-course/';
     const userData = '';
     axios.defaults.timeout = 10000;
     const token = await getUserToken();
@@ -23,14 +28,14 @@ export const course = () => {
         console.log('COURSE DATA');
         console.log(response.status);
         console.log(response.data);
-        const dane = response.data.courses;
+        const dane = response.data.users_courses;
         console.log(dane);
         dane.map(function (item) {
           console.log('ITEM ', item);
         });
 
         setCourses(dane);
-        return dane;
+        // return dane;
       })
       .catch((error) => {
         console.log(error);
