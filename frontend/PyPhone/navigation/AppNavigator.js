@@ -33,13 +33,7 @@ export default AppNavigator = createStackNavigator({
         // borderBottomColor: '#eeeeee',
         // borderBottomWidth: 1,
       },
-<<<<<<< HEAD
       headerTitle: 'Lekcja 1',
-=======
-      headerShown: false,
-
-      headerTitle: 'Lekcja',
->>>>>>> 08c577f475ebec72037418c4eaf3df15e5fa99ed
       headerTitleStyle: {color: '#676767'},
       // headerStyle: {backgroundColor: '#fff271'},
       headerTintColor: 'blue',

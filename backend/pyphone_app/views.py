@@ -60,22 +60,14 @@ class UsersCourseView(APIView):
         token = request.headers['Authorization'].split(" ")[1]
         user = Token.objects.get(
             key=token).user
-<<<<<<< HEAD
         courses = UsersCourse.objects.filter(user=user).order_by('-active')
         serializer = UsersCourseSerializer(courses, many=True)
         print(serializer.data)
-=======
-        courses = UsersCourse.objects.filter(user=user)
-        serializer = UsersCourseSerializer(courses, many=True)
->>>>>>> 08c577f475ebec72037418c4eaf3df15e5fa99ed
         courses_data = serializer.data
         response_data = []
         for i in courses_data:
             dane = i['course']
             dane['active'] = i['active']
             response_data.append(dane)
-<<<<<<< HEAD
         print("RESP", response_data)
-=======
->>>>>>> 08c577f475ebec72037418c4eaf3df15e5fa99ed
         return Response({"users_courses": response_data})

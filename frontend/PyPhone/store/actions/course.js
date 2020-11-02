@@ -8,12 +8,9 @@ export const SET_COURSES = 'SET_COURSES';
 export const course = () => {
   return async (dispatch, getState) => {
     console.log('POCZĄTEK');
-<<<<<<< HEAD
     const username = getState().auth.username;
     console.log('REDUCER, ', username);
 
-=======
->>>>>>> 08c577f475ebec72037418c4eaf3df15e5fa99ed
     const endpoint = global.url + '/api/users-course/';
     const userData = '';
     axios.defaults.timeout = 10000;
