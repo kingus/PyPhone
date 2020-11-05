@@ -28,14 +28,15 @@ const QuizAnswersRadio = (props) => {
     console.log(props.answers[0]);
   };
 
-  // useEffect(() => {
-  //   setAnswers(
-  //     {key: 1, answer: props.answers[0], clicked: false},
-  //     {key: 2, answer: props.answers[1], clicked: false},
-  //     {key: 3, answer: props.answers[2], clicked: false},
-  //     {key: 4, answer: props.answers[3], clicked: false},
-  //   );
-  // }, [props]);
+  useEffect(() => {
+    console.log('PROPS', props.answers);
+    setAnswers([
+      {key: 1, answer: props.answers[0], clicked: false},
+      {key: 2, answer: props.answers[1], clicked: false},
+      {key: 3, answer: props.answers[2], clicked: false},
+      {key: 4, answer: props.answers[3], clicked: false},
+    ]);
+  }, [props.answers]);
 
   return (
     <View style={styles.answers}>

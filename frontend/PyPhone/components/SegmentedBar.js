@@ -5,7 +5,7 @@ const SegmentedBar = (props) => {
   const [items, setItems] = useState(() => {
     var list = [];
     for (var i = 0; i < props.numOfExercises; i++) {
-      if (i <= props.currentExercise) list.push(true);
+      if (i < props.currentExercise) list.push(true);
       else {
         list.push(false);
       }
@@ -20,7 +20,7 @@ const SegmentedBar = (props) => {
     setItems(() => {
       var list = [];
       for (var i = 0; i < props.numOfExercises; i++) {
-        if (i <= props.currentExercise) list.push(true);
+        if (i < props.currentExercise) list.push(true);
         else {
           list.push(false);
         }

@@ -12,7 +12,11 @@ const Exercises = () => {
   const exercises = useSelector((state) => state.exercise.userExercises);
 
   const nextExercise = () => {
-    setCurrentExercise(currentExercise + 1);
+    if (currentExercise < exercises.length - 1)
+      setCurrentExercise(currentExercise + 1);
+    else {
+      console.log('LAST EXERCISE');
+    }
   };
 
   useEffect(() => {

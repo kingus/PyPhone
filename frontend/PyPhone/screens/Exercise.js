@@ -17,14 +17,13 @@ import {useDispatch, useSelector} from 'react-redux';
 Icon.loadFont();
 
 const Exercise = (props) => {
-  var possible = useSelector((state) => state.exercise.possibleAnswers);
+  const [possibleAnswers, setPossibleAnswers] = useState(
+    props.exerciseData.possible_answers,
+  );
 
-  // var answersss = [
-  //   {key: 1, answer: props.exerciseData.possible_answers[0], clicked: false},
-  //   {key: 2, answer: props.exerciseData.possible_answers[1], clicked: false},
-  //   {key: 3, answer: props.exerciseData.possible_answers[2], clicked: false},
-  //   {key: 4, answer: props.exerciseData.possible_answers[3], clicked: false},
-  // ];
+  useEffect(() => {
+    setPossibleAnswers(props.exerciseData.possible_answers);
+  }, [props]);
 
   return (
     <View style={styles.container}>
@@ -37,10 +36,8 @@ const Exercise = (props) => {
       <View style={styles.cmdContainer}>
         {/* <CommandLine lines={['x = 1', 'x = x + 5', 'print(x)']}></CommandLine> */}
       </View>
-      {/* <QuizAnswersRadio></QuizAnswersRadio> */}
       <View style={styles.answers}>
-        <QuizAnswersRadio
-          answers={props.exerciseData.possible_answers}></QuizAnswersRadio>
+        <QuizAnswersRadio answers={possibleAnswers}></QuizAnswersRadio>
       </View>
       <View></View>
       <TouchableOpacity
