@@ -8,6 +8,7 @@ export const exercise = (id) => {
     console.log('ACTION EXERCISE, ', token);
     const endpoint = global.url + '/api/exercise/';
     axios.defaults.timeout = 10000;
+    console.log('ID', id);
 
     var config = {
       method: 'get',
@@ -15,7 +16,7 @@ export const exercise = (id) => {
       headers: {
         Authorization: 'Token ' + token,
       },
-      params: {course_id: 6},
+      params: {course_id: id},
     };
 
     await axios(config)

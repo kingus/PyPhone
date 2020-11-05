@@ -20,7 +20,7 @@ const Card2 = (props) => {
     // props.navigation.navigate({
     //   routeName: 'CourseSwitch',
     // });
-    props.navToExercise();
+    props.navToExercise(props.id);
 
     console.log('EXERCISES CLICKED');
   };

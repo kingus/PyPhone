@@ -13,6 +13,7 @@ import QuizAnswerRadio from '../components/QuizAnswerRadio';
 import QuizAnswersRadio from '../components/QuizAnswersRadio';
 import SegmentedBar from '../components/SegmentedBar';
 import {useDispatch, useSelector} from 'react-redux';
+import QuizAnswersCheck from '../components/QuizAnswersCheck';
 
 Icon.loadFont();
 
@@ -20,10 +21,36 @@ const Exercise = (props) => {
   const [possibleAnswers, setPossibleAnswers] = useState(
     props.exerciseData.possible_answers,
   );
+  const [exerciseType, setExerciseType] = useState(
+    props.exerciseData.exercise_type,
+  );
 
   useEffect(() => {
     setPossibleAnswers(props.exerciseData.possible_answers);
+    setExerciseType(props.exerciseData.exercise_type);
+    console.log('TYPE', exerciseType);
   }, [props]);
+
+  var exerciseContainer;
+  // <View style={styles.answers}>
+  //   <QuizAnswersRadio answers={possibleAnswers}></QuizAnswersRadio>
+  // </View>
+  if (exerciseType == 'single_choice') {
+    exerciseContainer = (
+      <View style={styles.answers}>
+        <QuizAnswersRadio answers={possibleAnswers}></QuizAnswersRadio>
+      </View>
+    );
+  } else if (exerciseType == 'multiple_choice') {
+    exerciseContainer = (
+      <View style={styles.answers}>
+        <QuizAnswersCheck answers={possibleAnswers}></QuizAnswersCheck>
+
+        {/* <QuizAnswersRadio answers={possibleAnswers}></QuizAnswersRadio> */}
+      </View>
+    );
+  }
+  // );
 
   return (
     <View style={styles.container}>
@@ -36,10 +63,11 @@ const Exercise = (props) => {
       <View style={styles.cmdContainer}>
         {/* <CommandLine lines={['x = 1', 'x = x + 5', 'print(x)']}></CommandLine> */}
       </View>
-      <View style={styles.answers}>
+      {/* <View style={styles.answers}>
         <QuizAnswersRadio answers={possibleAnswers}></QuizAnswersRadio>
-      </View>
-      <View></View>
+      </View> */}
+      {exerciseContainer}
+
       <TouchableOpacity
         style={styles.nextButton}
         onPress={() => props.nextExercise()}>

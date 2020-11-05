@@ -17,6 +17,7 @@ import * as exerciseActions from '../store/actions/exercise';
 const Home = (props) => {
   const userCourses = useSelector((state) => state.course.userCourses);
   const dispatch = useDispatch();
+  const [activeCourse, setActiveCourse] = useState(6);
 
   const navToLecture = (lesson) => {
     props.navigation.navigate({
@@ -25,15 +26,17 @@ const Home = (props) => {
     console.log('NAV CLICKED');
   };
 
-  const navToExercise = () => {
+  const navToExercise = (id) => {
+    setActiveCourse(id);
+
     props.navigation.navigate({
       routeName: 'Exercises',
     });
     console.log('NAV TO EXERCISE CLICKED');
   };
 
-  const exercisesHandler = () => {
-    let action = exerciseActions.exercise();
+  const exercisesHandler = (id) => {
+    let action = exerciseActions.exercise(id);
     try {
       dispatch(action);
     } catch (err) {
@@ -42,8 +45,8 @@ const Home = (props) => {
   };
 
   useEffect(() => {
-    exercisesHandler();
-  }, []);
+    exercisesHandler(activeCourse);
+  }, [activeCourse]);
 
   return (
     <ScrollView>
@@ -75,6 +78,7 @@ const Home = (props) => {
             completed="30%"
             category={number['course_name']}
             key={number['course_name']}
+            id={number['id']}
             navToLecture={navToLecture}
             isActive={number['active']}
             navToExercise={navToExercise}></Card2>
