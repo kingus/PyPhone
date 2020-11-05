@@ -8,9 +8,14 @@ import NavContainer from './navigation/NavContainer';
 import {Provider} from 'react-redux';
 import {createStore, combineReducers, applyMiddleware} from 'redux';
 import authReducer from './store/reducers/auth';
+import course from './store/reducers/course';
 import ReduxThunk from 'redux-thunk';
+import exercise from './store/reducers/exercise';
+
 const rootReducer = combineReducers({
   auth: authReducer,
+  course: course,
+  exercise: exercise,
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));

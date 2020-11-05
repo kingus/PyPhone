@@ -2,15 +2,17 @@ from rest_framework import serializers
 from .models import Exercise, ExerciseType, Course, UsersCourse
 
 
-class ExerciseSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Exercise
-        fields = '__all__'
-
-
 class ExerciseTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ExerciseType
+        fields = '__all__'
+
+
+class ExerciseSerializer(serializers.ModelSerializer):
+    exercise_type = ExerciseTypeSerializer(read_only=True)
+
+    class Meta:
+        model = Exercise
         fields = '__all__'
 
 

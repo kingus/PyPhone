@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Text, Dimensions, Image, StyleSheet, View} from 'react-native';
 
-const SegmentedBar = () => {
+const SegmentedBar = (props) => {
   const [items, setItems] = useState([true, true, false, false, false, false]);
 
   return (
@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'row',
+    marginTop: 2,
   },
   item: {
     backgroundColor: '#5afffb',

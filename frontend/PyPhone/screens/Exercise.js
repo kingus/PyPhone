@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Text, Dimensions, Image, StyleSheet, View} from 'react-native';
 import CommandLine from '../components/CommandLine';
 import {TouchableOpacity} from 'react-native-gesture-handler';
@@ -12,40 +12,42 @@ import QuizAnswerCheckBox from '../components/QuizAnswer';
 import QuizAnswerRadio from '../components/QuizAnswerRadio';
 import QuizAnswersRadio from '../components/QuizAnswersRadio';
 import SegmentedBar from '../components/SegmentedBar';
+import {useDispatch, useSelector} from 'react-redux';
 
 Icon.loadFont();
 
-const Exercise = () => {
-  const [isClicked, setIsClicked] = useState('square-o');
-  const onClickCard = () => {
-    if (isClicked == 'square-o') setIsClicked('check-square-o');
-    else {
-      setIsClicked('square-o');
-    }
-  };
+const Exercise = (props) => {
+  var possible = useSelector((state) => state.exercise.possibleAnswers);
+
+  // var answersss = [
+  //   {key: 1, answer: props.exerciseData.possible_answers[0], clicked: false},
+  //   {key: 2, answer: props.exerciseData.possible_answers[1], clicked: false},
+  //   {key: 3, answer: props.exerciseData.possible_answers[2], clicked: false},
+  //   {key: 4, answer: props.exerciseData.possible_answers[3], clicked: false},
+  // ];
 
   return (
     <View style={styles.container}>
-      <SegmentedBar></SegmentedBar>
       <View style={styles.navbar}>
         <Icon name="flag" size={30} color="#abf0ff" />
       </View>
 
       <Text style={styles.lectureTitle}>Ćwiczenie 1.</Text>
-      <Text style={styles.lectureText}>
-        Jaki będzie wynik poniższego programu?
-      </Text>
+      <Text style={styles.lectureText}>{props.exerciseData.question}</Text>
       <View style={styles.cmdContainer}>
         {/* <CommandLine lines={['x = 1', 'x = x + 5', 'print(x)']}></CommandLine> */}
       </View>
       {/* <QuizAnswersRadio></QuizAnswersRadio> */}
       <View style={styles.answers}>
-        {/* <QuizAnswerCheckBox answer={10}></QuizAnswerCheckBox>
-        <QuizAnswerCheckBox answer={5}></QuizAnswerCheckBox>
-        <QuizAnswerCheckBox answer={6}></QuizAnswerCheckBox>
-        <QuizAnswerCheckBox answer={1}></QuizAnswerCheckBox>  */}
-        <QuizAnswersRadio></QuizAnswersRadio>
+        <QuizAnswersRadio
+          answers={props.exerciseData.possible_answers}></QuizAnswersRadio>
       </View>
+      <View></View>
+      <TouchableOpacity
+        style={styles.nextButton}
+        onPress={() => props.nextExercise()}>
+        <Icon name="arrow-right" size={30} color="#00072b" />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -117,5 +119,16 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     paddingTop: 15,
     paddingRight: 15,
+  },
+  nextButton: {
+    borderRadius: 100,
+    width: 60,
+    height: 60,
+    backgroundColor: '#5afffb',
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'flex-end',
+    margin: 50,
+    elevation: 2, // Android
   },
 });

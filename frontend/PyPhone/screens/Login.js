@@ -33,7 +33,7 @@ const Login = (props) => {
   };
 
   const authHandler = async () => {
-    let action, action2;
+    let action;
     action = authActions.login(username, password);
 
     setIsLoading(true);
@@ -52,9 +52,7 @@ const Login = (props) => {
 
   const coursesHandler = async () => {
     let action;
-    const token = await courseActions.getUserToken();
-    console.log('TU TOKEN ', token);
-    action = courseActions.course(token);
+    action = courseActions.course();
     try {
       await dispatch(action);
       console.log('COURSE SUCCESS');

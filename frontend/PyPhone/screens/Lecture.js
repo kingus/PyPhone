@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
 import {Text, Dimensions, Image, StyleSheet, View} from 'react-native';
-import box from '../images/package.png';
-
-import SwiperFlatList from 'react-native-swiper-flatlist';
 import Lecture1 from '../lectures/Lecture1';
+import {useDispatch, useSelector} from 'react-redux';
 
 const Lecture = () => {
+
   return (
     <View style={styles.container}>
       <Lecture1></Lecture1>

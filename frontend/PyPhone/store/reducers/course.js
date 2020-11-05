@@ -1,20 +1,19 @@
 import {GET_COURSES, SET_COURSES} from '../actions/course';
 
 const initialState = {
-  userCourses = []
+  userCourses: [],
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_COURSES:
-        return {
-            userCourses: userCourses
+      return {
+        userCourses: userCourses,
       };
     case SET_COURSES:
-        return {
-            ...state,
-            userCourses: state.userCourses
-          };
+      return {
+        userCourses: action.userCourses,
+      };
     default:
       return state;
   }

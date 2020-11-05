@@ -11,9 +11,17 @@ from rest_framework.authtoken.models import Token
 class ExerciseView(APIView):
 
     def get(self, request):
-        exercises = Exercise.objects.all()
+        course_id = request.GET.get('course_id')
+        print(course_id)
+        exercises = Exercise.objects.filter(course=course_id)
         serializer = ExerciseSerializer(exercises, many=True)
-        return Response({"exercises": serializer.data})
+        exercises_data = serializer.data
+        for i in exercises_data:
+            dane = i['exercise_type']['exercise_type']
+            i['exercise_type'] = dane
+            i['possible_answers'] = i['possible_answers'].split(";")
+
+        return Response({"exercises": exercises_data})
 
     def post(self, request):
         exercise = request.data.get('exercise')

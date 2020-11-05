@@ -3,18 +3,12 @@ import React from 'react';
 import {createAppContainer} from 'react-navigation';
 import Lecture from '../screens/Lecture';
 import Home from '../screens/Home';
-import Exercise from '../screens/Exercise';
+import Exercises from '../screens/Exercises';
 import TabNavigator from './TabNavigator';
 import {createStackNavigator, HeaderBackButton} from 'react-navigation-stack';
 import {StyleSheet} from 'react-native';
 
 export default AppNavigator = createStackNavigator({
-  // Home: {
-  //   screen: Home,
-  //   navigationOptions: {
-  //     header: null,
-  //   },
-  // },
   TabNav: {
     screen: TabNavigator,
     navigationOptions: {
@@ -23,7 +17,7 @@ export default AppNavigator = createStackNavigator({
     },
   },
 
-  Exercise: {screen: Exercise},
+  Exercises: {screen: Exercises},
 
   Lecture: {
     screen: Lecture,

@@ -10,47 +10,39 @@ import {Dimensions} from 'react-native';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 import LinearGradient from 'react-native-linear-gradient';
-import XPBar from '../components/XPBar';
-import * as courseActions from '../store/actions/course';
-import {useDispatch, useSelector} from 'react-redux';
-
+import {useSelector, useDispatch} from 'react-redux';
 import UserBar from '../components/UserBar';
+import * as exerciseActions from '../store/actions/exercise';
 
 const Home = (props) => {
+  const userCourses = useSelector((state) => state.course.userCourses);
   const dispatch = useDispatch();
-  const [courses, setCourses] = useState([]);
-  const token = useSelector((state) => state.auth.token);
 
   const navToLecture = (lesson) => {
     props.navigation.navigate({
       routeName: 'Lecture',
-      // params: {lectureTitle: 'TITLE'},
     });
     console.log('NAV CLICKED');
   };
 
   const navToExercise = () => {
     props.navigation.navigate({
-      routeName: 'Exercise',
+      routeName: 'Exercises',
     });
+    console.log('NAV TO EXERCISE CLICKED');
   };
 
-  const coursesHandler = async () => {
-    let action = courseActions.getCourses();
+  const exercisesHandler = () => {
+    let action = exerciseActions.exercise();
     try {
-      const data = await dispatch(action);
-      console.log('coursesHandler ', data);
-      setCourses(data);
+      dispatch(action);
     } catch (err) {
       console.log(err.message);
-      throw new Error('coursesHandler something went wrong!');
     }
   };
 
   useEffect(() => {
-    coursesHandler();
-    console.log('Home useEffect', courses);
-    console.log('AAUTHH ', token);
+    exercisesHandler();
   }, []);
 
   return (
@@ -78,7 +70,7 @@ const Home = (props) => {
           </View>
           <UserBar></UserBar>
         </View>
-        {courses.map((number, index) => (
+        {userCourses.map((number, index) => (
           <Card2
             completed="30%"
             category={number['course_name']}
