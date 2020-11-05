@@ -2,7 +2,35 @@ import React, {useState, useEffect} from 'react';
 import {Text, Dimensions, Image, StyleSheet, View} from 'react-native';
 
 const SegmentedBar = (props) => {
-  const [items, setItems] = useState([true, true, false, false, false, false]);
+  const [items, setItems] = useState(() => {
+    var list = [];
+    for (var i = 0; i < props.numOfExercises; i++) {
+      if (i <= props.currentExercise) list.push(true);
+      else {
+        list.push(false);
+      }
+    }
+    console.log(list);
+    console.log(props.currentExercise);
+
+    return list;
+  });
+
+  useEffect(() => {
+    setItems(() => {
+      var list = [];
+      for (var i = 0; i < props.numOfExercises; i++) {
+        if (i <= props.currentExercise) list.push(true);
+        else {
+          list.push(false);
+        }
+      }
+      console.log(list);
+      console.log(props.currentExercise);
+
+      return list;
+    });
+  }, [props]);
 
   return (
     <View style={styles.container}>

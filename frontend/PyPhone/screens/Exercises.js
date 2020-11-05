@@ -9,19 +9,7 @@ import {useDispatch, useSelector} from 'react-redux';
 const Exercises = () => {
   const dispatch = useDispatch();
   const [currentExercise, setCurrentExercise] = useState(0);
-
   const exercises = useSelector((state) => state.exercise.userExercises);
-
-  // const exercisesHandler = async () => {
-  //   let action = exerciseActions.exercise();
-  //   try {
-  //     await dispatch(action);
-  //     console.log('PO DISPATCH', exercises);
-  //   } catch (err) {
-  //     console.log(err.message);
-  //   } finally {
-  //   }
-  // };
 
   const nextExercise = () => {
     setCurrentExercise(currentExercise + 1);
@@ -34,7 +22,9 @@ const Exercises = () => {
 
   return (
     <View style={styles.container}>
-      {/* <SegmentedBar></SegmentedBar> */}
+      <SegmentedBar
+        currentExercise={currentExercise}
+        numOfExercises={exercises.length}></SegmentedBar>
       <Exercise
         exerciseData={exercises[currentExercise]}
         nextExercise={nextExercise}></Exercise>
