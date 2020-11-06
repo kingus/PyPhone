@@ -20,8 +20,10 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     backgroundColor: '#00072b',
     padding: 15,
+    marginTop: 10,
     borderRadius: 5,
     width: '95%',
+    alignSelf: 'center',
   },
   cmdText: {
     color: '#5afffb',

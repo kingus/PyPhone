@@ -20,6 +20,8 @@ class ExerciseView(APIView):
             dane = i['exercise_type']['exercise_type']
             i['exercise_type'] = dane
             i['possible_answers'] = i['possible_answers'].split(";")
+            if i['code'] is not None:
+                i['code'] = i['code'].split(";")
 
         return Response({"exercises": exercises_data})
 

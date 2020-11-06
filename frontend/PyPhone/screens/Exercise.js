@@ -24,17 +24,17 @@ const Exercise = (props) => {
   const [exerciseType, setExerciseType] = useState(
     props.exerciseData.exercise_type,
   );
+  const [code, setCode] = useState(props.exerciseData.code);
 
   useEffect(() => {
     setPossibleAnswers(props.exerciseData.possible_answers);
     setExerciseType(props.exerciseData.exercise_type);
+    setCode(props.exerciseData.code);
     console.log('TYPE', exerciseType);
   }, [props]);
 
-  var exerciseContainer;
-  // <View style={styles.answers}>
-  //   <QuizAnswersRadio answers={possibleAnswers}></QuizAnswersRadio>
-  // </View>
+  var exerciseContainer, codeContainer;
+
   if (exerciseType == 'single_choice') {
     exerciseContainer = (
       <View style={styles.answers}>
@@ -45,12 +45,17 @@ const Exercise = (props) => {
     exerciseContainer = (
       <View style={styles.answers}>
         <QuizAnswersCheck answers={possibleAnswers}></QuizAnswersCheck>
-
-        {/* <QuizAnswersRadio answers={possibleAnswers}></QuizAnswersRadio> */}
       </View>
     );
   }
-  // );
+  if (code !== null) {
+    console.log('CODE', code);
+    codeContainer = (
+      // <View style={styles.cmdContainer}>
+      <CommandLine lines={['x = 1', 'x = x + 5', 'print(x)']}></CommandLine>
+      // </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -60,12 +65,7 @@ const Exercise = (props) => {
 
       <Text style={styles.lectureTitle}>Ćwiczenie 1.</Text>
       <Text style={styles.lectureText}>{props.exerciseData.question}</Text>
-      <View style={styles.cmdContainer}>
-        {/* <CommandLine lines={['x = 1', 'x = x + 5', 'print(x)']}></CommandLine> */}
-      </View>
-      {/* <View style={styles.answers}>
-        <QuizAnswersRadio answers={possibleAnswers}></QuizAnswersRadio>
-      </View> */}
+      {codeContainer}
       {exerciseContainer}
 
       <TouchableOpacity
@@ -102,6 +102,7 @@ const styles = StyleSheet.create({
   },
   cmdContainer: {
     flex: 1,
+    display: 'flex',
     alignItems: 'center',
     marginTop: 40,
   },

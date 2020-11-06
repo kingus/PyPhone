@@ -21,7 +21,7 @@ class Course (models.Model):
 
 class Exercise(models.Model):
     question = models.CharField(max_length=350, null=False)
-    code = models.CharField(max_length=350, null=False)
+    code = models.CharField(max_length=350, null=True, blank=True)
     possible_answers = models.CharField(max_length=600, null=True)
     correct_answer = models.CharField(max_length=100, null=False)
     exercise_type = models.ForeignKey(
