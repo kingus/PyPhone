@@ -6,7 +6,6 @@ import QuizAnswerRadio from '../components/QuizAnswerRadio';
 import {set} from 'react-native-reanimated';
 
 const QuizAnswersRadio = (props) => {
-  const [isClicked, setIsClicked] = useState('square-o');
   const [answers, setAnswers] = useState([
     {key: 1, answer: props.answers[0], clicked: false},
     {key: 2, answer: props.answers[1], clicked: false},
@@ -23,19 +22,17 @@ const QuizAnswersRadio = (props) => {
       }
     });
     setAnswers(editedAnswers);
-
-    console.log(answers);
-    console.log(props.answers[0]);
+    props.sendUsersAnswer(editedAnswers);
   };
 
   useEffect(() => {
-    console.log('PROPS', props.answers);
     setAnswers([
       {key: 1, answer: props.answers[0], clicked: false},
       {key: 2, answer: props.answers[1], clicked: false},
       {key: 3, answer: props.answers[2], clicked: false},
       {key: 4, answer: props.answers[3], clicked: false},
     ]);
+    props.sendUsersAnswer(answers);
   }, [props.answers]);
 
   return (
