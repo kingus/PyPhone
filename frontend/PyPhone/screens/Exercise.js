@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import QuizAnswersRadio from '../components/QuizAnswersRadio';
 import QuizAnswersCheck from '../components/QuizAnswersCheck';
 import Toast from 'react-native-toast-message';
+import DragableExercise from '../components/DragableExercise';
 
 Icon.loadFont();
 
@@ -30,11 +31,9 @@ const Exercise = (props) => {
   }, [props]);
 
   const sendUsersAnswer = (answer) => {
-    console.log(answer);
+    console.log('SEND USERS ANSWER', answer);
     let usersAns = [];
     for (let i of answer) {
-      console.log(i.clicked);
-      console.log(i.answer);
       if (i.clicked === true) {
         usersAns.push(i.answer);
       }
@@ -42,10 +41,24 @@ const Exercise = (props) => {
     setUsersAnswer(usersAns);
     console.log("USER'S CHOSEN ANSWER:", usersAns);
     console.log('CORRECT ANSWER: ', correctAnswer);
+    console.log(
+      'props.exerciseData.correct_answer ',
+      props.exerciseData.correct_answer,
+    );
+  };
+  const sendUsersAnswerDragEx = (answer) => {
+    console.log('SEND USERS ANSWER', answer);
+    let usersAns = [];
+    for (let i of answer) {
+      usersAns.push(i.answer);
+    }
+    setUsersAnswer(usersAns);
+    console.log("USER'S CHOSEN ANSWER:", usersAns);
+    console.log('CORRECT ANSWER: ', correctAnswer);
   };
 
   const checkIfCorrect = () => {
-    if (usersAnswer[0] === correctAnswer) {
+    if (usersAnswer.sort().join(',') === correctAnswer.sort().join(',')) {
       console.log('ANSWER CORRECT');
       Toast.show({
         text1: 'Poprawna odpowiedź',
@@ -54,10 +67,30 @@ const Exercise = (props) => {
         position: 'bottom',
       });
       props.nextExercise();
-      setUsersAnswer(null);
     } else {
       console.log('ANSWER WRONG');
-
+      Toast.show({
+        text1: 'Zła odpowiedź',
+        text2: 'Spróbuj ponownie!👎',
+        type: 'error',
+        position: 'bottom',
+      });
+    }
+  };
+  const checkIfCorrectDragEx = () => {
+    console.log('checkIfCorrectDragEx', correctAnswer);
+    console.log('checkIfCorrectDragEx', usersAnswer);
+    if (usersAnswer.join(',') === correctAnswer.join(',')) {
+      console.log('CORRECT');
+      Toast.show({
+        text1: 'Poprawna odpowiedź',
+        text2: 'Tak trzymaj!👌',
+        type: 'success',
+        position: 'bottom',
+      });
+      props.nextExercise();
+    } else {
+      console.log('ANSWER WRONG');
       Toast.show({
         text1: 'Zła odpowiedź',
         text2: 'Spróbuj ponownie!👎',
@@ -80,10 +113,22 @@ const Exercise = (props) => {
   } else if (exerciseType == 'multiple_choice') {
     exerciseContainer = (
       <View style={styles.answers}>
-        <QuizAnswersCheck answers={possibleAnswers}></QuizAnswersCheck>
+        <QuizAnswersCheck
+          answers={possibleAnswers}
+          sendUsersAnswer={sendUsersAnswer}></QuizAnswersCheck>
+      </View>
+    );
+  } else if (exerciseType == 'drag_and_drop') {
+    exerciseContainer = (
+      <View style={styles.answers}>
+        <DragableExercise
+          answers={possibleAnswers}
+          sendUsersAnswer={sendUsersAnswerDragEx}
+          checkIfCorrectDragEx={checkIfCorrectDragEx}></DragableExercise>
       </View>
     );
   }
+
   if (code !== null) {
     codeContainer = <CommandLine lines={code}></CommandLine>;
   }
@@ -101,11 +146,19 @@ const Exercise = (props) => {
       {codeContainer}
       {exerciseContainer}
 
-      <TouchableOpacity
-        style={styles.nextButton}
-        onPress={() => checkIfCorrect()}>
-        <Icon name="arrow-right" size={30} color="#00072b" />
-      </TouchableOpacity>
+      {exerciseType == 'drag_and_drop' ? (
+        <TouchableOpacity
+          style={styles.nextButton}
+          onPress={() => checkIfCorrectDragEx()}>
+          <Icon name="arrow-right" size={30} color="#00072b" />
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity
+          style={styles.nextButton}
+          onPress={() => checkIfCorrect()}>
+          <Icon name="arrow-right" size={30} color="#00072b" />
+        </TouchableOpacity>
+      )}
     </View>
   );
 };

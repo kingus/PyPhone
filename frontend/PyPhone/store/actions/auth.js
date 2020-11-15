@@ -3,6 +3,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
+export const SET_XP = 'SET_XP';
 
 export const login = (username, password) => {
   return async (dispatch) => {
@@ -25,6 +26,35 @@ export const login = (username, password) => {
       .catch((error) => {
         console.log(error);
         throw new Error('Something went wrong!');
+      });
+  };
+};
+
+export const get_profile = () => {
+  return async (dispatch, getState) => {
+    const token = getState().auth.token;
+    const endpoint = global.url + '/api/profile/';
+    axios.defaults.timeout = 10000;
+
+    var config = {
+      method: 'get',
+      url: endpoint,
+      headers: {
+        Authorization: 'Token ' + token,
+      },
+    };
+    console.log(endpoint);
+    await axios(config)
+      .then(async (response) => {
+        console.log('RESPO XP', response.data.profile[0]['xp']);
+        await dispatch({
+          type: SET_XP,
+          xp: response.data.profile[0]['xp'],
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        throw new Error('XP Something went wrong!');
       });
   };
 };

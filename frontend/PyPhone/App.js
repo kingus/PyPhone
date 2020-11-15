@@ -21,10 +21,23 @@ const rootReducer = combineReducers({
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 const App = () => {
+  // const toastConfig = {
+  //   success: (internalState) => (
+  //     <View style={styles.successToast}>
+  //       <Text>{internalState.text1}</Text>
+  //     </View>
+  //   ),
+  //   error: () => {},
+  //   info: () => {},
+  //   any_custom_type: () => {},
+  // };
+
   return (
     <Provider store={store}>
       <NavContainer></NavContainer>
       <Toast ref={(ref) => Toast.setRef(ref)} />
+
+      {/* <Toast config={toastConfig} ref={(ref) => Toast.setRef(ref)} /> */}
     </Provider>
   );
 };
@@ -32,6 +45,13 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  successToast: {
+    height: 60,
+    width: '80%',
+    elevation: 2,
+    borderBottomColor: '#b2b2b2',
+    borderRadius: 3,
   },
 });
 

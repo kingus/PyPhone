@@ -4,8 +4,10 @@ import {View, Text, StyleSheet} from 'react-native';
 const CommandLine = (props) => {
   return (
     <View style={styles.cmd}>
-      {props.lines.map((line) => (
-        <Text style={styles.cmdText}>{line}</Text>
+      {props.lines.map((line, index) => (
+        <Text style={styles.cmdText} key={index}>
+          {line}
+        </Text>
       ))}
     </View>
   );
@@ -20,7 +22,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     backgroundColor: '#00072b',
     padding: 15,
-    marginTop: 10,
     borderRadius: 5,
     width: '95%',
     alignSelf: 'center',

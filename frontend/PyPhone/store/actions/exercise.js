@@ -5,6 +5,7 @@ export const SET_EXERCISES = 'SET_EXERCISES';
 export const exercise = (id) => {
   return async (dispatch, getState) => {
     const token = getState().auth.token;
+    // token = '493e77275ee813c6a1aa7ab20aac0af7eb8a43bb';
     console.log('ACTION EXERCISE, ', token);
     const endpoint = global.url + '/api/exercise/';
     axios.defaults.timeout = 10000;
@@ -14,14 +15,15 @@ export const exercise = (id) => {
       method: 'get',
       url: 'http://192.168.0.101:8000/api/exercise/',
       headers: {
-        Authorization: 'Token ' + token,
+        Authorization: 'Token 493e77275ee813c6a1aa7ab20aac0af7eb8a43bb',
+        // Authorization: 'Token ' + token,
       },
       params: {course_id: id},
     };
 
     await axios(config)
       .then(async (response) => {
-        console.log('RESPO', response.data.exercises);
+        console.log('RESPONSE EXERCISE', response.data.exercises);
         await dispatch({
           type: SET_EXERCISES,
           exercises: response.data.exercises,

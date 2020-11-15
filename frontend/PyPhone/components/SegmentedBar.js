@@ -34,11 +34,11 @@ const SegmentedBar = (props) => {
 
   return (
     <View style={styles.container}>
-      {items.map((record) =>
+      {items.map((record, index) =>
         record === true ? (
-          <View style={styles.itemDone}></View>
+          <View style={styles.itemDone} key={index}></View>
         ) : (
-          <View style={styles.item}></View>
+          <View style={styles.item} key={index}></View>
         ),
       )}
     </View>

@@ -14,20 +14,37 @@ const QuizAnswersCheck = (props) => {
     {key: 4, answer: props.answers[3], clicked: false},
   ]);
 
+  const onClickCard = (id) => {
+    const editedAnswers = answers.map((answer) => {
+      if (answer.key === id) {
+        return {...answer, clicked: !answer.clicked};
+      } else {
+        return {...answer, clicked: answer.clicked};
+      }
+    });
+    setAnswers(editedAnswers);
+    props.sendUsersAnswer(editedAnswers);
+  };
+
   useEffect(() => {
-    console.log('PROPS', props.answers);
     setAnswers([
       {key: 1, answer: props.answers[0], clicked: false},
       {key: 2, answer: props.answers[1], clicked: false},
       {key: 3, answer: props.answers[2], clicked: false},
       {key: 4, answer: props.answers[3], clicked: false},
     ]);
+    props.sendUsersAnswer(answers);
   }, [props.answers]);
 
   return (
     <View style={styles.answers}>
       {answers.map((number) => (
-        <QuizAnswerCheckBox answer={number['answer']}></QuizAnswerCheckBox>
+        <QuizAnswerCheckBox
+          answer={number['answer']}
+          isClicked={number['clicked']}
+          id={number['key']}
+          key={number['key']}
+          onClickCard={onClickCard}></QuizAnswerCheckBox>
       ))}
     </View>
   );

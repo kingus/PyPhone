@@ -1,11 +1,18 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 User = get_user_model()
-# Create your models here.
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    xp = models.IntegerField(default=0)
+
+    def __str__(self):
+        return str(self.user.username)
 
 
 class ExerciseType(models.Model):
-    exercise_type = models.CharField(max_length=50, null=False)
+    exercise_type = models.CharField(max_length=50, blank=True)
 
     def __str__(self):
         return str(self.id) + " " + self.exercise_type
@@ -25,11 +32,13 @@ class Exercise(models.Model):
     possible_answers = models.CharField(max_length=600, null=True)
     correct_answer = models.CharField(max_length=100, null=False)
     exercise_type = models.ForeignKey(
-        ExerciseType, on_delete=models.CASCADE, default=None, unique=False)
+        ExerciseType, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, default=1)
+    points = models.IntegerField(default=10,
+                                 blank=False)
 
     def __str__(self):
-        return self.question
+        return str(self.course) + " " + self.question
 
 
 class UsersCourse(models.Model):

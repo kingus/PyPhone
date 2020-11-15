@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.views import APIView, Response
-from .serializers import ExerciseSerializer, ExerciseTypeSerializer, CourseSerializer, UsersCourseSerializer
-from .models import Exercise, ExerciseType, Course, UsersCourse
+from .serializers import ExerciseSerializer, ExerciseSerializer2, ExerciseTypeSerializer, CourseSerializer, UsersCourseSerializer, ProfileSerializer
+from .models import Exercise, ExerciseType, Course, UsersCourse, Profile
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 
@@ -20,18 +20,34 @@ class ExerciseView(APIView):
             dane = i['exercise_type']['exercise_type']
             i['exercise_type'] = dane
             i['possible_answers'] = i['possible_answers'].split(";")
+            i['correct_answer'] = i['correct_answer'].split(";")
             if i['code'] is not None:
                 i['code'] = i['code'].split(";")
 
         return Response({"exercises": exercises_data})
 
     def post(self, request):
-        exercise = request.data.get('exercise')
-        serializer = ExerciseSerializer(data=exercise)
-        if serializer.is_valid(raise_exception=True):
-            saved_exercise = serializer.save()
-            return Response({"success": "Exercise '{}' created successfully".format(saved_exercise.question)})
-        return Response(serializer.errors)
+
+        exercises = request.data.get('exercises')
+
+        for exercise in exercises:
+            serializer = ExerciseSerializer2(data=exercise)
+            if serializer.is_valid(raise_exception=True):
+                saved_exercise = serializer.save()
+            else:
+                return Response(serializer.errors)
+
+        return Response({"success": "Exercise '{}' created successfully".format(saved_exercise.question)})
+
+
+class ProfileView(APIView):
+    def get(self, request):
+        token = request.headers['Authorization'].split(" ")[1]
+        user = Token.objects.get(
+            key=token).user
+        profile = Profile.objects.filter(user=user)
+        serializer = ProfileSerializer(profile, many=True)
+        return Response({"profile": serializer.data})
 
 
 class ExerciseTypeView(APIView):

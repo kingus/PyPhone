@@ -1,22 +1,41 @@
-import React, {useState} from 'react';
-import {Text, Dimensions, Image, StyleSheet, View} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import React, {useRef, useEffect} from 'react';
+import {Text, StyleSheet} from 'react-native';
+import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import * as Animatable from 'react-native-animatable';
 
 const QuizAnswerCheckBox = (props) => {
-  const [isClicked, setIsClicked] = useState('square-o');
+  const AnimationRef = useRef(null);
+
   const onClickCard = () => {
-    if (isClicked == 'square-o') setIsClicked('check-square-o');
-    else {
-      setIsClicked('square-o');
-    }
+    // if (AnimationRef) {
+    //   AnimationRef.current?.bounce();
+    // }
+    props.onClickCard(props.id);
   };
 
+  useEffect(() => {
+    if (AnimationRef) {
+      AnimationRef.current?.bounceIn();
+    }
+  }, [props.answer]);
+
   return (
-    <TouchableOpacity style={styles.answerCard} onPress={onClickCard}>
-      <Icon name={isClicked} size={25} color="#5afffb" />
-      <Text style={styles.answerText}>{props.answer}</Text>
-    </TouchableOpacity>
+    <TouchableWithoutFeedback onPress={onClickCard}>
+      <Animatable.View
+        ref={AnimationRef}
+        style={styles.answerCard}
+        ease="linear"
+        useNativeDriver={false}
+        duration={1400}>
+        {props.isClicked ? (
+          <Icon name="check-square-o" size={25} color="#5afffb" />
+        ) : (
+          <Icon name="square-o" size={25} color="#5afffb" />
+        )}
+        <Text style={styles.answerText}>{props.answer}</Text>
+      </Animatable.View>
+    </TouchableWithoutFeedback>
   );
 };
 

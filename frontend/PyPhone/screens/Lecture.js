@@ -1,13 +1,12 @@
 import React, {useState} from 'react';
 import {Text, Dimensions, Image, StyleSheet, View} from 'react-native';
-import Lecture1 from '../lectures/Lecture1';
+import Lecture2 from '../lectures/Lecture2';
 import {useDispatch, useSelector} from 'react-redux';
 
 const Lecture = () => {
-
   return (
     <View style={styles.container}>
-      <Lecture1></Lecture1>
+      <Lecture2></Lecture2>
     </View>
   );
 };

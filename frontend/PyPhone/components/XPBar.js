@@ -22,7 +22,8 @@ const XPBar = (props) => {
           colors={['#fffba9', '#ffdb00']}
           style={completedBar}></LinearGradient>
       </View>
-      <Text style={styles.XPText}>20XP</Text>
+      {/* <Text style={styles.XPText}>10 XP</Text> */}
+      <Text style={styles.XPText}>{props.xp}XP</Text>
 
       {/* <Text style={styles.completed}>{props.completed}</Text> */}
     </View>

@@ -1,22 +1,44 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {Text, Dimensions, Image, StyleSheet, View} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import * as Animatable from 'react-native-animatable';
 
 const QuizAnswerRadio = (props) => {
+  const AnimationRef = useRef(null);
+
   const onClickCard = () => {
+    // if (AnimationRef) {
+    //   AnimationRef.current?.bounce();
+    // }
     props.onClickCard(props.id);
   };
 
+  // const onClickCard = () => {
+  //   props.onClickCard(props.id);
+  // };
+  useEffect(() => {
+    if (AnimationRef) {
+      AnimationRef.current?.bounceIn();
+    }
+  }, [props.answer]);
+
   return (
-    <TouchableOpacity style={styles.answerCard} onPress={onClickCard}>
-      {props.isClicked ? (
-        <Icon name="check-circle-o" size={25} color="#5afffb" />
-      ) : (
-        <Icon name="circle-o" size={25} color="#5afffb" />
-      )}
-      <Text style={styles.answerText}>{props.answer}</Text>
-    </TouchableOpacity>
+    <TouchableWithoutFeedback onPress={onClickCard}>
+      <Animatable.View
+        ref={AnimationRef}
+        style={styles.answerCard}
+        ease="linear"
+        useNativeDriver={false}
+        duration={1400}>
+        {props.isClicked ? (
+          <Icon name="check-circle-o" size={25} color="#5afffb" />
+        ) : (
+          <Icon name="circle-o" size={25} color="#5afffb" />
+        )}
+        <Text style={styles.answerText}>{props.answer}</Text>
+      </Animatable.View>
+    </TouchableWithoutFeedback>
   );
 };
 

@@ -1,8 +1,10 @@
 import {LOGIN} from '../actions/auth';
+import {SET_XP} from '../actions/auth';
 
 const initialState = {
   token: null,
   username: null,
+  xp: null,
 };
 
 export default (state = initialState, action) => {
@@ -11,6 +13,10 @@ export default (state = initialState, action) => {
       return {
         token: action.token,
         username: action.username,
+      };
+    case SET_XP:
+      return {
+        xp: action.xp,
       };
     default:
       return state;

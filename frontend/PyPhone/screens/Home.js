@@ -36,6 +36,7 @@ const Home = (props) => {
   };
 
   const exercisesHandler = (id) => {
+    console.log('ID TU', id);
     let action = exerciseActions.exercise(id);
     try {
       dispatch(action);
@@ -72,17 +73,19 @@ const Home = (props) => {
             </View>
           </View>
           <UserBar></UserBar>
+          <View style={styles.coursesContainer}>
+            {userCourses.map((number, index) => (
+              <Card2
+                completed="30%"
+                category={number['course_name']}
+                key={index}
+                id={number['id']}
+                navToLecture={navToLecture}
+                isActive={number['active']}
+                navToExercise={navToExercise}></Card2>
+            ))}
+          </View>
         </View>
-        {userCourses.map((number, index) => (
-          <Card2
-            completed="30%"
-            category={number['course_name']}
-            key={number['course_name']}
-            id={number['id']}
-            navToLecture={navToLecture}
-            isActive={number['active']}
-            navToExercise={navToExercise}></Card2>
-        ))}
       </LinearGradient>
     </ScrollView>
   );
@@ -99,6 +102,9 @@ const styles = StyleSheet.create({
     paddingBottom: 50,
     borderRadius: 5,
     display: 'flex',
+  },
+  coursesContainer: {
+    marginTop: 10,
   },
   main: {
     height: '17%',

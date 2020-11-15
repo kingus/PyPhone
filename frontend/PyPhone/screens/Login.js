@@ -40,7 +40,7 @@ const Login = (props) => {
     try {
       await dispatch(action);
       await coursesHandler();
-
+      // await getProfile();
       props.navigation.navigate({
         routeName: 'TabNav',
       });
@@ -56,6 +56,17 @@ const Login = (props) => {
     try {
       await dispatch(action);
       console.log('COURSE SUCCESS');
+    } catch (err) {
+      console.log(err.message);
+    }
+    await getProfile();
+  };
+  const getProfile = async () => {
+    let action;
+    action = authActions.get_profile();
+    try {
+      dispatch(action);
+      console.log('XP SUCCESS');
     } catch (err) {
       console.log(err.message);
     }
