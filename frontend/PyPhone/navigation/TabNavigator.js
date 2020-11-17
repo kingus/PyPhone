@@ -4,6 +4,7 @@ import React from 'react';
 import Home from '../screens/Home';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import User from '../screens/User';
+import Final from '../screens/Final';
 
 const TabNavigator = createBottomTabNavigator(
   {
@@ -20,7 +21,7 @@ const TabNavigator = createBottomTabNavigator(
     },
 
     User: {
-      screen: User,
+      screen: Final,
       navigationOptions: {
         headerShown: false,
         tabBarIcon: ({focused}) => (

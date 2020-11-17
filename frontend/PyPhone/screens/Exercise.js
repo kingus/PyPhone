@@ -22,16 +22,18 @@ const Exercise = (props) => {
   const [correctAnswer, setCorrectAnswer] = useState(
     props.exerciseData.correct_answer,
   );
+  const [points, setPoints] = useState(props.exerciseData.points);
+  const [summary, setSummary] = useState({correct: 0, wrong: 0});
 
   useEffect(() => {
     setPossibleAnswers(props.exerciseData.possible_answers);
     setExerciseType(props.exerciseData.exercise_type);
     setCode(props.exerciseData.code);
     setCorrectAnswer(props.exerciseData.correct_answer);
+    setPoints(props.exerciseData.points);
   }, [props]);
 
   const sendUsersAnswer = (answer) => {
-    console.log('SEND USERS ANSWER', answer);
     let usersAns = [];
     for (let i of answer) {
       if (i.clicked === true) {
@@ -39,35 +41,33 @@ const Exercise = (props) => {
       }
     }
     setUsersAnswer(usersAns);
-    console.log("USER'S CHOSEN ANSWER:", usersAns);
-    console.log('CORRECT ANSWER: ', correctAnswer);
-    console.log(
-      'props.exerciseData.correct_answer ',
-      props.exerciseData.correct_answer,
-    );
   };
   const sendUsersAnswerDragEx = (answer) => {
-    console.log('SEND USERS ANSWER', answer);
     let usersAns = [];
     for (let i of answer) {
       usersAns.push(i.answer);
     }
     setUsersAnswer(usersAns);
-    console.log("USER'S CHOSEN ANSWER:", usersAns);
-    console.log('CORRECT ANSWER: ', correctAnswer);
   };
 
   const checkIfCorrect = () => {
+    var gainedPoints = 0;
+    var correct = 'correct';
     if (usersAnswer.sort().join(',') === correctAnswer.sort().join(',')) {
       console.log('ANSWER CORRECT');
+
+      gainedPoints = points;
+
       Toast.show({
         text1: 'Poprawna odpowiedź',
         text2: 'Tak trzymaj!👌',
         type: 'success',
         position: 'bottom',
       });
-      props.nextExercise();
     } else {
+      gainedPoints = 0;
+      correct = 'wrong';
+
       console.log('ANSWER WRONG');
       Toast.show({
         text1: 'Zła odpowiedź',
@@ -76,21 +76,38 @@ const Exercise = (props) => {
         position: 'bottom',
       });
     }
+    console.log('SUMMARY', summary);
+
+    props.nextExercise(gainedPoints, correct);
   };
   const checkIfCorrectDragEx = () => {
+    var gainedPoints = 0;
+    var correct = 'correct';
     console.log('checkIfCorrectDragEx', correctAnswer);
     console.log('checkIfCorrectDragEx', usersAnswer);
     if (usersAnswer.join(',') === correctAnswer.join(',')) {
       console.log('CORRECT');
+      gainedPoints = points;
+      setSummary({
+        ...summary,
+        correct: summary['correct'] + 1,
+      });
+
       Toast.show({
         text1: 'Poprawna odpowiedź',
         text2: 'Tak trzymaj!👌',
         type: 'success',
         position: 'bottom',
       });
-      props.nextExercise();
     } else {
       console.log('ANSWER WRONG');
+      gainedPoints = 0;
+      setSummary({
+        ...summary,
+        wrong: summary['wrong'] + 1,
+      });
+      correct = 'wrong';
+
       Toast.show({
         text1: 'Zła odpowiedź',
         text2: 'Spróbuj ponownie!👎',
@@ -98,6 +115,8 @@ const Exercise = (props) => {
         position: 'bottom',
       });
     }
+
+    props.nextExercise(gainedPoints, correct);
   };
 
   var exerciseContainer, codeContainer;

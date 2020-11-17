@@ -1,18 +1,31 @@
 import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, Alert} from 'react-native';
 import SegmentedBar from '../components/SegmentedBar';
 import Exercise from '../screens/Exercise';
 import {useSelector} from 'react-redux';
 
-const Exercises = () => {
+const Exercises = (props) => {
   const [currentExercise, setCurrentExercise] = useState(0);
+  const [currentPoints, setCurrentPoints] = useState(0);
   const exercises = useSelector((state) => state.exercise.userExercises);
+  const [summary, setSummary] = useState({correct: 0, wrong: 0});
 
-  const nextExercise = () => {
-    if (currentExercise < exercises.length - 1)
+  const nextExercise = async (points, correct) => {
+    var sum = {correct: 0, wrong: 0};
+    summary[correct] = summary[correct] + 1;
+    console.log('MY SUMMARY', summary);
+
+    if (currentExercise < exercises.length - 1) {
       setCurrentExercise(currentExercise + 1);
-    else {
-      console.log('LAST EXERCISE');
+      setCurrentPoints(currentPoints + points);
+    } else {
+      var gainedPoints = currentPoints;
+      setCurrentPoints(0);
+
+      props.navigation.navigate('Final', {
+        xp: gainedPoints + points,
+        summary: summary,
+      });
     }
   };
 

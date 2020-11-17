@@ -195,6 +195,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     display: 'flex',
+    height: windowHeight,
   },
 });
 

@@ -3,6 +3,7 @@ import React from 'react';
 import {createAppContainer} from 'react-navigation';
 import Lecture from '../screens/Lecture';
 import Home from '../screens/Home';
+import Final from '../screens/Final';
 import Exercises from '../screens/Exercises';
 import TabNavigator from './TabNavigator';
 import {createStackNavigator, HeaderBackButton} from 'react-navigation-stack';
@@ -18,6 +19,13 @@ export default AppNavigator = createStackNavigator({
   },
 
   Exercises: {screen: Exercises},
+  Final: {
+    screen: Final,
+    navigationOptions: {
+      headerShown: false,
+      showLabel: false,
+    },
+  },
 
   Lecture: {
     screen: Lecture,

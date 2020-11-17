@@ -15,6 +15,10 @@ import * as authActions from '../store/actions/auth';
 import {useDispatch} from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import * as courseActions from '../store/actions/course';
+import {Dimensions} from 'react-native';
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const Login = (props) => {
   const dispatch = useDispatch();
@@ -113,11 +117,6 @@ const Login = (props) => {
             onChangeText={(password) => changePasswordHandler(password)}
           />
         </View>
-        {/* <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => authHandler()}>
-          <Text style={styles.buttonText}>LOGIN</Text>
-        </TouchableOpacity>
-      </View> */}
 
         {isLoading ? (
           <ActivityIndicator size="small" color="grey" />
@@ -148,6 +147,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // alignItems: 'center',
   },
+
   appName: {
     fontSize: 50,
     color: 'white',
@@ -197,10 +197,8 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   linearGradient: {
-    flex: 1,
+    height: windowHeight,
     alignItems: 'center',
-    paddingLeft: 15,
-    paddingRight: 15,
     borderRadius: 5,
     display: 'flex',
   },
