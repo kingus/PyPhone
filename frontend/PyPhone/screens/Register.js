@@ -15,6 +15,7 @@ import {useDispatch} from 'react-redux';
 import * as authActions from '../store/actions/auth';
 import LinearGradient from 'react-native-linear-gradient';
 import {Dimensions} from 'react-native';
+import SpinningLogo from '../components/SpinningLogo';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -77,7 +78,8 @@ const Register = (props) => {
         style={styles.linearGradient}>
         <Text style={styles.appName}>PyPhone</Text>
         <View style={styles.logoContainer}>
-          <Image source={logo} style={styles.logo}></Image>
+          <SpinningLogo></SpinningLogo>
+          {/* <Image source={logo} style={styles.logo}></Image> */}
           <Text style={styles.sign_text}>
             Sign up and keep on learning Python...
           </Text>
@@ -145,7 +147,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   logoContainer: {
-    margin: 70,
+    margin: 40,
     flexDirection: 'column',
     alignItems: 'center',
   },
@@ -169,6 +171,7 @@ const styles = StyleSheet.create({
     color: 'rgba(255,255,255,0.6)',
     textAlign: 'center',
     width: 300,
+    marginTop: 50,
   },
   buttonContainer: {
     alignItems: 'center',

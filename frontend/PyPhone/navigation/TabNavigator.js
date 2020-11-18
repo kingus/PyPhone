@@ -21,7 +21,7 @@ const TabNavigator = createBottomTabNavigator(
     },
 
     User: {
-      screen: Final,
+      screen: User,
       navigationOptions: {
         headerShown: false,
         tabBarIcon: ({focused}) => (

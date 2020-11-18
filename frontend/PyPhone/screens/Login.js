@@ -7,6 +7,8 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
+  Animated,
+  Easing,
   ActivityIndicator,
 } from 'react-native';
 import {StyleSheet} from 'react-native';
@@ -16,6 +18,7 @@ import {useDispatch} from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import * as courseActions from '../store/actions/course';
 import {Dimensions} from 'react-native';
+import SpinningLogo from '../components/SpinningLogo';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -90,7 +93,8 @@ const Login = (props) => {
         style={styles.linearGradient}>
         <Text style={styles.appName}>PyPhone</Text>
         <View style={styles.logoContainer}>
-          <Image source={logo} style={styles.logo}></Image>
+          {/* <Image source={logo} style={styles.logo}></Image> */}
+          <SpinningLogo></SpinningLogo>
           <Text style={styles.signText}>
             Sign in and keep on learning Python...
           </Text>
@@ -157,7 +161,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
   },
   logoContainer: {
-    margin: 80,
+    margin: 40,
     flexDirection: 'column',
     alignItems: 'center',
   },
@@ -182,6 +186,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     width: 300,
     fontFamily: 'OpenSansRegular',
+    marginTop: 50,
   },
   buttonContainer: {
     alignItems: 'center',

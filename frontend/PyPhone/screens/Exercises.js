@@ -11,7 +11,6 @@ const Exercises = (props) => {
   const [summary, setSummary] = useState({correct: 0, wrong: 0});
 
   const nextExercise = async (points, correct) => {
-    var sum = {correct: 0, wrong: 0};
     summary[correct] = summary[correct] + 1;
     console.log('MY SUMMARY', summary);
 

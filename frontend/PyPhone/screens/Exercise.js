@@ -98,6 +98,7 @@ const Exercise = (props) => {
         text2: 'Tak trzymaj!👌',
         type: 'success',
         position: 'bottom',
+        visibilityTime: 4000,
       });
     } else {
       console.log('ANSWER WRONG');
@@ -113,6 +114,7 @@ const Exercise = (props) => {
         text2: 'Spróbuj ponownie!👎',
         type: 'error',
         position: 'bottom',
+        visibilityTime: 4000,
       });
     }
 
