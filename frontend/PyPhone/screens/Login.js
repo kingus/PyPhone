@@ -6,6 +6,7 @@ import {
   Button,
   Image,
   TouchableOpacity,
+  TouchableHighlight,
   ScrollView,
   Animated,
   Easing,
@@ -19,6 +20,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import * as courseActions from '../store/actions/course';
 import {Dimensions} from 'react-native';
 import SpinningLogo from '../components/SpinningLogo';
+import AnimatedText from '../components/AnimatedText';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -93,17 +95,14 @@ const Login = (props) => {
         style={styles.linearGradient}>
         <Text style={styles.appName}>PyPhone</Text>
         <View style={styles.logoContainer}>
-          {/* <Image source={logo} style={styles.logo}></Image> */}
           <SpinningLogo></SpinningLogo>
-          <Text style={styles.signText}>
-            Sign in and keep on learning Python...
-          </Text>
+          <AnimatedText></AnimatedText>
         </View>
 
         <View style={styles.input_group}>
           <TextInput
             name="username"
-            placeholder="Username"
+            placeholder="Podaj login"
             autoCapitalize="none"
             placeholderTextColor="rgba(255,255,255,0.7)"
             onChangeText={(username) => changeUsernameHandler(username)}
@@ -112,7 +111,7 @@ const Login = (props) => {
           />
           <TextInput
             name="password"
-            placeholder="Password"
+            placeholder="Podaj hasło"
             secureTextEntry={true}
             autoCapitalize="none"
             placeholderTextColor="rgba(255,255,255,0.7)"
@@ -129,14 +128,14 @@ const Login = (props) => {
             <TouchableOpacity
               style={styles.button}
               onPress={() => authHandler()}>
-              <Text style={styles.buttonText}>LOGIN</Text>
+              <Text style={styles.buttonText}>ZALOGUJ SIĘ</Text>
             </TouchableOpacity>
           </View>
         )}
 
         <TouchableOpacity onPress={() => onClickRegister()}>
           <Text style={styles.bottomText}>
-            Don't have an account? REGISTER.
+            Nie masz jeszcze konta? ZAREJESTRUJ SIĘ.
           </Text>
         </TouchableOpacity>
       </LinearGradient>
@@ -154,11 +153,18 @@ const styles = StyleSheet.create({
 
   appName: {
     fontSize: 50,
-    color: 'white',
     paddingTop: 50,
     textAlign: 'center',
     fontFamily: 'OpenSansRegular',
     letterSpacing: 0,
+    textAlign: 'center',
+    fontSize: 50,
+    fontWeight: '700',
+    letterSpacing: 0.1,
+    color: '#ffe25b',
+    textShadowColor: 'rgba(0, 0, 0, 0.45)',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 10,
   },
   logoContainer: {
     margin: 40,
