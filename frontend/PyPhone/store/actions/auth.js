@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const SET_XP = 'SET_XP';
+export const ADD_XP = 'ADD_XP';
 
 export const login = (username, password) => {
   return async (dispatch) => {
@@ -96,4 +97,13 @@ const setUserData = (token, username) => {
   } catch (error) {
     console.log('ERROR');
   }
+};
+
+export const xp = (newXp) => {
+  return async (dispatch, getState) => {
+    await dispatch({
+      type: ADD_XP,
+      xp: newXp,
+    });
+  };
 };

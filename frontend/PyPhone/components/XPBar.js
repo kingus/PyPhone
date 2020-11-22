@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import girl from '../images/girl.png';
 
 const XPBar = (props) => {
   const completedBar = {
@@ -8,44 +9,53 @@ const XPBar = (props) => {
     backgroundColor: '#49a9c4',
     borderRadius: 80,
     width: props.completed,
-    justifyContent: 'center',
     flex: 1,
-    alignItems: 'center',
-    paddingLeft: 15,
-    paddingRight: 15,
   };
 
   return (
     <View style={styles.container}>
-      <View style={[styles.fullBar]}>
-        <LinearGradient
-          colors={['#fffba9', '#ffdb00']}
-          style={completedBar}></LinearGradient>
-      </View>
-      {/* <Text style={styles.XPText}>10 XP</Text> */}
-      <Text style={styles.XPText}>{props.xp}XP</Text>
+      <Image source={girl} style={styles.profileImage}></Image>
 
-      {/* <Text style={styles.completed}>{props.completed}</Text> */}
+      <View style={styles.main}>
+        <View style={[styles.fullBar]}>
+          <LinearGradient
+            colors={['#fffba9', '#ffdb00']}
+            style={completedBar}></LinearGradient>
+        </View>
+        <Text style={styles.XPText}>{props.xp} XP</Text>
+      </View>
     </View>
   );
 };
 const styles = StyleSheet.create({
   container: {
-    width: 300,
-    display: 'flex',
-    justifyContent: 'space-between',
-    flexDirection: 'row',
+    width: '85%',
+    // // display: 'flex',
+    // flexDirection: 'row',
     alignItems: 'center',
+    // justifyContent: 'center',
+  },
+  main: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 10,
+  },
+  profileImage: {
+    height: 70,
+    width: 70,
+    margin: 10,
   },
   fullBar: {
     height: 25,
-    width: 200,
+    width: 150,
     backgroundColor: '#dedddb',
     borderRadius: 50,
     borderColor: 'white',
     borderWidth: 3,
     flex: 15,
-    marginLeft: 40,
+    marginLeft: 45,
   },
   completed: {
     color: '#49a9c4',
@@ -57,8 +67,9 @@ const styles = StyleSheet.create({
   XPText: {
     color: 'white',
     fontWeight: 'bold',
-    padding: 10,
-    flex: 3,
+    flex: 4,
+    marginBottom: 4,
+    marginLeft: 5,
   },
 });
 

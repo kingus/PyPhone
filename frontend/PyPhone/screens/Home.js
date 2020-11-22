@@ -29,9 +29,14 @@ const Home = (props) => {
   const navToExercise = (id) => {
     setActiveCourse(id);
 
-    props.navigation.navigate({
-      routeName: 'Exercises',
+    // props.navigation.navigate({
+    //   routeName: 'Exercises',
+    // });
+
+    props.navigation.navigate('Exercises', {
+      course: activeCourse,
     });
+
     console.log('NAV TO EXERCISE CLICKED');
   };
 

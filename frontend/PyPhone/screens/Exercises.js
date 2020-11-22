@@ -9,6 +9,8 @@ const Exercises = (props) => {
   const [currentPoints, setCurrentPoints] = useState(0);
   const exercises = useSelector((state) => state.exercise.userExercises);
   const [summary, setSummary] = useState({correct: 0, wrong: 0});
+  const {navigation} = props;
+  const course = navigation.getParam('course', {});
 
   const nextExercise = async (points, correct) => {
     summary[correct] = summary[correct] + 1;
@@ -20,10 +22,12 @@ const Exercises = (props) => {
     } else {
       var gainedPoints = currentPoints;
       setCurrentPoints(0);
+      console.log('TU JEST COURSE ', course);
 
       props.navigation.navigate('Final', {
         xp: gainedPoints + points,
         summary: summary,
+        course: course,
       });
     }
   };

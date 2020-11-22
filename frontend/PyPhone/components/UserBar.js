@@ -13,7 +13,6 @@ const UserBar = (props) => {
 
   return (
     <View style={styles.userInfo}>
-      <Image source={girl} style={styles.profileImage}></Image>
       <View style={styles.xpContainer}>
         <XPBar completed={oblicz} xp={xp}></XPBar>
       </View>
@@ -27,11 +26,6 @@ const styles = StyleSheet.create({
   xpContainer: {
     display: 'flex',
     flexDirection: 'row',
-  },
-
-  profileImage: {
-    height: 70,
-    width: 70,
   },
 
   userInfo: {

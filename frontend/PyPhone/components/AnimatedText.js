@@ -3,11 +3,12 @@ import {Animated} from 'react-native';
 import {StyleSheet} from 'react-native';
 
 const AnimatedText = (props) => {
-  const [visible, setVisible] = useState(true);
-
+  // const [visible, setVisible] = useState(true);
+  var visible = true;
   const fadeAnim = new Animated.Value(visible ? 1 : 0);
   const toggleVisible = () => {
-    setVisible(!visible);
+    // setVisible(!visible);
+    visible = !visible;
   };
 
   setTimeout(() => {

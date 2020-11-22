@@ -45,6 +45,7 @@ class UsersCourse(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     active = models.BooleanField()
+    gainedPoints = models.IntegerField(default=0)
 
     def __str__(self):
         return str(self.user) + " - " + str(self.course)

@@ -16,6 +16,7 @@ import * as authActions from '../store/actions/auth';
 import LinearGradient from 'react-native-linear-gradient';
 import {Dimensions} from 'react-native';
 import SpinningLogo from '../components/SpinningLogo';
+import AnimatedText from '../components/AnimatedText';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -30,18 +31,14 @@ const Register = (props) => {
   const dispatch = useDispatch();
 
   const changePasswordHandler = (password) => {
-    console.log(password);
     setPassword(password);
   };
 
   const changeRePasswordHandler = (password) => {
-    console.log(password);
     setRePassword(password);
   };
 
   const changeUsernameHandler = (username) => {
-    console.log(username);
-
     setUsername(username);
   };
 
@@ -79,15 +76,12 @@ const Register = (props) => {
         <Text style={styles.appName}>PyPhone</Text>
         <View style={styles.logoContainer}>
           <SpinningLogo></SpinningLogo>
-          {/* <Image source={logo} style={styles.logo}></Image> */}
-          <Text style={styles.sign_text}>
-            Sign up and keep on learning Python...
-          </Text>
+          <AnimatedText></AnimatedText>
         </View>
         <View style={styles.input_group}>
           <TextInput
             name="username"
-            placeholder="Username"
+            placeholder="Podaj login"
             autoCapitalize="none"
             placeholderTextColor="rgba(255,255,255,0.7)"
             style={styles.input}
@@ -96,7 +90,7 @@ const Register = (props) => {
           />
           <TextInput
             name="password"
-            placeholder="Password"
+            placeholder="Podaj hasło"
             secureTextEntry={true}
             autoCapitalize="none"
             placeholderTextColor="rgba(255,255,255,0.7)"
@@ -106,7 +100,7 @@ const Register = (props) => {
           />
           <TextInput
             name="repassword"
-            placeholder="Repeat your password"
+            placeholder="Powtórz hasło"
             secureTextEntry={true}
             autoCapitalize="none"
             placeholderTextColor="rgba(255,255,255,0.7)"
@@ -117,13 +111,11 @@ const Register = (props) => {
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={() => authHandler()}>
-            <Text style={styles.buttonText}>REGISTER</Text>
+            <Text style={styles.buttonText}>ZAREJESTRUJ</Text>
           </TouchableOpacity>
         </View>
         <TouchableOpacity onPress={() => onClickLogin()} title="Login">
-          <Text style={styles.bottomText}>
-            Already have an account? LOG IN.
-          </Text>
+          <Text style={styles.bottomText}>Masz już konto? ZALOGUJ SIĘ</Text>
         </TouchableOpacity>
 
         {/* </View> */}
@@ -142,9 +134,18 @@ const styles = StyleSheet.create({
   },
   appName: {
     fontSize: 50,
-    color: 'white',
     paddingTop: 50,
     textAlign: 'center',
+    fontFamily: 'OpenSansRegular',
+    letterSpacing: 0,
+    textAlign: 'center',
+    fontSize: 50,
+    fontWeight: '700',
+    letterSpacing: 0.1,
+    color: '#ffe25b',
+    textShadowColor: 'rgba(0, 0, 0, 0.45)',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 10,
   },
   logoContainer: {
     margin: 40,

@@ -49,6 +49,20 @@ class ProfileView(APIView):
         serializer = ProfileSerializer(profile, many=True)
         return Response({"profile": serializer.data})
 
+    def post(self, request):
+        token = request.headers['Authorization'].split(" ")[1]
+        user = Token.objects.get(
+            key=token).user
+        xp = request.data.get('xp')
+        course = request.data.get('course')
+        profile = Profile.objects.filter(user=user)
+        newXp = int(profile.get().xp) + int(xp)
+        profile.update(xp=newXp)
+        usersCourse = UsersCourse.objects.filter(
+            user=user, course=course).update(gainedPoints=xp)
+
+        return Response({"XP saved correctly. You have " + str(newXp) + " XP."})
+
 
 class ExerciseTypeView(APIView):
     def get(self, request):
@@ -58,6 +72,7 @@ class ExerciseTypeView(APIView):
 
     def post(self, request):
         exercise_type = request.data.get('exercise_type')
+
         serializer = ExerciseTypeSerializer(data=exercise_type)
         if serializer.is_valid(raise_exception=True):
             saved_exercise_type = serializer.save()

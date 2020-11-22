@@ -4,17 +4,38 @@ import winner from '../images/winner.png';
 import coin from '../images/coin.png';
 import LinearGradient from 'react-native-linear-gradient';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import * as userActions from '../store/actions/user';
+import * as authActions from '../store/actions/auth';
+import {useSelector, useDispatch} from 'react-redux';
 
 const Final = (props) => {
   const {navigation} = props;
   const gainedPoints = navigation.getParam('xp', {});
   const summary = navigation.getParam('summary');
+  const course = navigation.getParam('course');
+  const dispatch = useDispatch();
+
   console.log(summary);
 
   const onClickContinue = () => {
+    console.log(gainedPoints);
+    xpHandler(gainedPoints);
     props.navigation.navigate({
       routeName: 'Home',
     });
+  };
+
+  const xpHandler = async (xp) => {
+    console.log('XP TU', xp);
+    console.log('COURSE TU', course);
+    let action = userActions.user(xp, course);
+    let action2 = authActions.xp(xp);
+    try {
+      dispatch(action);
+      dispatch(action2);
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
   return (
