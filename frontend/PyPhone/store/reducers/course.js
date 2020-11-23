@@ -1,10 +1,24 @@
-import {GET_COURSES, SET_COURSES} from '../actions/course';
+import {GET_COURSES, SET_COURSES, SET_ACTIVE_COURSES} from '../actions/course';
 
 const initialState = {
   userCourses: [],
 };
 
 export default (state = initialState, action) => {
+  console.log('AAAAA', state.userCourses);
+  console.log('action.course', action.course);
+  let newCourses = state.userCourses.map((userCourse) => {
+    if (userCourse.id === action.course + 1) {
+      console.log(userCourse.id);
+      return {...userCourse, active: true};
+    } else {
+      return {
+        ...userCourse,
+      };
+    }
+  });
+  console.log(newCourses);
+
   switch (action.type) {
     case GET_COURSES:
       return {
@@ -14,6 +28,11 @@ export default (state = initialState, action) => {
       return {
         userCourses: action.userCourses,
       };
+    case SET_ACTIVE_COURSES:
+      return {
+        userCourses: newCourses,
+      };
+
     default:
       return state;
   }

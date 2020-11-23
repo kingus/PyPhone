@@ -13,6 +13,7 @@ export default (state = initialState, action) => {
     case SET_EXERCISES:
       return {
         userExercises: action.exercises,
+        xp: action.xp,
       };
     default:
       return state;

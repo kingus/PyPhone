@@ -13,10 +13,11 @@ import LinearGradient from 'react-native-linear-gradient';
 import {useSelector, useDispatch} from 'react-redux';
 import UserBar from '../components/UserBar';
 import * as exerciseActions from '../store/actions/exercise';
+import {user} from '../store/actions/user';
 
 const Home = (props) => {
-  const userCourses = useSelector((state) => state.course.userCourses);
   const dispatch = useDispatch();
+  const userCourses = useSelector((state) => state.course.userCourses);
   const [activeCourse, setActiveCourse] = useState(6);
 
   const navToLecture = (lesson) => {
@@ -28,15 +29,9 @@ const Home = (props) => {
 
   const navToExercise = (id) => {
     setActiveCourse(id);
-
-    // props.navigation.navigate({
-    //   routeName: 'Exercises',
-    // });
-
     props.navigation.navigate('Exercises', {
-      course: activeCourse,
+      course: id,
     });
-
     console.log('NAV TO EXERCISE CLICKED');
   };
 
@@ -53,6 +48,10 @@ const Home = (props) => {
   useEffect(() => {
     exercisesHandler(activeCourse);
   }, [activeCourse]);
+
+  useEffect(() => {
+    console.log('XXX', userCourses);
+  }, [userCourses]);
 
   return (
     <ScrollView>

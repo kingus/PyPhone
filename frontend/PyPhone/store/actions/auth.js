@@ -99,7 +99,7 @@ const setUserData = (token, username) => {
   }
 };
 
-export const xp = (newXp) => {
+export const xp = (newXp, unlock) => {
   return async (dispatch, getState) => {
     await dispatch({
       type: ADD_XP,

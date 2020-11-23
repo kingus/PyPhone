@@ -24,9 +24,12 @@ export const exercise = (id) => {
     await axios(config)
       .then(async (response) => {
         console.log('RESPONSE EXERCISE', response.data.exercises);
+        console.log('PRINT XP ', response.data.xp);
+
         await dispatch({
           type: SET_EXERCISES,
           exercises: response.data.exercises,
+          xp: response.data.xp,
         });
       })
       .catch((error) => {

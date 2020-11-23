@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
-import ProgressBar from './ProgressBar';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import padlock from '../images/padlock.png';
 
@@ -10,6 +9,7 @@ const Card2 = (props) => {
   const [isActive, setIsActive] = useState(props.isActive);
   const [cardStyle, setCardStyle] = useState();
   const [categoryStyle, setCategoryStyle] = useState();
+
   const clickLecture = () => {
     let lesson = 'Zmienne';
     props.navToLecture(lesson);
@@ -17,15 +17,12 @@ const Card2 = (props) => {
   };
 
   const clickExercises = () => {
-    // props.navigation.navigate({
-    //   routeName: 'CourseSwitch',
-    // });
     props.navToExercise(props.id);
-
     console.log('EXERCISES CLICKED');
   };
 
   useEffect(() => {
+    setIsActive(props.isActive);
     if (isActive) {
       setCardStyle(styles.cardInfoActive);
       setCategoryStyle(styles.categoryActive);
@@ -33,11 +30,11 @@ const Card2 = (props) => {
       setCardStyle(styles.cardInfoInActive);
       setCategoryStyle(styles.categoryInActive);
     }
-  }, []);
+    console.log('CARD', props.category, isActive);
+  });
 
   return (
     <View style={styles.card}>
-      {/* <ProgressBar completed={props.completed} /> */}
       <View style={cardStyle}>
         <Text style={categoryStyle}>{props.category}</Text>
       </View>

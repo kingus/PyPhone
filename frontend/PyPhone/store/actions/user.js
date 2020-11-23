@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-export const user = (xp, course) => {
+export const user = (xp, course, unlock) => {
   return async (dispatch, getState) => {
     const endpoint = global.url + '/api/profile/';
-    const payload = {xp: xp, course: course};
+    const payload = {xp: xp, course: course, unlock: unlock};
 
     axios.defaults.timeout = 10000;
 
@@ -11,9 +11,6 @@ export const user = (xp, course) => {
       Authorization: 'Token 493e77275ee813c6a1aa7ab20aac0af7eb8a43bb',
       'Content-Type': 'application/json',
     };
-
-    console.log('TU USER COURSE ', course);
-    console.log('TU USER XP ', xp);
 
     await axios
       .post(endpoint, payload, {headers})

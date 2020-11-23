@@ -6,6 +6,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import * as userActions from '../store/actions/user';
 import * as authActions from '../store/actions/auth';
+import * as courseActions from '../store/actions/course';
 import {useSelector, useDispatch} from 'react-redux';
 
 const Final = (props) => {
@@ -13,6 +14,7 @@ const Final = (props) => {
   const gainedPoints = navigation.getParam('xp', {});
   const summary = navigation.getParam('summary');
   const course = navigation.getParam('course');
+  const maxXp = navigation.getParam('maxXp');
   const dispatch = useDispatch();
 
   console.log(summary);
@@ -20,6 +22,7 @@ const Final = (props) => {
   const onClickContinue = () => {
     console.log(gainedPoints);
     xpHandler(gainedPoints);
+    console.log('MAX', maxXp);
     props.navigation.navigate({
       routeName: 'Home',
     });
@@ -28,9 +31,19 @@ const Final = (props) => {
   const xpHandler = async (xp) => {
     console.log('XP TU', xp);
     console.log('COURSE TU', course);
-    let action = userActions.user(xp, course);
+    let action = userActions.user(xp, course, false);
     let action2 = authActions.xp(xp);
+    let action3 = courseActions.courseSetActive(course);
+    let calculateXp = (75 * maxXp) / 100;
+    console.log(calculateXp);
+    if (xp >= calculateXp) {
+    }
+
     try {
+      if (xp >= calculateXp) {
+        dispatch(action3);
+        action = userActions.user(xp, course, true);
+      }
       dispatch(action);
       dispatch(action2);
     } catch (err) {

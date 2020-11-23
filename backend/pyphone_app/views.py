@@ -16,6 +16,7 @@ class ExerciseView(APIView):
         exercises = Exercise.objects.filter(course=course_id)
         serializer = ExerciseSerializer(exercises, many=True)
         exercises_data = serializer.data
+        xpSum = 0
         for i in exercises_data:
             dane = i['exercise_type']['exercise_type']
             i['exercise_type'] = dane
@@ -23,8 +24,9 @@ class ExerciseView(APIView):
             i['correct_answer'] = i['correct_answer'].split(";")
             if i['code'] is not None:
                 i['code'] = i['code'].split(";")
+            xpSum = xpSum + i['points']
 
-        return Response({"exercises": exercises_data})
+        return Response({"exercises": exercises_data, "xp": xpSum})
 
     def post(self, request):
 
@@ -55,12 +57,15 @@ class ProfileView(APIView):
             key=token).user
         xp = request.data.get('xp')
         course = request.data.get('course')
+        unlock = request.data.get('unlock')
         profile = Profile.objects.filter(user=user)
         newXp = int(profile.get().xp) + int(xp)
         profile.update(xp=newXp)
         usersCourse = UsersCourse.objects.filter(
             user=user, course=course).update(gainedPoints=xp)
-
+        if(unlock):
+            usersCourseNext = UsersCourse.objects.filter(
+                user=user, course=course+1).update(active=True)
         return Response({"XP saved correctly. You have " + str(newXp) + " XP."})
 
 
