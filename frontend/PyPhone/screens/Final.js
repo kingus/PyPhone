@@ -31,19 +31,20 @@ const Final = (props) => {
   const xpHandler = async (xp) => {
     console.log('XP TU', xp);
     console.log('COURSE TU', course);
+
     let action = userActions.user(xp, course, false);
     let action2 = authActions.xp(xp);
     let action3 = courseActions.courseSetActive(course);
+
     let calculateXp = (75 * maxXp) / 100;
     console.log(calculateXp);
-    if (xp >= calculateXp) {
-    }
 
     try {
       if (xp >= calculateXp) {
         dispatch(action3);
         action = userActions.user(xp, course, true);
       }
+
       dispatch(action);
       dispatch(action2);
     } catch (err) {

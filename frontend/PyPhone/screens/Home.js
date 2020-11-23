@@ -1,5 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet, ScrollView, Image} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Image,
+  ImageBackground,
+} from 'react-native';
 import Card from '../components/Card';
 import Card2 from '../components/Card2';
 import trophy from '../images/trophy.png';
@@ -84,6 +91,7 @@ const Home = (props) => {
             </View>
           </View>
           <UserBar></UserBar>
+
           <View style={styles.coursesContainer}>
             {userCourses.map((number, index) => (
               <Card2
