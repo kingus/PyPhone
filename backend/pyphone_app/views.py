@@ -90,6 +90,7 @@ class CourseView(APIView):
     def get(self, request):
         courses = Course.objects.all()
         serializer = CourseSerializer(courses, many=True)
+
         return Response({"courses": serializer.data})
 
     def post(self, request):
@@ -108,12 +109,13 @@ class UsersCourseView(APIView):
             key=token).user
         courses = UsersCourse.objects.filter(user=user).order_by('-active')
         serializer = UsersCourseSerializer(courses, many=True)
-        print(serializer.data)
         courses_data = serializer.data
         response_data = []
+        activeAmount = 0
         for i in courses_data:
             dane = i['course']
             dane['active'] = i['active']
             response_data.append(dane)
-        print("RESP", response_data)
-        return Response({"users_courses": response_data})
+            if dane['active'] == True:
+                activeAmount = activeAmount + 1
+        return Response({"users_courses": response_data, "activeAmount": activeAmount})

@@ -18,6 +18,10 @@ import {user} from '../store/actions/user';
 const Home = (props) => {
   const dispatch = useDispatch();
   const userCourses = useSelector((state) => state.course.userCourses);
+  const activeCoursesAmount = useSelector(
+    (state) => state.course.activeCoursesAmount,
+  );
+
   const [activeCourse, setActiveCourse] = useState(6);
 
   const navToLecture = (lesson) => {
@@ -51,6 +55,7 @@ const Home = (props) => {
 
   useEffect(() => {
     console.log('XXX', userCourses);
+    console.log('activeCoursesAmount ', activeCoursesAmount);
   }, [userCourses]);
 
   return (
@@ -68,12 +73,14 @@ const Home = (props) => {
             <View style={styles.pointsCard}>
               <Image source={trophy} style={styles.image}></Image>
 
-              <Text style={styles.pointsCardText}>100</Text>
+              <Text style={styles.pointsCardText}>
+                {activeCoursesAmount - 1}
+              </Text>
             </View>
             <View style={styles.pointsCard}>
               <Image source={coin} style={styles.image}></Image>
 
-              <Text style={styles.pointsCardText}>100</Text>
+              <Text style={styles.pointsCardText}>123</Text>
             </View>
           </View>
           <UserBar></UserBar>

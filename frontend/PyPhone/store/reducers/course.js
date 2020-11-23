@@ -27,10 +27,12 @@ export default (state = initialState, action) => {
     case SET_COURSES:
       return {
         userCourses: action.userCourses,
+        activeCoursesAmount: action.activeCoursesAmount,
       };
     case SET_ACTIVE_COURSES:
       return {
         userCourses: newCourses,
+        activeCoursesAmount: activeCoursesAmount + 1,
       };
 
     default:

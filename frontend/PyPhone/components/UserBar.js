@@ -9,6 +9,7 @@ import {useSelector} from 'react-redux';
 
 const UserBar = (props) => {
   const xp = useSelector((state) => state.auth.xp);
+
   var oblicz = ((xp * 100) / 1200).toString() + '%';
 
   return (

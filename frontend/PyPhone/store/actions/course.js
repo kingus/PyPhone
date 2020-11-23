@@ -21,8 +21,11 @@ export const course = () => {
         },
       })
       .then((response) => {
-
-        dispatch({type: SET_COURSES, userCourses: response.data.users_courses});
+        dispatch({
+          type: SET_COURSES,
+          userCourses: response.data.users_courses,
+          activeCoursesAmount: response.data.activeAmount,
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -33,7 +36,6 @@ export const course = () => {
 
 export const courseSetActive = (course) => {
   return async (dispatch, getState) => {
-    // console.log('courseSetActive CHECK, ', userCourses);
     await dispatch({
       type: SET_ACTIVE_COURSES,
       course: course,
