@@ -1,37 +1,200 @@
 import React from 'react';
-import {View, StyleSheet, Text, Button} from 'react-native';
-import Editor2 from '../components/Editor2';
+import {View, StyleSheet, Text, Image, ImageBackground} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import {Dimensions} from 'react-native';
+import calendar from '../images/user/calendar.png';
+import openBook from '../images/user/open-book.png';
+import lightning from '../images/user/lightning.png';
+import medal from '../images/user/medal.png';
+import monster from '../images/user/monster.png';
+import background from '../images/user/background.png';
+import XPBar2 from '../components/XPBar2';
+import {ContributionGraph} from 'react-native-chart-kit';
+const windowHeight = Dimensions.get('window').height;
+const screenWidth = Dimensions.get('window').width;
 
 const User = (props) => {
-  return <Editor2></Editor2>;
+  const commitsData = [
+    {date: '2017-01-02', count: 1},
+    {date: '2017-01-03', count: 2},
+    {date: '2017-01-04', count: 3},
+    {date: '2017-01-05', count: 4},
+    {date: '2017-01-06', count: 5},
+    {date: '2017-01-30', count: 2},
+    {date: '2017-01-31', count: 3},
+    {date: '2017-03-01', count: 2},
+    {date: '2017-04-02', count: 4},
+    {date: '2017-03-05', count: 2},
+    {date: '2017-02-30', count: 4},
+  ];
+  const chartConfig = {
+    backgroundGradientFrom: '#00072b',
+    backgroundGradientTo: '#00072b',
+    color: (opacity = 1) => `rgba(90, 255, 251, ${opacity})`,
+    strokeWidth: 3, // optional, default 3
+    barPercentage: 0.5,
+  };
+
+  return (
+    <View style={styles.container}>
+      {/* <LinearGradient
+        colors={['#34adf9', '#67c4ff', '#34adf9']}
+        style={styles.linearGradient}> */}
+
+      <View style={styles.mainUser}>
+        {/* <Image source={background} style={styles.background}></Image> */}
+        <View style={styles.background}>
+          <Text style={styles.username}>kingus</Text>
+          <XPBar2 completed="30%"></XPBar2>
+        </View>
+        <Image source={monster} style={styles.monster}></Image>
+      </View>
+      <View style={styles.chartStyle}>
+        <ContributionGraph
+          values={commitsData}
+          endDate={new Date('2017-04-01')}
+          numDays={105}
+          width={screenWidth}
+          height={220}
+          chartConfig={chartConfig}
+        />
+      </View>
+      <View style={styles.infoContainer}>
+        <View style={styles.infoRow}>
+          <View style={styles.infoItem}>
+            <Image source={openBook} style={styles.image}></Image>
+            <View style={styles.textContainer}>
+              <Text style={styles.textStyle}>Ukończone kursy</Text>
+              <Text style={styles.pointsStyle}>100</Text>
+            </View>
+          </View>
+          <View style={styles.infoItem}>
+            <Image source={calendar} style={styles.image}></Image>
+            <View style={styles.textContainer}>
+              <Text style={styles.textStyle}>Aktywność</Text>
+              <Text style={styles.pointsStyle}>100 dni</Text>
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.infoRow}>
+          <View style={styles.infoItem}>
+            <Image source={lightning} style={styles.image}></Image>
+            <View style={styles.textContainer}>
+              <Text style={styles.textStyle}>Dzisiejsze XP</Text>
+              <Text style={styles.pointsStyle}>100 XP</Text>
+            </View>
+          </View>
+          <View style={styles.infoItem}>
+            <Image source={medal} style={styles.image}></Image>
+            <View style={styles.textContainer}>
+              <Text style={styles.textStyle}>Zdobyte odznaki</Text>
+              <Text style={styles.pointsStyle}>2</Text>
+            </View>
+          </View>
+        </View>
+      </View>
+
+      {/* </LinearGradient> */}
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-  navBar: {
-    height: 60,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  linearGradient: {
+    height: windowHeight,
     alignItems: 'center',
-    backgroundColor: 'blue',
+    borderRadius: 5,
+    display: 'flex',
   },
-  leftContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    backgroundColor: 'green',
-  },
-  rightContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
+  chartStyle: {
+    display: 'flex',
     alignItems: 'center',
-    backgroundColor: 'red',
+    justifyContent: 'center',
+    paddingLeft: 30,
   },
-  rightIcon: {
-    height: 10,
-    width: 10,
-    resizeMode: 'contain',
-    backgroundColor: 'white',
+  monster: {
+    width: 100,
+    height: 100,
+    margin: 10,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#00072b',
+    alignItems: 'center',
+  },
+  mainUser: {
+    height: '30%',
+    width: '100%',
+    backgroundColor: '#00072b',
+    // elevation: 2,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  background: {
+    width: '50%',
+    height: 90,
+    justifyContent: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  infoContainer: {
+    marginTop: 30,
+    width: '85%',
+    height: '25%',
+    // elevation: 2,
+  },
+  infoRow: {
+    flex: 1,
+    display: 'flex',
+    // paddingTop: 2,
+    // paddingLeft: 2,
+    // paddingRight: 2,
+    flexDirection: 'row',
+  },
+  infoItem: {
+    width: '50%',
+    height: '100%',
+    // elevation: 2,
+    backgroundColor: '#00072b',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#5afffb',
+  },
+  image: {
+    height: 50,
+    width: 50,
+  },
+  textContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  textStyle: {
+    fontFamily: 'OpenSans-ExtraBoldItalic',
+    // fontStyle: 'italic',
+    fontWeight: 'bold',
+    fontSize: 13,
+    color: '#5afffb',
+  },
+  pointsStyle: {
+    fontFamily: 'OpenSans-ExtraBoldItalic',
+    fontStyle: 'italic',
+    // fontWeight: 'bold',
+    fontSize: 20,
+    textAlign: 'right',
+    color: '#5afffb',
+  },
+  username: {
+    fontSize: 20,
+    marginBottom: 15,
+    fontFamily: 'OpenSans-ExtraBoldItalic',
+    fontWeight: 'bold',
+    color: '#5afffb',
   },
 });
 

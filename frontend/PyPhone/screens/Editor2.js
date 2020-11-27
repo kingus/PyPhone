@@ -10,7 +10,8 @@ import {
 } from 'react-native';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import {set} from 'react-native-reanimated';
-import Interpreter2 from './Interpreter2';
+
+import Interpreter2 from '../components/Interpreter2';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Editor = (props) => {
@@ -198,7 +199,6 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     alignItems: 'center',
-    marginTop: 20,
     backgroundColor: '#00072b',
   },
   navBar: {

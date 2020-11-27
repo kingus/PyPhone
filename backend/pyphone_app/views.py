@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from django.db.models import Sum
 from django.db.models.functions import Coalesce
+import datetime
 
 
 class ExerciseView(APIView):
@@ -61,8 +62,11 @@ class ProfileView(APIView):
         profile = Profile.objects.filter(user=user)
         newXp = int(profile.get().xp) + int(xp)
         profile.update(xp=newXp)
+        newDate = datetime.datetime.now()
+        print(newDate)
+        updat = {'gainedPoints': xp, 'finishDate': newDate}
         usersCourse = UsersCourse.objects.filter(
-            user=user, course=course).update(gainedPoints=xp)
+            user=user, course=course).update(**updat)
         if(unlock):
             usersCourseNext = UsersCourse.objects.filter(
                 user=user, course=course+1).update(active=True)

@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import User from '../screens/User';
 import Final from '../screens/Final';
 import Achievements from '../screens/Achievements';
+import Editor2 from '../screens/Editor2';
 
 const TabNavigator = createBottomTabNavigator(
   {
@@ -21,20 +22,34 @@ const TabNavigator = createBottomTabNavigator(
       },
     },
 
-    User: {
-      screen: User,
+    Editor: {
+      screen: Editor2,
       navigationOptions: {
         headerShown: false,
         tabBarIcon: ({focused}) => (
           <Icon name="code" size={25} color={focused ? '#abf0ff' : '#dbdbdb'} />
         ),
-        // tabBarIcon: () => <Icon name="user" size={25} color="grey" />,
+      },
+    },
+    User: {
+      screen: User,
+      navigationOptions: {
+        headerShown: false,
+        tabBarIcon: ({focused}) => (
+          <Icon name="user" size={25} color={focused ? '#abf0ff' : '#dbdbdb'} />
+        ),
       },
     },
     Lecture: {
       screen: Achievements,
       navigationOptions: {
-        tabBarIcon: ({focused}) => <Icon name="trophy" size={25} color={focused ? '#abf0ff' : '#dbdbdb'} />,
+        tabBarIcon: ({focused}) => (
+          <Icon
+            name="trophy"
+            size={25}
+            color={focused ? '#abf0ff' : '#dbdbdb'}
+          />
+        ),
       },
     },
   },

@@ -3,17 +3,11 @@ import {
   View,
   Text,
   TextInput,
-  Button,
-  Image,
   TouchableOpacity,
-  TouchableHighlight,
   ScrollView,
-  Animated,
-  Easing,
   ActivityIndicator,
 } from 'react-native';
 import {StyleSheet} from 'react-native';
-import logo from '../images/logo.png';
 import * as authActions from '../store/actions/auth';
 import {useDispatch} from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';

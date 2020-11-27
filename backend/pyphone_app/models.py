@@ -1,11 +1,17 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+import datetime
+
+defaultDate = datetime.datetime(9999, 12, 31)
+todaysDate = datetime.datetime.now()
+
 User = get_user_model()
 
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     xp = models.IntegerField(default=0)
+    creationDate = models.DateField(default=todaysDate)
 
     def __str__(self):
         return str(self.user.username)
@@ -45,6 +51,7 @@ class UsersCourse(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     active = models.BooleanField()
+    finishDate = models.DateField(default=defaultDate)
     gainedPoints = models.FloatField(default=0)
 
     def __str__(self):
