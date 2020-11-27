@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <script src="http://pypyjs.org/pypyjs-release/lib/Promise.min.js"></script>
+    <script src="http://pypyjs.org/pypyjs-release/lib/FunctionPromise.js"></script>
+    <script src="http://pypyjs.org/pypyjs-release/lib/pypyjs.js"></script>
+  </head>
+  <body>
+    <script type="text/javascript">
+      document.addEventListener(
+        'message',
+        function(event) {
+          pypyjs
+            .exec(
+              `from StringIO import StringIO
+import sys
+
+old_stdout = sys.stdout
+res = StringIO()
+sys.stdout = res` +
+                '\n' +
+                event.data +
+                '\n' +
+                `sys.stdout = old_stdout
+result_string = res.getvalue()`,
+            )
+            .then(function() {
+              return pypyjs.get('result_string');
+            })
+            .then(function(result) {
+              //WV SENDING
+              window.ReactNativeWebView.postMessage(result.toString());
+            });
+        },
+        false,
+      );
+    </script>
+  </body>
+</html>
