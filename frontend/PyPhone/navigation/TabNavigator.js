@@ -7,6 +7,7 @@ import User from '../screens/User';
 import Final from '../screens/Final';
 import Achievements from '../screens/Achievements';
 import Editor2 from '../screens/Editor2';
+import Lecture from '../screens/Lecture';
 
 const TabNavigator = createBottomTabNavigator(
   {
@@ -40,7 +41,8 @@ const TabNavigator = createBottomTabNavigator(
         ),
       },
     },
-    Lecture: {
+
+    Achievements: {
       screen: Achievements,
       navigationOptions: {
         tabBarIcon: ({focused}) => (

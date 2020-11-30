@@ -65,6 +65,7 @@ print x`);
           autoCorrect={false}
           onChangeText={(text) => onChangeTextInput(text)}
           value={value}
+          autoCapitalize={'none'}
           multiline={true}
           underlineColorAndroid="transparent"
           textAlign={'left'}

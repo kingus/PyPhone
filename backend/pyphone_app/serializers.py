@@ -54,4 +54,4 @@ class UsersCourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = UsersCourse
         # fields = ('__all__')
-        fields = ('active', 'course', 'gainedPoints')
+        fields = ('active', 'course', 'gainedPoints', 'finishDate')

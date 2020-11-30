@@ -14,8 +14,11 @@ const Final = (props) => {
   const gainedPoints = navigation.getParam('xp', {});
   const summary = navigation.getParam('summary');
   const course = navigation.getParam('course');
+  const course_id = navigation.getParam('course_id');
   const maxXp = navigation.getParam('maxXp');
   const dispatch = useDispatch();
+
+  const activeCourses = useSelector((state) => state.auth.activeCourses);
 
   console.log(summary);
 
@@ -30,11 +33,11 @@ const Final = (props) => {
 
   const xpHandler = async (xp) => {
     console.log('XP TU', xp);
-    console.log('COURSE TU', course);
-    let percentage = xp/maxXp*100;
-    let action = userActions.user(xp, course, false);
-    let action2 = authActions.xp(xp, course);
-    let action3 = courseActions.courseSetActive(course, false, percentage);
+    console.log('COURSE TU', course_id);
+    let percentage = (xp / maxXp) * 100;
+    let action = userActions.user(xp, course_id, false);
+    let action2 = authActions.xp(xp, course_id, activeCourses);
+    let action3 = courseActions.courseSetActive(course_id, false, percentage);
 
     let calculateXp = (75 * maxXp) / 100;
     console.log(calculateXp);
@@ -42,16 +45,12 @@ const Final = (props) => {
     try {
       if (xp >= calculateXp) {
         // dispatch(action3);
-        action3 = courseActions.courseSetActive(course, true, percentage);
-        action = userActions.user(xp, course, true);
+        action3 = courseActions.courseSetActive(course_id, true, percentage);
+        action = userActions.user(xp, course_id, true);
       }
       dispatch(action3);
-
       dispatch(action);
       dispatch(action2);
-      
-
-
     } catch (err) {
       console.log(err.message);
     }

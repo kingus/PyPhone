@@ -3,15 +3,15 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
-export const SET_XP = 'SET_XP';
-export const ADD_XP = 'ADD_XP';
+export const SET_PROFILE = 'SET_PROFILE';
+export const CHANGE_PROFILE = 'CHANGE_PROFILE';
 
 export const login = (username, password) => {
   return async (dispatch) => {
     const endpoint = global.url + '/auth/login/';
     const payload = {username: username, password: password};
     axios.defaults.timeout = 10000;
-console.log(endpoint)
+    console.log(endpoint);
 
     await axios
       .post(endpoint, payload)
@@ -34,8 +34,10 @@ console.log(endpoint)
 
 export const get_profile = () => {
   return async (dispatch, getState) => {
-    const token = getState().auth.token;
-    const endpoint = global.url + '/api/profile/';
+    let token = getState().auth.token;
+    token = '493e77275ee813c6a1aa7ab20aac0af7eb8a43bb';
+    // const endpoint = global.url + '/api/profile/';
+    const endpoint = global.url + '/api/profile-info/';
     axios.defaults.timeout = 10000;
 
     var config = {
@@ -45,13 +47,20 @@ export const get_profile = () => {
         Authorization: 'Token ' + token,
       },
     };
+
     console.log(endpoint);
     await axios(config)
       .then(async (response) => {
-        console.log('RESPO XP', response.data.profile[0]['xp']);
+        console.log('RESPO', response.data);
+        console.log('XP', response.data.countDatesList);
         await dispatch({
-          type: SET_XP,
-          xp: response.data.profile[0]['xp'],
+          type: SET_PROFILE,
+          xp: response.data.xp,
+          activeCourses: response.data.activeCourses,
+          activeDays: response.data.activeDays,
+          badges: response.data.badges,
+          countDatesList: response.data.countDatesList,
+          todaysXp: response.data.todaysXp,
         });
       })
       .catch((error) => {
@@ -100,12 +109,16 @@ const setUserData = (token, username) => {
   }
 };
 
-export const xp = (newXp, course) => {
+export const xp = (newXp, course, activeCourses) => {
   return async (dispatch, getState) => {
     await dispatch({
-      type: ADD_XP,
+      type: CHANGE_PROFILE,
       xp: newXp,
-      course: course
+      course: course,
+      activeCourses: activeCourses,
+      // activeDays: activeDays,
+      // badges: badges,
+      // todaysXp: action.todaysXp,
     });
   };
 };

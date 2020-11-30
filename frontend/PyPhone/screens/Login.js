@@ -64,6 +64,7 @@ const Login = (props) => {
     }
     await getProfile();
   };
+
   const getProfile = async () => {
     let action;
     action = authActions.get_profile();

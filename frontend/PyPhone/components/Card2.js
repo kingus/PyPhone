@@ -21,14 +21,12 @@ const Card2 = (props) => {
   const [categoryStyle, setCategoryStyle] = useState();
 
   const clickLecture = () => {
-    let lesson = 'Zmienne';
-    props.navToLecture(lesson);
-    console.log('LECTURE CLICKED');
+    props.navToLecture(props.id, props.category);
+    console.log('LECTURE CLICKED', props.id);
   };
 
   const clickExercises = () => {
-    props.navToExercise(props.id);
-    console.log('EXERCISES CLICKED');
+    props.navToExercise(props.id, props.category);
   };
 
   useEffect(() => {
@@ -100,8 +98,6 @@ const Card2 = (props) => {
     </View>
   );
 };
-
-
 
 export default Card2;
 

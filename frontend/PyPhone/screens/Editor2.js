@@ -8,8 +8,7 @@ import {
   Text,
   ActivityIndicator,
 } from 'react-native';
-import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
-import {set} from 'react-native-reanimated';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 import Interpreter2 from '../components/Interpreter2';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -157,6 +156,7 @@ print x`);
               textAlign={'left'}
               padding={0}
               margin={0}
+              autoCapitalize="none"
               scrollEnabled={false}
               lineHeight={22}
             />
@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     borderColor: '#5afffb',
     borderWidth: 2,
-    marginTop: 10,
+    marginTop: 30,
   },
   navBarItemLeft: {
     flex: 1,

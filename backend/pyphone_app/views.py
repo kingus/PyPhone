@@ -4,7 +4,7 @@ from .serializers import ExerciseSerializer, ExerciseSerializer2, ExerciseTypeSe
 from .models import Exercise, ExerciseType, Course, UsersCourse, Profile
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
-from django.db.models import Sum
+from django.db.models import Sum, Q
 from django.db.models.functions import Coalesce
 import datetime
 
@@ -134,3 +134,34 @@ class UsersCourseView(APIView):
             if dane['active'] == True:
                 activeAmount = activeAmount + 1
         return Response({"users_courses": response_data, "activeAmount": activeAmount})
+
+
+class ProfileInfo(APIView):
+    def get(self, request):
+        token = request.headers['Authorization'].split(" ")[1]
+        user = Token.objects.get(key=token).user
+        countDates = {}
+        countDatesList = []
+        usersCourse = UsersCourse.objects.filter(
+            user=user, finishDate__year=2020, finishDate__month__in=[10, 11, 12])
+        serializer = UsersCourseSerializer(usersCourse, many=True)
+        for i in serializer.data:
+            countDates.setdefault(i['finishDate'], 0)
+            countDates[i['finishDate']] = countDates[i['finishDate']]+1
+        for i in countDates:
+            countDatesList.append({'date': i, 'count': countDates[i]})
+        countDatesList.append({"count": 0, "date": "9999-11-29"})
+        activeCourses = UsersCourse.objects.filter(
+            user=user, active=True).count()
+        todaysDate = datetime.date.today()
+
+        profileInfo = Profile.objects.filter(
+            user=user).values('xp', 'creationDate')
+        todaysXp = UsersCourse.objects.filter(
+            user=user, finishDate=todaysDate).aggregate((Sum('gainedPoints')))['gainedPoints__sum']
+        print(todaysXp)
+        xp = profileInfo[0]['xp']
+        creationDate = profileInfo[0]['creationDate']
+        activeDays = (todaysDate-creationDate).days
+
+        return Response({"countDatesList": countDatesList, "activeCourses": activeCourses, "activeDays": activeDays, "badges": 0, "xp": xp, "todaysXp": todaysXp})

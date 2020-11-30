@@ -1,0 +1,51 @@
+{
+    "exercises": [
+      {
+        "question": "Jakie wartości przyjmuje boolean?",
+        "code": null,
+        "possible_answers": "true;false;True;False",
+        "correct_answer": "True;False",
+        "exercise_type": "3",
+        "course": "10",
+        "points": 10
+      },
+      {
+        "question": "Wybierz operatory porównania.",
+        "code": null,
+        "possible_answers": "==;=;>=;!",
+        "correct_answer": "==;>=",
+        "exercise_type": "3",
+        "course": "10",
+        "points": 10
+      },
+      {
+        "question": "Wybierz poprawny wynik poniższego kodu.",
+        "code": "print(1==1.0)",
+        "possible_answers": "1;True;False;0",
+        "correct_answer": "True",
+        "exercise_type": "1",
+        "course": "10",
+        "points": 10
+      
+      },
+      {
+        "question": "Wybierz poprawny wynik poniższego kodu.",
+        "code": "print(12==12.5)",
+        "possible_answers": "True;0;1;False",
+        "correct_answer": "False",
+        "exercise_type": "1",
+        "course": "10",
+        "points": 10
+      },
+      {
+        "question": "Ustaw wynik poniższego kodu w poprawnej kolejności.",
+        "code": "print(2==2.0);print(100!=1000);print(100>='100')",
+        "possible_answers": "False;True;False",
+        "correct_answer": "True;False;False",
+        "exercise_type": "4",
+        "course": "10",
+        "points": 10
+      }
+    ]
+  }
+  

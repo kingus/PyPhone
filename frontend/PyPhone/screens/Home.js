@@ -19,6 +19,8 @@ const windowHeight = Dimensions.get('window').height;
 import LinearGradient from 'react-native-linear-gradient';
 import {useSelector, useDispatch} from 'react-redux';
 import UserBar from '../components/UserBar';
+import Lecture from '../screens/Lecture';
+import Lecture1 from '../lectures/Lecture3';
 import * as exerciseActions from '../store/actions/exercise';
 import {user} from '../store/actions/user';
 
@@ -31,17 +33,20 @@ const Home = (props) => {
 
   const [activeCourse, setActiveCourse] = useState(6);
 
-  const navToLecture = (lesson) => {
-    props.navigation.navigate({
-      routeName: 'Lecture',
+  const navToLecture = (id, course) => {
+    var route = 'Lecture' + id;
+    props.navigation.navigate(route, {
+      course: course,
     });
     console.log('NAV CLICKED');
   };
 
-  const navToExercise = (id) => {
+  const navToExercise = (id, course) => {
     setActiveCourse(id);
+    console.log('NAV + ID: ', id);
     props.navigation.navigate('Exercises', {
-      course: id,
+      course_id: id,
+      course: course,
     });
     console.log('NAV TO EXERCISE CLICKED');
   };

@@ -1,0 +1,115 @@
+{
+  "exercises": [
+    {
+      "question": "Jaki będzie wynik poniżego kodu?",
+      "code": "print(3+7*3//5)",
+      "possible_answers": "7;6;5;2",
+      "correct_answer": "7",
+      "exercise_type": "1",
+      "course": "7",
+      "points": 10
+    },
+    {
+      "question": "Jaki będzie wynik poniżego kodu?",
+      "code": "print(4**3 – 2)",
+      "possible_answers": "64;62;18;14",
+      "correct_answer": "62",
+      "exercise_type": "1",
+      "course": "7",
+      "points": 10
+    },
+    {
+      "question": "Z czego składa się wyrażenie?",
+      "code": null,
+      "possible_answers": "wartość;operator;instrukcja;typ danych",
+      "correct_answer": "wartość;operator",
+      "exercise_type": "3",
+      "course": "7",
+      "points": 20
+    },
+    {
+      "question": "Czym jest cyfra 2 w powyższym wyrażeniu?",
+      "code": "2 + 3",
+      "possible_answers": "zmienną;operatorem;typem danych;wartością",
+      "correct_answer": "wartością",
+      "exercise_type": "1",
+      "course": "7",
+      "points": 20
+    },
+    {
+      "question": "Czym jest znak '-' w powyższym wyrażeniu?",
+      "code": "10 - 5",
+      "possible_answers": "operatorem;instrukcją;typem danych;zmienną",
+      "correct_answer": "operatorem",
+      "exercise_type": "1",
+      "course": "7",
+      "points": 10
+    },
+    {
+      "question": "Ustaw operatory zgodnie z kolejnością wykonywania działań - od najważniejszego do najmniej ważnego.",
+      "code": null,
+      "possible_answers": "*;-;**;//",
+      "correct_answer": "**;//;*;-",
+      "exercise_type": "4",
+      "course": "7",
+      "points": 20
+    },
+    {
+      "question": "Jak nazywa się typ danych przechowujących ciągi znaków?",
+      "code": null,
+      "possible_answers": "int;string;list;float",
+      "correct_answer": "string",
+      "exercise_type": "1",
+      "course": "8",
+      "points": 10
+    },
+    {
+      "question": "Jaki jest wynik poniższego kodu?",
+      "code": "'3' + '2'",
+      "possible_answers": "32;23;5;SyntaxError",
+      "correct_answer": "32",
+      "exercise_type": "1",
+      "course": "8",
+      "points": 10
+    },
+    {
+      "question": "Jaki jest wynik poniższego kodu?",
+      "code": "print(len('Hello world')",
+      "possible_answers": "Hello world;world;10;11",
+      "correct_answer": "11",
+      "exercise_type": "1",
+      "course": "8",
+      "points": 10
+    }
+    ,
+    {
+      "question": "Wybierz funkcje, które umożliwiają sprawdzenie wielkości ciągu znaków.",
+      "code": null,
+      "possible_answers": "upper();isupper();islower();len()",
+      "correct_answer": "isupper();islower()",
+      "exercise_type": "3",
+      "course": "8",
+      "points": 10
+    }
+    ,
+    {
+      "question": "Ustaw wynik poniższego kodu w poprawnej kolejności.",
+      "code": "'hello'.isupper();len('hello');'hello'.upper()",
+      "possible_answers": "5;HELLO;False",
+      "correct_answer": "False;5;HELLO",
+      "exercise_type": "4",
+      "course": "8",
+      "points": 10
+    }
+    ,
+    {
+      "question": "Ustaw wynik poniższego kodu w poprawnej kolejności.",
+      "code": "'hello'.startsWith('h');'hello'.startsWith('H');hello.upper()",
+      "possible_answers": "True;HELLO;False",
+      "correct_answer": "True;False;HELLO",
+      "exercise_type": "4",
+      "course": "8",
+      "points": 10
+    }
+  ]
+}

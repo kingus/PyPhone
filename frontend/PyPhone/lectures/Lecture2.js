@@ -1,12 +1,5 @@
 import React from 'react';
-import {Text, Dimensions, Image, StyleSheet, View} from 'react-native';
-import diagram from '../images/diagram.png';
-import flowers from '../images/flowers.png';
-import flowers2 from '../images/flowers2.png';
-import one from '../images/numbers/one.png';
-import two from '../images/numbers/two.png';
-import three from '../images/numbers/three.png';
-import four from '../images/numbers/four.png';
+import {Text, Dimensions, StyleSheet, View} from 'react-native';
 import SwiperFlatList from 'react-native-swiper-flatlist';
 import CommandLine from '../components/CommandLine';
 
@@ -15,6 +8,7 @@ const Lecture2 = () => {
     <SwiperFlatList
       index={0}
       showPagination
+      backgroundColor="white"
       paginationDefaultColor="#f9f9f9"
       paginationActiveColor="#d0f7ff"
       paginationStyleItem={styles.active}>
@@ -83,9 +77,9 @@ const Lecture2 = () => {
         <CommandLine
           lines={[
             ">>> 'hello'.isupper()",
-            'false',
+            'False',
             ">>> 'HELLO'.isupper()",
-            'true',
+            'True',
           ]}></CommandLine>
       </View>
       <View style={styles.child}>
@@ -102,9 +96,9 @@ const Lecture2 = () => {
         <CommandLine
           lines={[
             ">>> 'hello'.islower()",
-            'true',
+            'True',
             ">>> 'HELLO'.islower()",
-            'false',
+            'False',
           ]}></CommandLine>
       </View>
       <View style={styles.child}>
@@ -120,13 +114,13 @@ const Lecture2 = () => {
         <CommandLine
           lines={[
             ">>> 'Hello world'.startswith('Hello')",
-            'true',
+            'True',
             ">>> 'Hello world'.startswith('world')",
-            'false',
+            'False',
             ">>> 'Hello world'.endswith('Hello')",
-            'false',
+            'False',
             ">>> 'Hello world'.endswith('world')",
-            'true',
+            'True',
           ]}></CommandLine>
       </View>
     </SwiperFlatList>
@@ -134,6 +128,10 @@ const Lecture2 = () => {
 };
 
 export default Lecture2;
+Lecture2.navigationOptions = (navigationData) => {
+  const title = navigationData.navigation.getParam('course');
+  return {headerTitle: title};
+};
 
 export const {width, height} = Dimensions.get('window');
 

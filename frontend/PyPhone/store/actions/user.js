@@ -19,7 +19,7 @@ export const user = (xp, course, unlock) => {
       })
       .catch((error) => {
         console.log(error.message);
-        throw new Error('Something went wrong!');
+        throw new Error('User something went wrong!');
       });
   };
 };

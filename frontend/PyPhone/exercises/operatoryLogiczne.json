@@ -1,0 +1,50 @@
+{
+    "exercises": [
+      {
+        "question": "Jaki jest wynik poniższego kodu?",
+        "code": "x=100;if(x>0 and x<=100):;    print(x)",
+        "possible_answers": "'x';100;0;x=100",
+        "correct_answer": "100",
+        "exercise_type": "1",
+        "course": "9",
+        "points": 10
+      },
+      {
+        "question": "Jaki jest wynik poniższego kodu?",
+        "code": "x = -10;if(x>=0 or x<=100):;    print(x);else:;    print(x-10)",
+        "possible_answers": "-10;10;-20;0",
+        "correct_answer": "-10",
+        "exercise_type": "1",
+        "course": "9",
+        "points": 10
+      },
+      {
+        "question": "Jaki jest wynik poniższego kodu?",
+        "code": "x = 100;y = 100;x is y",
+        "possible_answers": "True;False;100;None",
+        "correct_answer": "True",
+        "exercise_type": "1",
+        "course": "9",
+        "points": 10
+      },
+      {
+        "question": "Ustaw wynik poniższego kodu w poprawnej kolejności.",
+        "code": "x = 100;y = 100;print(x is not y);print(x == y);print(not x is y)",
+        "possible_answers": "True;False;False",
+        "correct_answer": "False;True;False",
+        "exercise_type": "4",
+        "course": "9",
+        "points": 20
+      },
+      {
+        "question": "Ustaw wynik poniższego kodu w poprawnej kolejności.",
+        "code": "x = 'hello';print(x is 'hello');print(x is not 'hello');print('hellohello' is x * 2)",
+        "possible_answers": "False;True;False",
+        "correct_answer": "True;False;False",
+        "exercise_type": "4",
+        "course": "9",
+        "points": 20
+      }
+    ]
+  }
+  

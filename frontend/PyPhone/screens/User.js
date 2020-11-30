@@ -12,21 +12,25 @@ import XPBar2 from '../components/XPBar2';
 import {ContributionGraph} from 'react-native-chart-kit';
 const windowHeight = Dimensions.get('window').height;
 const screenWidth = Dimensions.get('window').width;
+import {useSelector} from 'react-redux';
 
 const User = (props) => {
-  const commitsData = [
-    {date: '2017-01-02', count: 1},
-    {date: '2017-01-03', count: 2},
-    {date: '2017-01-04', count: 3},
-    {date: '2017-01-05', count: 4},
-    {date: '2017-01-06', count: 5},
-    {date: '2017-01-30', count: 2},
-    {date: '2017-01-31', count: 3},
-    {date: '2017-03-01', count: 2},
-    {date: '2017-04-02', count: 4},
-    {date: '2017-03-05', count: 2},
-    {date: '2017-02-30', count: 4},
+  const activeDays = useSelector((state) => state.auth.activeDays);
+  const activeCourses = useSelector((state) => state.auth.activeCourses);
+  const badges = useSelector((state) => state.auth.badges);
+  const countDatesList = useSelector((state) => state.auth.countDatesList);
+  const todaysXp = useSelector((state) => state.auth.todaysXp);
+  const xp = useSelector((state) => state.auth.xp);
+
+  var oblicz = ((xp * 100) / 1200).toString() + '%';
+
+  const commitsData2 = [
+    {date: '2020-11-29', count: 1},
+    {date: '2020-11-11', count: 1},
+    {date: '2019-11-12', count: 0},
+    {date: '2020-11-13', count: 1},
   ];
+
   const chartConfig = {
     backgroundGradientFrom: '#00072b',
     backgroundGradientTo: '#00072b',
@@ -35,6 +39,8 @@ const User = (props) => {
     barPercentage: 0.5,
   };
 
+  console.log(countDatesList);
+
   return (
     <View style={styles.container}>
       {/* <LinearGradient
@@ -42,17 +48,16 @@ const User = (props) => {
         style={styles.linearGradient}> */}
 
       <View style={styles.mainUser}>
-        {/* <Image source={background} style={styles.background}></Image> */}
         <View style={styles.background}>
           <Text style={styles.username}>kingus</Text>
-          <XPBar2 completed="30%"></XPBar2>
+          <XPBar2 completed={oblicz} xp={xp}></XPBar2>
         </View>
         <Image source={monster} style={styles.monster}></Image>
       </View>
       <View style={styles.chartStyle}>
         <ContributionGraph
-          values={commitsData}
-          endDate={new Date('2017-04-01')}
+          values={countDatesList}
+          endDate={new Date('2020-12-31')}
           numDays={105}
           width={screenWidth}
           height={220}
@@ -65,14 +70,14 @@ const User = (props) => {
             <Image source={openBook} style={styles.image}></Image>
             <View style={styles.textContainer}>
               <Text style={styles.textStyle}>Ukończone kursy</Text>
-              <Text style={styles.pointsStyle}>100</Text>
+              <Text style={styles.pointsStyle}>{activeCourses - 1}</Text>
             </View>
           </View>
           <View style={styles.infoItem}>
             <Image source={calendar} style={styles.image}></Image>
             <View style={styles.textContainer}>
               <Text style={styles.textStyle}>Aktywność</Text>
-              <Text style={styles.pointsStyle}>100 dni</Text>
+              <Text style={styles.pointsStyle}>{activeDays} dni</Text>
             </View>
           </View>
         </View>
@@ -82,14 +87,14 @@ const User = (props) => {
             <Image source={lightning} style={styles.image}></Image>
             <View style={styles.textContainer}>
               <Text style={styles.textStyle}>Dzisiejsze XP</Text>
-              <Text style={styles.pointsStyle}>100 XP</Text>
+              <Text style={styles.pointsStyle}>{todaysXp} XP</Text>
             </View>
           </View>
           <View style={styles.infoItem}>
             <Image source={medal} style={styles.image}></Image>
             <View style={styles.textContainer}>
               <Text style={styles.textStyle}>Zdobyte odznaki</Text>
-              <Text style={styles.pointsStyle}>2</Text>
+              <Text style={styles.pointsStyle}>{badges}</Text>
             </View>
           </View>
         </View>
@@ -163,8 +168,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#5afffb',
+    // borderWidth: 1,
+    // borderColor: '#5afffb',
   },
   image: {
     height: 50,

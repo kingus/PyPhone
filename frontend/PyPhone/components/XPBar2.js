@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import girl from '../images/girl.png';
+import {useSelector} from 'react-redux';
 
 const XPBar2 = (props) => {
   const completedBar = {
@@ -27,7 +27,7 @@ const XPBar2 = (props) => {
 };
 const styles = StyleSheet.create({
   container: {
-    width: '80%',
+    width: '100%',
     height: '20%',
     alignItems: 'center',
   },
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 10,
+    flex: 15,
   },
 
   fullBar: {
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     borderColor: 'white',
     borderWidth: 3,
-    flex: 15,
+    flex: 10,
   },
   completed: {
     color: '#49a9c4',
@@ -55,7 +55,8 @@ const styles = StyleSheet.create({
   XPText: {
     color: 'white',
     fontWeight: 'bold',
-    flex: 4,
+    marginLeft: 10,
+    flex: 5,
   },
 });
 
