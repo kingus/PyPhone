@@ -47,16 +47,6 @@
         "course": "8",
         "points": 10
       }
-      ,
-      {
-        "question": "Ustaw wynik poniższego kodu w poprawnej kolejności.",
-        "code": "'hello'.startsWith('h');'hello'.startsWith('H');hello.upper()",
-        "possible_answers": "True;HELLO;False",
-        "correct_answer": "True;False;HELLO",
-        "exercise_type": "4",
-        "course": "8",
-        "points": 10
-      }
     ]
   }
   

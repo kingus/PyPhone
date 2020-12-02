@@ -132,7 +132,7 @@ const Login = (props) => {
         </View>
 
         {isLoading ? (
-          <ActivityIndicator size="small" color="#ffe25b" />
+          <ActivityIndicator size="large" color="#ffe25b" />
         ) : (
           <View style={styles.buttonContainer}>
             <TouchableOpacity
@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     textAlign: 'center',
-    color: '#FFFFFF',
+    color: '#00072b',
     fontWeight: '700',
   },
   linearGradient: {

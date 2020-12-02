@@ -8,7 +8,7 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import * as authActions from '../store/actions/auth';
 import {useDispatch} from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import logo from '../images/logo.png';
 const DrawerNavigator = createDrawerNavigator(
   {
     MainTabs: TabNavigator,
@@ -37,7 +37,19 @@ const DrawerNavigator = createDrawerNavigator(
 
       return (
         <View style={{flex: 1, paddingTop: 20, backgroundColor: '#00072b'}}>
-          <SafeAreaView forceInset={{top: 'always', horizontal: 'never'}}>
+          <View style={styles.logoContainer}>
+            <Image source={logo} style={styles.logo}></Image>
+            <Text style={styles.logoText}>PyPhone</Text>
+          </View>
+          <SafeAreaView
+            style={{
+              flex: 1,
+              justifyContent: 'flex-end',
+            }}
+            forceInset={{
+              top: 'never',
+              horizontal: 'always',
+            }}>
             <TouchableOpacity style={styles.container} onPress={logOutHandler}>
               {/* <Image
                 source={logout}
@@ -62,11 +74,29 @@ const styles = StyleSheet.create({
   },
   container: {
     padding: 10,
+    marginBottom: 20,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    borderBottomColor: '#DBDBDB',
-    borderBottomWidth: 1,
+    // borderBottomColor: '#DBDBDB',
+    // borderBottomWidth: 1,
+  },
+  logoText: {
+    fontWeight: 'bold',
+    color: '#ffe25b',
+    fontSize: 30,
+    marginLeft: 5,
+  },
+  logoContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginLeft: 5,
+  },
+
+  logo: {
+    width: 40,
+    height: 40,
   },
   text: {
     marginLeft: 25,

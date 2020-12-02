@@ -12,7 +12,10 @@ import Card2 from '../components/Card2';
 import trophy from '../images/trophy.png';
 import coin from '../images/coin.png';
 import logo from '../images/logo.png';
+import homework from '../images/homework.png';
 import girl from '../images/girl.png';
+import openBook from '../images/open-book.png';
+
 import {Dimensions} from 'react-native';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -27,6 +30,7 @@ const Home = (props) => {
   const activeCoursesAmount = useSelector(
     (state) => state.course.activeCoursesAmount,
   );
+  const achievements = useSelector((state) => state.auth.achievements);
 
   const [activeCourse, setActiveCourse] = useState(6);
 
@@ -81,16 +85,16 @@ const Home = (props) => {
             </View>
 
             <View style={styles.pointsCard}>
-              <Image source={trophy} style={styles.image}></Image>
+              <Image source={homework} style={styles.image}></Image>
 
               <Text style={styles.pointsCardText}>
                 {activeCoursesAmount - 1}
               </Text>
             </View>
             <View style={styles.pointsCard}>
-              <Image source={coin} style={styles.image}></Image>
+              <Image source={trophy} style={styles.image}></Image>
 
-              <Text style={styles.pointsCardText}>123</Text>
+              <Text style={styles.pointsCardText}>{achievements}</Text>
             </View>
           </View>
           <UserBar></UserBar>

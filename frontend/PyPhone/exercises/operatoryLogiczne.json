@@ -13,7 +13,7 @@
         "question": "Jaki jest wynik poniższego kodu?",
         "code": "x = -10;if(x>=0 or x<=100):;    print(x);else:;    print(x-10)",
         "possible_answers": "-10;10;-20;0",
-        "correct_answer": "-10",
+        "correct_answer": "-20",
         "exercise_type": "1",
         "course": "9",
         "points": 10

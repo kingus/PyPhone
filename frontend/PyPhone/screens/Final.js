@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet} from 'react-native';
-import winner from '../images/winner.png';
+import winner from '../images/winner3.png';
 import coin from '../images/coin.png';
 import LinearGradient from 'react-native-linear-gradient';
 import {TouchableOpacity} from 'react-native-gesture-handler';
@@ -57,9 +57,10 @@ const Final = (props) => {
   };
 
   return (
-    <LinearGradient
-      colors={['#34adf9', '#8ee7fe', '#34adf9']}
-      style={styles.linearGradient}>
+    // <LinearGradient
+    //   colors={['#34adf9', '#8ee7fe', '#34adf9']}
+    //   style={styles.linearGradient}>
+    <View style={styles.mainContainer}>
       <View>
         <Text style={styles.mainText}>Gratulacje!</Text>
       </View>
@@ -89,7 +90,7 @@ const Final = (props) => {
       <TouchableOpacity style={styles.finishButton} onPress={onClickContinue}>
         <Text style={styles.finishButtonText}>KONTYNUUJ NAUKĘ</Text>
       </TouchableOpacity>
-    </LinearGradient>
+    </View>
   );
 };
 export default Final;
@@ -99,6 +100,12 @@ const styles = StyleSheet.create({
     flex: 1,
     display: 'flex',
     alignItems: 'stretch',
+  },
+  mainContainer: {
+    flex: 1,
+    display: 'flex',
+    alignItems: 'stretch',
+    backgroundColor: '#00072b',
   },
   mainText: {
     textAlign: 'center',

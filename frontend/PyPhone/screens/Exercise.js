@@ -7,6 +7,7 @@ import QuizAnswersRadio from '../components/QuizAnswersRadio';
 import QuizAnswersCheck from '../components/QuizAnswersCheck';
 import Toast from 'react-native-toast-message';
 import DragableExercise from '../components/DragableExercise';
+import UsersInput from '../components/UsersInput';
 
 Icon.loadFont();
 
@@ -54,6 +55,38 @@ const Exercise = (props) => {
     var gainedPoints = 0;
     var correct = 'correct';
     if (usersAnswer.sort().join(',') === correctAnswer.sort().join(',')) {
+      console.log('ANSWER CORRECT');
+
+      gainedPoints = points;
+
+      Toast.show({
+        text1: 'Poprawna odpowiedź',
+        text2: 'Tak trzymaj!👌',
+        type: 'success',
+        position: 'bottom',
+      });
+    } else {
+      gainedPoints = 0;
+      correct = 'wrong';
+
+      console.log('ANSWER WRONG');
+      Toast.show({
+        text1: 'Zła odpowiedź',
+        text2: 'Spróbuj ponownie!👎',
+        type: 'error',
+        position: 'bottom',
+      });
+    }
+    console.log('SUMMARY', summary);
+
+    props.nextExercise(gainedPoints, correct);
+  };
+  const checkIfCorrectInput = () => {
+    var gainedPoints = 0;
+    var correct = 'correct';
+    console.log(usersAnswer);
+    console.log(correctAnswer[0]);
+    if (usersAnswer === correctAnswer[0]) {
       console.log('ANSWER CORRECT');
 
       gainedPoints = points;
@@ -148,6 +181,12 @@ const Exercise = (props) => {
           checkIfCorrectDragEx={checkIfCorrectDragEx}></DragableExercise>
       </View>
     );
+  } else if (exerciseType == 'user_input') {
+    exerciseContainer = (
+      <View style={styles.answers}>
+        <UsersInput sendUsersAnswer={setUsersAnswer}></UsersInput>
+      </View>
+    );
   }
 
   if (code !== null) {
@@ -171,6 +210,12 @@ const Exercise = (props) => {
         <TouchableOpacity
           style={styles.nextButton}
           onPress={() => checkIfCorrectDragEx()}>
+          <Icon name="arrow-right" size={30} color="#00072b" />
+        </TouchableOpacity>
+      ) : exerciseType == 'user_input' ? (
+        <TouchableOpacity
+          style={styles.nextButton}
+          onPress={() => checkIfCorrectInput()}>
           <Icon name="arrow-right" size={30} color="#00072b" />
         </TouchableOpacity>
       ) : (

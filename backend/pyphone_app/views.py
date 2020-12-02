@@ -21,7 +21,9 @@ class ExerciseView(APIView):
         for i in exercises_data:
             dane = i['exercise_type']['exercise_type']
             i['exercise_type'] = dane
-            i['possible_answers'] = i['possible_answers'].split(";")
+
+            if i['possible_answers'] is not None:
+                i['possible_answers'] = i['possible_answers'].split(";")
             i['correct_answer'] = i['correct_answer'].split(";")
             if i['code'] is not None:
                 i['code'] = i['code'].split(";")
@@ -198,7 +200,8 @@ class UsersAchievementView(APIView):
     def get(self, request):
         token = request.headers['Authorization'].split(" ")[1]
         user = Token.objects.get(key=token).user
-        achievements = UsersAchievement.objects.filter(user=user)
+        achievements = UsersAchievement.objects.filter(
+            user=user).order_by('?')
         serializer = UsersAchievementSerializer(achievements, many=True)
         achievements_data = serializer.data
         response = []

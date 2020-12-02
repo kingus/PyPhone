@@ -54,10 +54,11 @@ export default (state = initialState, action) => {
         activeCourses: action.activeCourses,
         activeDays: state.activeDays,
         //do zmiany
-        badges: 2,
+        achievements: state.achievements,
         countDatesList: newDates,
         //nie odejmuje poprzedniego wyniku dla kursu
         todaysXp: state.todaysXp + action.xp,
+        username: state.username,
       };
 
     default:
