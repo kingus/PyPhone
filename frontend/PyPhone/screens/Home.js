@@ -19,10 +19,7 @@ const windowHeight = Dimensions.get('window').height;
 import LinearGradient from 'react-native-linear-gradient';
 import {useSelector, useDispatch} from 'react-redux';
 import UserBar from '../components/UserBar';
-import Lecture from '../screens/Lecture';
-import Lecture1 from '../lectures/Lecture3';
 import * as exerciseActions from '../store/actions/exercise';
-import {user} from '../store/actions/user';
 
 const Home = (props) => {
   const dispatch = useDispatch();
@@ -72,9 +69,10 @@ const Home = (props) => {
 
   return (
     <ScrollView>
-      <LinearGradient
+      {/* <LinearGradient
         colors={['#34adf9', '#bae5ff', '#34adf9']}
-        style={styles.linearGradient}>
+        style={styles.linearGradient}> */}
+      <View style={styles.container}>
         <View style={styles.main}>
           <View style={styles.topBar}>
             <View style={styles.logoContainer}>
@@ -110,7 +108,8 @@ const Home = (props) => {
             ))}
           </View>
         </View>
-      </LinearGradient>
+        {/* </LinearGradient> */}
+      </View>
     </ScrollView>
   );
 };
@@ -146,6 +145,16 @@ const styles = StyleSheet.create({
   },
   coursesContainer: {
     marginTop: 10,
+  },
+  container: {
+    backgroundColor: '#00072b',
+    flex: 1,
+    alignItems: 'center',
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingBottom: 50,
+    borderRadius: 5,
+    display: 'flex',
   },
   main: {
     height: '17%',
@@ -193,7 +202,7 @@ const styles = StyleSheet.create({
 
   logoText: {
     fontWeight: 'bold',
-    color: 'white',
+    color: '#ffe25b',
     fontSize: 30,
     marginLeft: 4,
   },

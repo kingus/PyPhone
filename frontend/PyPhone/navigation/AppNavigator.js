@@ -55,6 +55,7 @@ export default AppNavigator = createStackNavigator({
   // },
   Exercises: {screen: Exercises},
   Lecture: {screen: Lecture},
+
   Lecture6: {screen: Lecture1},
   Lecture7: {screen: Lecture2},
   Lecture8: {screen: Lecture3},

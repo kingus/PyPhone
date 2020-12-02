@@ -17,10 +17,11 @@ import {useSelector} from 'react-redux';
 const User = (props) => {
   const activeDays = useSelector((state) => state.auth.activeDays);
   const activeCourses = useSelector((state) => state.auth.activeCourses);
-  const badges = useSelector((state) => state.auth.badges);
+  const achievements = useSelector((state) => state.auth.achievements);
   const countDatesList = useSelector((state) => state.auth.countDatesList);
   const todaysXp = useSelector((state) => state.auth.todaysXp);
   const xp = useSelector((state) => state.auth.xp);
+  const username = useSelector((state) => state.auth.username);
 
   var oblicz = ((xp * 100) / 1200).toString() + '%';
 
@@ -49,7 +50,7 @@ const User = (props) => {
 
       <View style={styles.mainUser}>
         <View style={styles.background}>
-          <Text style={styles.username}>kingus</Text>
+          <Text style={styles.username}>{username}</Text>
           <XPBar2 completed={oblicz} xp={xp}></XPBar2>
         </View>
         <Image source={monster} style={styles.monster}></Image>
@@ -94,7 +95,7 @@ const User = (props) => {
             <Image source={medal} style={styles.image}></Image>
             <View style={styles.textContainer}>
               <Text style={styles.textStyle}>Zdobyte odznaki</Text>
-              <Text style={styles.pointsStyle}>{badges}</Text>
+              <Text style={styles.pointsStyle}>{achievements}</Text>
             </View>
           </View>
         </View>

@@ -7,6 +7,7 @@ import logout from '../images/logout.png';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import * as authActions from '../store/actions/auth';
 import {useDispatch} from 'react-redux';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const DrawerNavigator = createDrawerNavigator(
   {
@@ -35,13 +36,15 @@ const DrawerNavigator = createDrawerNavigator(
       };
 
       return (
-        <View style={{flex: 1, paddingTop: 20, backgroundColor: 'white'}}>
+        <View style={{flex: 1, paddingTop: 20, backgroundColor: '#00072b'}}>
           <SafeAreaView forceInset={{top: 'always', horizontal: 'never'}}>
             <TouchableOpacity style={styles.container} onPress={logOutHandler}>
-              <Image
+              {/* <Image
                 source={logout}
                 style={styles.logoutIcon}
-                tintColor="#494949"></Image>
+                tintColor="#494949"></Image> */}
+              <Icon name="arrow-left" size={15} color="#5afffb" />
+
               <Text style={styles.text}>wyloguj się</Text>
             </TouchableOpacity>
           </SafeAreaView>
@@ -67,6 +70,8 @@ const styles = StyleSheet.create({
   },
   text: {
     marginLeft: 25,
-    color: '#494949',
+    color: 'white',
+    fontFamily: 'OpenSansSemiBold',
+    letterSpacing: 0,
   },
 });

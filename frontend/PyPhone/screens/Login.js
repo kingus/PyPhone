@@ -12,6 +12,7 @@ import * as authActions from '../store/actions/auth';
 import {useDispatch} from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import * as courseActions from '../store/actions/course';
+import * as achievementsActions from '../store/actions/achievements';
 import {Dimensions} from 'react-native';
 import SpinningLogo from '../components/SpinningLogo';
 import AnimatedText from '../components/AnimatedText';
@@ -63,6 +64,7 @@ const Login = (props) => {
       console.log(err.message);
     }
     await getProfile();
+    await getAchievements();
   };
 
   const getProfile = async () => {
@@ -71,6 +73,18 @@ const Login = (props) => {
     try {
       dispatch(action);
       console.log('XP SUCCESS');
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  const getAchievements = async () => {
+    let action;
+    action = achievementsActions.getAchievements();
+    try {
+      dispatch(action);
+
+      console.log('getAchievements SUCCESS');
     } catch (err) {
       console.log(err.message);
     }
@@ -85,9 +99,10 @@ const Login = (props) => {
 
   return (
     <ScrollView style={styles.container}>
-      <LinearGradient
+      {/* <LinearGradient
         colors={['#34adf9', '#67c4ff', '#34adf9']}
-        style={styles.linearGradient}>
+        style={styles.linearGradient}> */}
+      <View style={styles.viewContainer}>
         <Text style={styles.appName}>PyPhone</Text>
         <View style={styles.logoContainer}>
           <SpinningLogo></SpinningLogo>
@@ -117,7 +132,7 @@ const Login = (props) => {
         </View>
 
         {isLoading ? (
-          <ActivityIndicator size="small" color="grey" />
+          <ActivityIndicator size="small" color="#ffe25b" />
         ) : (
           <View style={styles.buttonContainer}>
             <TouchableOpacity
@@ -133,17 +148,26 @@ const Login = (props) => {
             Nie masz jeszcze konta? ZAREJESTRUJ SIĘ.
           </Text>
         </TouchableOpacity>
-      </LinearGradient>
+      </View>
+      {/* </LinearGradient> */}
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#3498db',
+    backgroundColor: '#00072b',
     display: 'flex',
     flex: 1,
     // alignItems: 'center',
+  },
+  viewContainer: {
+    backgroundColor: '#00072b',
+    // backgroundColor: 'green',
+    flex: 1,
+    alignItems: 'center',
+    borderRadius: 5,
+    display: 'flex',
   },
 
   appName: {
@@ -155,7 +179,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 50,
     fontWeight: '700',
-    letterSpacing: 0.1,
+    letterSpacing: 1,
     color: '#ffe25b',
     textShadowColor: 'rgba(0, 0, 0, 0.45)',
     textShadowOffset: {width: -1, height: 1},
@@ -193,7 +217,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    backgroundColor: '#2980b9',
+    backgroundColor: '#ffe25b',
     paddingVertical: 15,
     width: 250,
   },

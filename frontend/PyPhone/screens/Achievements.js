@@ -1,64 +1,75 @@
-import React from 'react';
-import {StyleSheet, View, Image, ImageBackground, Text} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, Text, FlatList} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import winner from '../images/winner.png';
-import diploma from '../images/achievements/diploma.png';
-import satisfaction from '../images/achievements/satisfaction.png';
-import satisfaction3 from '../images/achievements/satisfaction3.png';
-import shield from '../images/achievements/shield.png';
-import star from '../images/achievements/star.png';
-import goldmedal from '../images/achievements/gold-medal.png';
-import silvermedal from '../images/achievements/silver-medal.png';
-import trophy from '../images/achievements/trophy.png';
 import CoinIcon from '../components/icons/CoinIcon';
-import { TouchableHighlight, TouchableOpacity } from 'react-native-gesture-handler';
 import AwardIcon from '../components/icons/AwardIcon';
+import {useDispatch, useSelector} from 'react-redux';
+import GoldIcon from '../components/icons/GoldIcon';
+import SilverIcon from '../components/icons/SilverIcon';
+import FirstCorrect from '../components/icons/FirstCorrect';
+import ThirdCorrect from '../components/icons/ThirdCorrect';
+import CalendarIcon from '../components/icons/CalendarIcon';
+import CodeIcon from '../components/icons/CodeIcon';
+import DiplomaIcon from '../components/icons/DiplomaIcon';
+import {View} from 'react-native-animatable';
 
 const Achievements = (props) => {
- 
+  const dispatch = useDispatch();
+  const achievementsList = useSelector(
+    (state) => state.achievements.achievementsList,
+  );
+
+  console.log('ACHIEVEMENTS LIST, ', achievementsList);
+
   return (
-    <LinearGradient
-      colors={['#34adf9', '#8ee7fe', '#34adf9']}
-      style={styles.linearGradient}>
-              <Text style={styles.appName}>Twoje osiągnięcia</Text>
+    // <LinearGradient
+    //   colors={['#34adf9', '#8ee7fe', '#34adf9']}
+    //   style={styles.linearGradient}>
+    <View style={styles.container}>
+      <Text style={styles.appName}>Twoje osiągnięcia</Text>
+      <FlatList
+        numColumns={4}
+        keyExtractor={(item) => item.achievementName}
+        data={achievementsList}
+        renderItem={({item}) => {
+          if (item.achievementType === 'coin')
+            return (
+              <CoinIcon
+                xp={item.achievementName}
+                active={item['active']}></CoinIcon>
+            );
+          if (item.achievementType === 'award')
+            return (
+              <AwardIcon
+                number={item.achievementName}
+                active={item.active}></AwardIcon>
+            );
 
-      <View style={styles.firstLine}>
-      <TouchableOpacity>
-        <Image source={satisfaction} style={styles.image}></Image>
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <AwardIcon number="1"></AwardIcon>
-      </TouchableOpacity>
-      <CoinIcon xp="100XP"></CoinIcon>
-      <Image source={star} style={styles.image}></Image>
-
-
-      </View>
-      <View style={styles.firstLine}>
-        <AwardIcon number="5"></AwardIcon>
-        <Image source={diploma} style={styles.image} ></Image>
-        <CoinIcon xp="300XP" ></CoinIcon>
-        <TouchableOpacity>
-        <Image source={satisfaction3} style={styles.image}></Image>
-      </TouchableOpacity>
-        <Image source={trophy} style={styles.image} ></Image>
-      </View>
-      <View style={styles.firstLine}>
-
-        <CoinIcon xp="500XP"></CoinIcon>
-        <Image source={silvermedal} style={styles.image}></Image>
-        <Image source={shield} style={styles.image}></Image>
-        <AwardIcon number="10"></AwardIcon>
-
-      </View>
-      <View style={styles.firstLine}>
-        <CoinIcon xp="1000XP" ></CoinIcon>
-        <AwardIcon number="15"></AwardIcon>
-        <Image source={diploma} style={styles.image}></Image>
-        <Image source={goldmedal} style={styles.image}></Image>
-      </View>
-     
-    </LinearGradient>
+          if (item.achievementType === '100%') {
+            return <GoldIcon active={item.active}></GoldIcon>;
+          }
+          if (item.achievementType === '75%') {
+            return <SilverIcon active={item.active}></SilverIcon>;
+          }
+          if (item.achievementType === 'firstCorrect') {
+            return <FirstCorrect active={item.active}></FirstCorrect>;
+          }
+          if (item.achievementType === 'thirdCorrect') {
+            return <ThirdCorrect active={item.active}></ThirdCorrect>;
+          }
+          if (item.achievementType === 'calendar') {
+            return <CalendarIcon active={item.active}></CalendarIcon>;
+          }
+          if (item.achievementType === 'code') {
+            return <CodeIcon active={item.active}></CodeIcon>;
+          }
+          if (item.achievementType === 'diploma') {
+            return <DiplomaIcon active={item.active}></DiplomaIcon>;
+          }
+        }}
+      />
+    </View>
+    // </LinearGradient>
   );
 };
 export default Achievements;
@@ -69,14 +80,25 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'stretch',
   },
+  container: {
+    backgroundColor: '#00072b',
+    flex: 1,
+    alignItems: 'center',
+    borderRadius: 5,
+    display: 'flex',
+  },
   firstLine: {
-      display: 'flex',
-      flexDirection: 'row',
-      marginTop: 40
+    display: 'flex',
+    flexDirection: 'row',
+    marginTop: 40,
+  },
+  flatContainer: {
+    width: 100,
+    height: 100,
+    backgroundColor: 'red',
   },
   appName: {
-    fontSize: 48
-    ,
+    fontSize: 48,
     paddingTop: 50,
     textAlign: 'center',
     fontFamily: 'OpenSansRegular',
@@ -88,15 +110,16 @@ const styles = StyleSheet.create({
     textShadowColor: 'rgba(0, 0, 0, 0.45)',
     textShadowOffset: {width: -1, height: 1},
     textShadowRadius: 10,
+    marginBottom: 40,
   },
   image: {
-      width: 80,
-      height: 80,
-      margin:10
+    width: 80,
+    height: 80,
+    margin: 10,
+    backgroundColor: 'red',
   },
   xpText: {
-      fontWeight: 'bold',
-      color: '#D37C00'
-  }
-  
+    fontWeight: 'bold',
+    color: '#D37C00',
+  },
 });

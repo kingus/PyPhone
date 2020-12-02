@@ -11,12 +11,14 @@ import authReducer from './store/reducers/auth';
 import course from './store/reducers/course';
 import ReduxThunk from 'redux-thunk';
 import exercise from './store/reducers/exercise';
+import achievements from './store/reducers/achievements';
 import Toast from 'react-native-toast-message';
 
 const rootReducer = combineReducers({
   auth: authReducer,
   course: course,
   exercise: exercise,
+  achievements: achievements,
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));

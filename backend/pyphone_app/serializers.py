@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Exercise, ExerciseType, Course, UsersCourse, Profile
+from .models import Exercise, ExerciseType, Course, UsersCourse, Profile, UsersAchievement, Achievement
 from django.contrib.auth.models import User
 
 
@@ -55,3 +55,17 @@ class UsersCourseSerializer(serializers.ModelSerializer):
         model = UsersCourse
         # fields = ('__all__')
         fields = ('active', 'course', 'gainedPoints', 'finishDate')
+
+
+class AchievementSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Achievement
+        fields = ('__all__')
+
+
+class UsersAchievementSerializer(serializers.ModelSerializer):
+    achievement = AchievementSerializer(read_only=True)
+
+    class Meta:
+        model = UsersAchievement
+        fields = ('achievement', 'active')

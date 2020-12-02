@@ -56,3 +56,22 @@ class UsersCourse(models.Model):
 
     def __str__(self):
         return str(self.user) + " - " + str(self.course)
+
+
+class Achievement(models.Model):
+    achievementName = models.CharField(max_length=100, null=False)
+    achievementDescription = models.CharField(max_length=350, null=False)
+    achievementType = models.CharField(max_length=350, null=False, default="")
+    condition = models.CharField(max_length=350, null=False, default="")
+
+    def __str__(self):
+        return self.achievementName
+
+
+class UsersAchievement(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    achievement = models.ForeignKey(Achievement, on_delete=models.CASCADE)
+    active = models.BooleanField()
+
+    def __str__(self):
+        return str(self.user) + " - " + str(self.achievement)

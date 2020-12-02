@@ -58,9 +58,10 @@ export const get_profile = () => {
           xp: response.data.xp,
           activeCourses: response.data.activeCourses,
           activeDays: response.data.activeDays,
-          badges: response.data.badges,
+          achievements: response.data.achievements,
           countDatesList: response.data.countDatesList,
           todaysXp: response.data.todaysXp,
+          username: response.data.username,
         });
       })
       .catch((error) => {

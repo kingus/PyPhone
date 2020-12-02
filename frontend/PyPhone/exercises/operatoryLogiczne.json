@@ -3,7 +3,7 @@
       {
         "question": "Jaki jest wynik poniższego kodu?",
         "code": "x=100;if(x>0 and x<=100):;    print(x)",
-        "possible_answers": "'x';100;0;x=100",
+        "possible_answers": "x;100;0;x=100",
         "correct_answer": "100",
         "exercise_type": "1",
         "course": "9",

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.views import APIView, Response
-from .serializers import ExerciseSerializer, ExerciseSerializer2, ExerciseTypeSerializer, CourseSerializer, UsersCourseSerializer, ProfileSerializer
-from .models import Exercise, ExerciseType, Course, UsersCourse, Profile
+from .serializers import ExerciseSerializer, ExerciseSerializer2, ExerciseTypeSerializer, AchievementSerializer, CourseSerializer, UsersCourseSerializer, ProfileSerializer, UsersAchievementSerializer
+from .models import Exercise, ExerciseType, Course, UsersCourse, Profile, Achievement, UsersAchievement
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from django.db.models import Sum, Q
@@ -153,8 +153,12 @@ class ProfileInfo(APIView):
         countDatesList.append({"count": 0, "date": "9999-11-29"})
         activeCourses = UsersCourse.objects.filter(
             user=user, active=True).count()
+        achievements = UsersAchievement.objects.filter(
+            user=user, active=True).count()
         todaysDate = datetime.date.today()
 
+        profileInfo = Profile.objects.filter(
+            user=user).values('xp', 'creationDate')
         profileInfo = Profile.objects.filter(
             user=user).values('xp', 'creationDate')
         todaysXp = UsersCourse.objects.filter(
@@ -164,4 +168,63 @@ class ProfileInfo(APIView):
         creationDate = profileInfo[0]['creationDate']
         activeDays = (todaysDate-creationDate).days
 
-        return Response({"countDatesList": countDatesList, "activeCourses": activeCourses, "activeDays": activeDays, "badges": 0, "xp": xp, "todaysXp": todaysXp})
+        return Response({"username": user.username, "countDatesList": countDatesList, "activeCourses": activeCourses, "activeDays": activeDays, "achievements": achievements, "xp": xp, "todaysXp": todaysXp})
+
+
+class AchievementView(APIView):
+
+    def get(self, request):
+        achievements = Achievement.objects.all()
+        serializer = AchievementSerializer(achievements, many=True)
+        achievements_data = serializer.data
+        return Response({"achievements": achievements_data})
+
+    def post(self, request):
+
+        achievements = request.data.get('achievements')
+
+        for achievement in achievements:
+            serializer = AchievementSerializer(data=achievement)
+            if serializer.is_valid(raise_exception=True):
+                saved_achievements = serializer.save()
+            else:
+                return Response(serializer.errors)
+
+        return Response("Achievements has been created.")
+
+
+class UsersAchievementView(APIView):
+
+    def get(self, request):
+        token = request.headers['Authorization'].split(" ")[1]
+        user = Token.objects.get(key=token).user
+        achievements = UsersAchievement.objects.filter(user=user)
+        serializer = UsersAchievementSerializer(achievements, many=True)
+        achievements_data = serializer.data
+        response = []
+        for i in achievements_data:
+            print(i['achievement']['achievementName'])
+            response.append(
+                {"achievementName": i['achievement']['achievementName'], "active": i['active'], "achievementDescription": i['achievement']['achievementDescription'], "achievementType": i['achievement']['achievementType']})
+        return Response({"achievements": response})
+
+    # def post(self, request):
+    #     # check if user is going to get 100XP achievement
+    #     token = request.headers['Authorization'].split(" ")[1]
+    #     user = Token.objects.get(key=token).user
+    #     xp = Profile.objects.filter(user=user).values('xp')[0]['xp']
+    #     achievements = UsersAchievement.objects.filter(user=user, active=False)
+    #     serializer = UsersAchievementSerializer(achievements, many=True)
+    #     achievements_data = serializer.data
+    #     for i in achievements_data:
+    #         print(i)
+    #         condition = i['achievement']['condition']
+    #         achievenmentType = i['achievement']['achievementType']
+    #         achievementId = i['achievement']['id']
+    #         # print(achievementName)
+    #         if achievenmentType == "coin":
+    #             if xp > int(condition):
+    #                 print(condition)
+    #                 UsersAchievement.objects.filter(
+    #                     user=user, achievenment_id=achievementId).update(active=True)
+    #     return Response({"achievements": "response"})

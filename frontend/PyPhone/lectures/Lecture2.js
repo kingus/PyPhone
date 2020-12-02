@@ -1,5 +1,7 @@
 import React from 'react';
-import {Text, Dimensions, StyleSheet, View} from 'react-native';
+import {Text, Dimensions, Image, StyleSheet, View} from 'react-native';
+import flowers2 from '../images/flowers2.png';
+import operator from '../images/operator.png';
 import SwiperFlatList from 'react-native-swiper-flatlist';
 import CommandLine from '../components/CommandLine';
 
@@ -8,120 +10,116 @@ const Lecture2 = () => {
     <SwiperFlatList
       index={0}
       showPagination
-      backgroundColor="white"
       paginationDefaultColor="#f9f9f9"
       paginationActiveColor="#d0f7ff"
+      backgroundColor="white"
       paginationStyleItem={styles.active}>
       <View style={styles.child}>
-        <Text style={styles.lectureTitle}>Ciągi znaków</Text>
+        <Text style={styles.lectureText}>
+          <Text style={styles.lectureTextBold}>{'Typy danych '}</Text>
+          umożliwiają komputerowi przechowywać i przetwarzać dane we właściwy
+          sposób w zależności od ich rodzaju. Python udostępnia kilka
+          wbudowanych typów danych –
+          <Text style={styles.lectureTextBold}>
+            {
+              ' liczby całkowite(int), liczby rzeczywiste(float), ciągi znaków(str), typ logiczny(bool) '
+            }
+          </Text>
+          oraz wiele więcej.
+        </Text>
+        <Image source={flowers2} style={styles.flowersImage}></Image>
 
         <Text style={styles.lectureText}>
-          Kolejnym często wykorzystywanym typem danych jest{' '}
-          <Text style={styles.lectureTextBold}>{' string '}</Text>, czyli ciąg
-          znaków.
+          W Pythonie są obsługiwane dwa typy liczbowe –
+          <Text style={styles.lectureTextBold}>
+            {' liczby całkowite(int) '}
+          </Text>
+          oraz
+          <Text style={styles.lectureTextBold}>
+            {' liczby rzeczywiste (float).'}
+          </Text>
         </Text>
-        <CommandLine
-          lines={[">>> print('Hello world')", 'Hello world']}></CommandLine>
-        <Text style={styles.lectureTitle}>Konkatenacja</Text>
-
         <Text style={styles.lectureText}>
-          Jeśli chcemy połączyć dwa ciągi znaków w jeden, możemy to zrobić za
-          pomocą operatora “+”. Operator zmienia swoje działanie w zależności od
-          typów danych wartości, które się obok niego znajdują. Jeśli chcemy
-          dodać do siebie dwie wartości typu int możemy to zrobić w następujący
-          sposób:
+          <Text style={styles.lectureTextBold}>{'Liczby całkowite '}</Text> to
+          liczby bez części dzięsiętnych.
         </Text>
-        <CommandLine lines={['>>> 3 + 2', '5']}></CommandLine>
-
         <Text style={styles.lectureText}>
-          jeśli chcemy połączyć dwa ciągi znaków możemy do tego wykorzystać
-          także znak +
+          <Text style={styles.lectureTextBold}>{'np. '}</Text>1, 2, 13, 103
         </Text>
-        <CommandLine
-          lines={[">>> 'Hello ' + 'world'", 'Hello world']}></CommandLine>
+        <Text style={styles.lectureText}>
+          <Text style={styles.lectureTextBold}>{'Liczby rzeczywiste '}</Text> to
+          liczby posiadające część dziesiętną.
+        </Text>
+        <Text style={styles.lectureText}>
+          <Text style={styles.lectureTextBold}>{'np. '}</Text> 1.2, 2.025, 13.5,
+          103.99
+        </Text>
+      </View>
+      <View style={styles.child}>
+        <Text style={styles.lectureTitle}>Operatory</Text>
+
+        <View style={styles.operatorContainer}>
+          <Text style={styles.lectureTextBold}>{'Potęgowanie\n**'}</Text>
+          <View style={styles.cmdContainer}>
+            <CommandLine lines={['>>> print(2**3)', '8']}></CommandLine>
+          </View>
+        </View>
+        <View style={styles.operatorContainer}>
+          <Text style={styles.lectureTextBold}>{'Modulo\n%'}</Text>
+          <View style={styles.cmdContainer}>
+            <CommandLine lines={['>>> print(5%3)', '2']}></CommandLine>
+          </View>
+        </View>
+        <View style={styles.operatorContainer}>
+          <Text style={styles.lectureTextBold}>
+            {'Dzielenie liczb całkowitych\n \\\\ '}
+          </Text>
+          <View style={styles.cmdContainer}>
+            <CommandLine lines={['>>> print(6//4)', '1']}></CommandLine>
+          </View>
+        </View>
+        <View style={styles.operatorContainer}>
+          <Text style={styles.lectureTextBold}>{'Dzielenie\n '}</Text>
+          <View style={styles.cmdContainer}>
+            <CommandLine lines={['>>> print(6/4)', '1.5']}></CommandLine>
+          </View>
+        </View>
+        <View style={styles.operatorContainer}>
+          <Text style={styles.lectureTextBold}>{'Mnożenie\n* '}</Text>
+          <View style={styles.cmdContainer}>
+            <CommandLine lines={['>>> print(2*3)', '6']}></CommandLine>
+          </View>
+        </View>
+        <View style={styles.operatorContainer}>
+          <Text style={styles.lectureTextBold}>{'Odejmowanie\n-'}</Text>
+          <View style={styles.cmdContainer}>
+            <CommandLine lines={['>>> print(10-3)', '7']}></CommandLine>
+          </View>
+        </View>
+        <View style={styles.operatorContainer}>
+          <Text style={styles.lectureTextBold}>{'Dodawanie\n+'}</Text>
+          <View style={styles.cmdContainer}>
+            <CommandLine lines={['>>> print(2+3)', '5']}></CommandLine>
+          </View>
+        </View>
       </View>
 
       <View style={styles.child}>
-        <Text style={styles.lectureTitle}>Replikacja</Text>
+        <Text style={styles.lectureTitle}>Wyrażenie </Text>
+
+        <Image source={operator} style={styles.operatorImage}></Image>
 
         <Text style={styles.lectureText}>
-          Operator * wykorzystywany w połączeniu ze stringiem oraz intem służy
-          jako operator replikacji. Za jego pomocą ciąg znaków zostanie
-          zwielokrotniony odpowiednią ilość razy.
+          W Pythonie, 1+2 jest nazywane
+          <Text style={styles.lectureTextBold}>{' wyrażaniem '}</Text>, czyli
+          najbardziej podstawowy rodzaj instrukcji danego języka. Wyrażenie
+          składa się z<Text style={styles.lectureTextBold}>{' wartości '}</Text>
+          – 1 i 2 oraz z
+          <Text style={styles.lectureTextBold}>{' operatora '}</Text>
+          “+”. Wyrażenia są sprowadzane do pojedynczej wartości, dlatego mogą
+          być umieszczane w każdym miejscu w kodzie, gdzie możemy użyć
+          pojedynczej wartości.
         </Text>
-        <CommandLine
-          lines={[
-            ">>> 'Hello' * 5",
-            'HelloHelloHelloHelloHello',
-          ]}></CommandLine>
-        <Text style={styles.lectureTitle}>Długość ciągu znaków – len()</Text>
-
-        <Text style={styles.lectureText}>
-          Funkcja len() przyjmuje jako parametr ciąg znaków i zwraca liczbę
-          znaków w danym ciągu.
-        </Text>
-        <CommandLine lines={[">>>len('Hello')", '5']}></CommandLine>
-      </View>
-
-      <View style={styles.child}>
-        <Text style={styles.lectureText}>
-          Funkcja upper() przyjmuje jako parametr string i zwraca ten sam ciąg
-          znaków napisany wielkimi literami.
-        </Text>
-        <CommandLine lines={[">>> 'hello'.upper()", 'HELLO']}></CommandLine>
-        <Text style={styles.lectureText}>
-          Funkcja isupper() sprawdza, czy przekazany jako parametr ciąg znaków
-          składa się z wielkich liter. Jeśli tak, zwraca warotść true, jeśli nie
-          – false.
-        </Text>
-        <CommandLine
-          lines={[
-            ">>> 'hello'.isupper()",
-            'False',
-            ">>> 'HELLO'.isupper()",
-            'True',
-          ]}></CommandLine>
-      </View>
-      <View style={styles.child}>
-        <Text style={styles.lectureText}>
-          Funkcja lower() przyjmuje jako parametr string i zwraca ten sam ciąg
-          znaków napisany małymi literami.
-        </Text>
-        <CommandLine lines={[">>> 'HELLO'.lower()", 'hello']}></CommandLine>
-        <Text style={styles.lectureText}>
-          Funkcja islower() sprawdza, czy przekazany jako parametr ciąg znaków
-          składa się z małych liter. Jeśli tak, zwraca warotść true, jeśli nie –
-          false.
-        </Text>
-        <CommandLine
-          lines={[
-            ">>> 'hello'.islower()",
-            'True',
-            ">>> 'HELLO'.islower()",
-            'False',
-          ]}></CommandLine>
-      </View>
-      <View style={styles.child}>
-        <Text style={styles.lectureTitle}>startswith() endswith() </Text>
-
-        <Text style={styles.lectureText}>
-          Funkcje
-          <Text style={styles.lectureTextBold}>{' startswith() '}</Text> i
-          <Text style={styles.lectureTextBold}>{' endswith() '}</Text> zwracają
-          True, jeśli ciąg znaków zaczyna/kończy się na przekazany ciąg znaków.
-          W przeciwnym przypadku fukcja zwraca wartość False.
-        </Text>
-        <CommandLine
-          lines={[
-            ">>> 'Hello world'.startswith('Hello')",
-            'True',
-            ">>> 'Hello world'.startswith('world')",
-            'False',
-            ">>> 'Hello world'.endswith('Hello')",
-            'False',
-            ">>> 'Hello world'.endswith('world')",
-            'True',
-          ]}></CommandLine>
       </View>
     </SwiperFlatList>
   );
@@ -129,10 +127,11 @@ const Lecture2 = () => {
 
 export default Lecture2;
 Lecture2.navigationOptions = (navigationData) => {
+  console.log(navigationData);
   const title = navigationData.navigation.getParam('course');
+  console.log('TITLE', title);
   return {headerTitle: title};
 };
-
 export const {width, height} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
@@ -147,6 +146,11 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'flex-start',
+  },
+  operatorContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 
   image: {
@@ -185,11 +189,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'OpenSansSemiBold',
     letterSpacing: 0,
-    marginTop: 20,
+    flex: 3,
+    textAlign: 'center',
   },
   cmdContainer: {
-    paddingTop: 30,
-    paddingBottom: 30,
+    paddingTop: 10,
+    paddingBottom: 10,
+    display: 'flex',
+    flex: 5,
   },
   numbersContainer: {
     display: 'flex',
@@ -198,5 +205,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginLeft: 60,
     marginRight: 20,
+  },
+  operatorImage: {
+    width: 320,
+    height: 120,
   },
 });

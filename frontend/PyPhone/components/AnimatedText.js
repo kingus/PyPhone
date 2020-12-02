@@ -13,6 +13,7 @@ const AnimatedText = (props) => {
 
   setTimeout(() => {
     toggleVisible();
+    console.log('ZMIANA');
   }, 4800);
 
   Animated.timing(fadeAnim, {
@@ -25,7 +26,7 @@ const AnimatedText = (props) => {
     <Animated.Text
       style={{
         opacity: fadeAnim,
-        color: 'rgba(255,255,255,0.6)',
+        color: 'rgba(255,255,255,0.9)',
         textAlign: 'center',
         width: 300,
         fontFamily: 'OpenSansRegular',

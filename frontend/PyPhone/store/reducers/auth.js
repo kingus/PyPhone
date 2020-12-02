@@ -25,9 +25,10 @@ export default (state = initialState, action) => {
         xp: action.xp,
         activeCourses: action.activeCourses,
         activeDays: action.activeDays,
-        badges: action.badges,
+        achievements: action.achievements,
         countDatesList: action.countDatesList,
         todaysXp: action.todaysXp,
+        username: action.username,
       };
     case CHANGE_PROFILE:
       var today = new Date();

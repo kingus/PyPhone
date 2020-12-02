@@ -1,7 +1,6 @@
-import React, {useState} from 'react';
-import {Text, Dimensions, Image, StyleSheet, View} from 'react-native';
+import React from 'react';
+import {Dimensions, StyleSheet, View} from 'react-native';
 import Lecture2 from '../lectures/Lecture2';
-import {useDispatch, useSelector} from 'react-redux';
 
 const Lecture = () => {
   return (

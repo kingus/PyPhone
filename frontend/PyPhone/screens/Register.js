@@ -70,9 +70,10 @@ const Register = (props) => {
 
   return (
     <ScrollView style={styles.container}>
-      <LinearGradient
+      {/* <LinearGradient
         colors={['#34adf9', '#67c4ff', '#34adf9']}
-        style={styles.linearGradient}>
+        style={styles.linearGradient}> */}
+      <View style={styles.mainContainer}>
         <Text style={styles.appName}>PyPhone</Text>
         <View style={styles.logoContainer}>
           <SpinningLogo></SpinningLogo>
@@ -117,9 +118,8 @@ const Register = (props) => {
         <TouchableOpacity onPress={() => onClickLogin()} title="Login">
           <Text style={styles.bottomText}>Masz już konto? ZALOGUJ SIĘ</Text>
         </TouchableOpacity>
-
-        {/* </View> */}
-      </LinearGradient>
+      </View>
+      {/* </LinearGradient> */}
     </ScrollView>
   );
 };
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    backgroundColor: '#2980b9',
+    backgroundColor: '#ffe25b',
     paddingVertical: 15,
     width: 250,
   },
@@ -200,6 +200,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     display: 'flex',
     height: windowHeight,
+  },
+  mainContainer: {
+    flex: 1,
+    alignItems: 'center',
+    display: 'flex',
+    height: windowHeight,
+    backgroundColor: '#00072b',
   },
 });
 

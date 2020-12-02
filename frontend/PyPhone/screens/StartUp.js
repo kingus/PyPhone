@@ -29,15 +29,18 @@ const StartUp = (props) => {
   }, [dispatch]);
 
   return (
-    <LinearGradient
-      colors={['#34adf9', '#bae5ff', '#34adf9']}
-      style={styles.linearGradient}>
+    // <LinearGradient
+    //   colors={['#34adf9', '#bae5ff', '#34adf9']}
+    //   style={styles.linearGradient}>
+    <View style={styles.container}>
       <Text style={styles.appName}>PyPhone</Text>
       <View style={styles.logoContainer}>
         <Image source={logo} style={styles.logo}></Image>
       </View>
-      <ActivityIndicator size="large" color="grey" />
-    </LinearGradient>
+      <ActivityIndicator size="large" color="#5afffb" />
+    </View>
+
+    // </LinearGradient>
   );
 };
 
@@ -52,9 +55,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: '#00072b',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   appName: {
     fontSize: 50,
-    color: 'white',
+    color: '#ffe25b',
     paddingTop: 50,
     textAlign: 'center',
   },

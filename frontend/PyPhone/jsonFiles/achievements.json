@@ -1,0 +1,89 @@
+{
+    "achievements": [
+      {
+        "achievementName": "100XP",
+        "achievementDescription": "Użytkownik uzyskał swoje pierwsze 100XP",
+        "achievementType": "coin"
+      },
+          {
+        "achievementName": "200XP",
+        "achievementDescription": "Użytkownik uzyskał swoje pierwsze 200XP",
+        "achievementType": "coin"
+
+      },
+          {
+        "achievementName": "500XP",
+        "achievementDescription": "Użytkownik uzyskał swoje pierwsze 500XP",
+        "achievementType": "coin"
+
+      },
+          {
+        "achievementName": "1000XP",
+        "achievementDescription": "Użytkownik uzyskał swoje pierwsze 1000XP",
+        "achievementType": "coin"
+      },{
+        "achievementName": "1",
+        "achievementDescription": "Użytkownik ukończył 1 kurs",
+        "achievementType": "award"
+      }
+      ,{
+        "achievementName": "5",
+        "achievementDescription": "Użytkownik ukończył 5 kursów",
+        "achievementType": "award"
+      }
+      ,{
+        "achievementName": "10",
+        "achievementDescription": "Użytkownik ukończył 10 kursów",
+        "achievementType": "award"
+      }
+      ,{
+        "achievementName": "15",
+        "achievementDescription": "Użytkownik ukończył 15 kursów",
+        "achievementType": "award"
+      },
+      {
+        "achievementName": "100%",
+        "achievementDescription": "Użytkownik ukończył wszystkie kursy na 100%",
+        "achievementType": "100%"
+      }
+      ,{
+        "achievementName": "5",
+        "achievementDescription": "Użytkownik ukończył wszystkie kursy na co najmniej 75%",
+        "achievementType": "75%"
+      }, {
+        "achievementName": "1correct",
+        "achievementDescription": "Użytkownik ukończył bezbłędnie 1 kurs",
+        "achievementType": "firstCorrect"
+      }
+      ,{
+        "achievementName": "3correct",
+        "achievementDescription": "Użytkownik ukończył bezbłędnie 3 kursy",
+        "achievementType": "thirdCorrect"
+      },
+      {
+        "achievementName": "10 dni",
+        "achievementDescription": "Użytkownik posiada konto 10 dni",
+        "achievementType": "calendar"
+      }
+      ,{
+        "achievementName": "100 dni",
+        "achievementDescription": "Użytkownik posiada konto 100 dni",
+        "achievementType": "calendar"
+      }, {
+        "achievementName": "360 dni",
+        "achievementDescription": "Użytkownik posiada konto 360 dni",
+        "achievementType": "calendar"
+      },
+      {
+        "achievementName": "code",
+        "achievementDescription": "Użytkownik pierwszy raz skorzystał z interpretera",
+        "achievementType": "code"
+      },
+       {
+        "achievementName": "diploma",
+        "achievementDescription": "Użytkownik ukończył wszystkie kursy",
+        "achievementType": "diploma"
+      }
+    ]
+  }
+  

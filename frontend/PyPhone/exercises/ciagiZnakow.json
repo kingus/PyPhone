@@ -20,8 +20,8 @@
       },
       {
         "question": "Jaki jest wynik poniższego kodu?",
-        "code": "print(len('Hello world')",
-        "possible_answers": "'Hello world';'world';'10;11",
+        "code": "print(len('Hello world'))",
+        "possible_answers": "Hello world;world;10;11",
         "correct_answer": "11",
         "exercise_type": "1",
         "course": "8",
@@ -33,17 +33,17 @@
         "code": null,
         "possible_answers": "upper();isupper();islower();len()",
         "correct_answer": "isupper();islower()",
-        "exercise_type": "2",
+        "exercise_type": "3",
         "course": "8",
         "points": 10
       }
       ,
       {
         "question": "Ustaw wynik poniższego kodu w poprawnej kolejności.",
-        "code": "'hello'.isupper();len('hello');'hello'.upper()",
+        "code": "print('hello'.isupper());print(len('hello'));print('hello'.upper())",
         "possible_answers": "5;HELLO;False",
         "correct_answer": "False;5;HELLO",
-        "exercise_type": "3",
+        "exercise_type": "4",
         "course": "8",
         "points": 10
       }
@@ -53,7 +53,7 @@
         "code": "'hello'.startsWith('h');'hello'.startsWith('H');hello.upper()",
         "possible_answers": "True;HELLO;False",
         "correct_answer": "True;False;HELLO",
-        "exercise_type": "3",
+        "exercise_type": "4",
         "course": "8",
         "points": 10
       }
