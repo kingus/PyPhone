@@ -87,9 +87,7 @@ const Home = (props) => {
             <View style={styles.pointsCard}>
               <Image source={homework} style={styles.image}></Image>
 
-              <Text style={styles.pointsCardText}>
-                {activeCoursesAmount - 1}
-              </Text>
+              <Text style={styles.pointsCardText}>{activeCoursesAmount}</Text>
             </View>
             <View style={styles.pointsCard}>
               <Image source={trophy} style={styles.image}></Image>

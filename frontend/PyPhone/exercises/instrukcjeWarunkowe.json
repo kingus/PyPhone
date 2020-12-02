@@ -3,15 +3,15 @@
       {
         "question": "Jaki jest wynik poniższego kodu?",
         "code": "a=3;b=2;if 0 and a:;    print(4);elif a or b:;    print(a+b*2)",
-        "possible_answers":"7;4;10;3",
+        "possible_answers":null,
         "correct_answer": "7",
-        "exercise_type": "1",
+        "exercise_type": "2",
         "course": "11",
         "points": 10
       },
       {
         "question": "Jaki jest wynik poniższego kodu?",
-        "code": "a = 3;if(2%1-0):;    print('a' + '1');else:    print(a + 2)",
+        "code": "a = 3;if(2%1-0):;    print('a' + '1');else:;    print(a + 2)",
         "possible_answers":"5;a1;Error;0",
         "correct_answer": "5",
         "exercise_type": "1",

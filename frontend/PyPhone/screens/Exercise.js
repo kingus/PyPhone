@@ -195,9 +195,9 @@ const Exercise = (props) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.navbar}>
+      {/* <View style={styles.navbar}>
         <Icon name="flag" size={30} color="#abf0ff" />
-      </View>
+      </View> */}
 
       <Text style={styles.lectureTitle}>
         Ćwiczenie {props.currentExercise + 1}.
@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
     fontFamily: 'OpenSansSemiBold',
     letterSpacing: 0,
     marginLeft: 10,
-    marginTop: 10,
+    marginTop: 20,
   },
   lectureText: {
     fontSize: 16,
@@ -249,6 +249,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
     marginLeft: 10,
     marginTop: 10,
+    marginBottom: 10,
     justifyContent: 'space-around',
     alignItems: 'center',
   },

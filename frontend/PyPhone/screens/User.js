@@ -16,7 +16,9 @@ import {useSelector} from 'react-redux';
 
 const User = (props) => {
   const activeDays = useSelector((state) => state.auth.activeDays);
-  const activeCourses = useSelector((state) => state.auth.activeCourses);
+  const activeCoursesAmount = useSelector(
+    (state) => state.course.activeCoursesAmount,
+  );
   const achievements = useSelector((state) => state.auth.achievements);
   const countDatesList = useSelector((state) => state.auth.countDatesList);
   const todaysXp = useSelector((state) => state.auth.todaysXp);
@@ -71,7 +73,7 @@ const User = (props) => {
             <Image source={openBook} style={styles.image}></Image>
             <View style={styles.textContainer}>
               <Text style={styles.textStyle}>Ukończone kursy</Text>
-              <Text style={styles.pointsStyle}>{activeCourses - 1}</Text>
+              <Text style={styles.pointsStyle}>{activeCoursesAmount}</Text>
             </View>
           </View>
           <View style={styles.infoItem}>

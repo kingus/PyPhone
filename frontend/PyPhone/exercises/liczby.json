@@ -3,9 +3,9 @@
       {
         "question": "Jaki będzie wynik poniżego kodu?",
         "code": "print(3+7*3//5)",
-        "possible_answers": "7;6;5;2",
+        "possible_answers": null,
         "correct_answer": "7",
-        "exercise_type": "1",
+        "exercise_type": "2",
         "course": "7",
         "points": 10
       },
@@ -57,9 +57,9 @@
       {
         "question": "Jaki jest wynik poniższego kodu?",
         "code": "a = '+';b = 4;c = 9;d = (9*3)//4;print(d*a)",
-        "possible_answers": "xxxxx;xxxxxx;27;0",
-        "correct_answer": "xxxxxx",
-        "exercise_type": "1",
+        "possible_answers": null,
+        "correct_answer": "++++++",
+        "exercise_type": "2",
         "course": "7",
         "points": 20
       }

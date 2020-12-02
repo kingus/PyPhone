@@ -21,9 +21,9 @@
       {
         "question": "Jaki jest wynik poniższego kodu?",
         "code": "x = 100;y = 100;x is y",
-        "possible_answers": "True;False;100;None",
+        "possible_answers": null,
         "correct_answer": "True",
-        "exercise_type": "1",
+        "exercise_type": "2",
         "course": "9",
         "points": 10
       },

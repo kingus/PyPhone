@@ -231,3 +231,14 @@ class UsersAchievementView(APIView):
     #                 UsersAchievement.objects.filter(
     #                     user=user, achievenment_id=achievementId).update(active=True)
     #     return Response({"achievements": "response"})
+
+
+class ResetCoursesView(APIView):
+
+    def get(self, request):
+        token = request.headers['Authorization'].split(" ")[1]
+        user = Token.objects.get(key=token).user
+
+        usersCourse = UsersCourse.objects.filter(
+            user=user and Course.course_name != "Zmienne").update(active=0, gainedPoints=0, finishDate="9999-12-31")
+        return Response("DATA RESET")

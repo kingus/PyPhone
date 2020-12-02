@@ -31,9 +31,9 @@
       {
         "question": "Wybierz poprawny wynik poniższego kodu.",
         "code": "print(12==12.5)",
-        "possible_answers": "True;0;1;False",
+        "possible_answers": "",
         "correct_answer": "False",
-        "exercise_type": "1",
+        "exercise_type": "2",
         "course": "10",
         "points": 10
       },

@@ -21,9 +21,9 @@
       {
         "question": "Jaki jest wynik poniższego kodu?",
         "code": "print(len('Hello world'))",
-        "possible_answers": "Hello world;world;10;11",
+        "possible_answers": null,
         "correct_answer": "11",
-        "exercise_type": "1",
+        "exercise_type": "2",
         "course": "8",
         "points": 10
       }

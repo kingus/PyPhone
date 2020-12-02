@@ -11,7 +11,7 @@ export default (state = initialState, action) => {
   console.log('action.course', action.course);
   let active = 0;
   let newCourses = state.userCourses.map((userCourse) => {
-    if (userCourse.active) {
+    if (userCourse.percentage > 75) {
       active++;
     }
 

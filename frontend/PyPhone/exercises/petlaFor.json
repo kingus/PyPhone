@@ -12,9 +12,9 @@
       {
         "question": "Jaki jest wynik poniższego kodu?",
         "code": "a = 'abcd';b = 'defg';c = '';for i in a:;    if i not in b:;        c+=i;print(c)",
-        "possible_answers":"defg;abc;abcd;efg",
+        "possible_answers":null,
         "correct_answer": "abc",
-        "exercise_type": "1",
+        "exercise_type": "2",
         "course": "12",
         "points": 10
       
