@@ -7,7 +7,7 @@ const CoinIcon = (props) => {
   const [active, setActive] = useState(props.active);
 
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={() => props.pressAchievement(props.description)}>
       {active ? (
         <ImageBackground source={coin} style={styles.image}>
           <View

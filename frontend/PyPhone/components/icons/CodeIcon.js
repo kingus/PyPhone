@@ -7,7 +7,7 @@ const CodeIcon = (props) => {
   const [active, setActive] = useState(props.active);
 
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={() => props.pressAchievement(props.description)}>
       {active ? (
         <Image source={programming} style={styles.image}></Image>
       ) : (

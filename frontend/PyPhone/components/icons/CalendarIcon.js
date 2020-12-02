@@ -7,7 +7,7 @@ const CalendarIcon = (props) => {
   const [active, setActive] = useState(props.active);
 
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={() => props.pressAchievement(props.description)}>
       {active ? (
         <ImageBackground source={calendar} style={styles.image}>
           <View

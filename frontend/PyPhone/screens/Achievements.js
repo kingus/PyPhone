@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, FlatList} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  FlatList,
+  Modal,
+  TouchableHighlight,
+} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import CoinIcon from '../components/icons/CoinIcon';
 import AwardIcon from '../components/icons/AwardIcon';
@@ -12,12 +18,20 @@ import CalendarIcon from '../components/icons/CalendarIcon';
 import CodeIcon from '../components/icons/CodeIcon';
 import DiplomaIcon from '../components/icons/DiplomaIcon';
 import {View} from 'react-native-animatable';
+// import Modal, {ModalContent} from 'react-native-modals';
 
 const Achievements = (props) => {
+  const [visible, setVisible] = useState(false);
+  const [description, setDescription] = useState('');
   const dispatch = useDispatch();
   const achievementsList = useSelector(
     (state) => state.achievements.achievementsList,
   );
+
+  const pressAchievement = (description) => {
+    setVisible(true);
+    setDescription(description);
+  };
 
   console.log('ACHIEVEMENTS LIST, ', achievementsList);
 
@@ -25,7 +39,11 @@ const Achievements = (props) => {
     // <LinearGradient
     //   colors={['#34adf9', '#8ee7fe', '#34adf9']}
     //   style={styles.linearGradient}>
-    <View style={styles.container}>
+    <View
+      style={styles.container}
+      onTouchStart={() => {
+        setVisible(false);
+      }}>
       <Text style={styles.appName}>Twoje osiągnięcia</Text>
       <FlatList
         numColumns={4}
@@ -36,38 +54,90 @@ const Achievements = (props) => {
             return (
               <CoinIcon
                 xp={item.achievementName}
-                active={item['active']}></CoinIcon>
+                description={item.achievementDescription}
+                active={item['active']}
+                pressAchievement={pressAchievement}></CoinIcon>
             );
           if (item.achievementType === 'award')
             return (
               <AwardIcon
                 number={item.achievementName}
-                active={item.active}></AwardIcon>
+                active={item.active}
+                description={item.achievementDescription}
+                pressAchievement={pressAchievement}></AwardIcon>
             );
 
           if (item.achievementType === '100%') {
-            return <GoldIcon active={item.active}></GoldIcon>;
+            return (
+              <GoldIcon
+                active={item.active}
+                description={item.achievementDescription}
+                pressAchievement={pressAchievement}></GoldIcon>
+            );
           }
           if (item.achievementType === '75%') {
-            return <SilverIcon active={item.active}></SilverIcon>;
+            return (
+              <SilverIcon
+                active={item.active}
+                description={item.achievementDescription}
+                pressAchievement={pressAchievement}></SilverIcon>
+            );
           }
           if (item.achievementType === 'firstCorrect') {
-            return <FirstCorrect active={item.active}></FirstCorrect>;
+            return (
+              <FirstCorrect
+                active={item.active}
+                description={item.achievementDescription}
+                pressAchievement={pressAchievement}></FirstCorrect>
+            );
           }
           if (item.achievementType === 'thirdCorrect') {
-            return <ThirdCorrect active={item.active}></ThirdCorrect>;
+            return (
+              <ThirdCorrect
+                active={item.active}
+                description={item.achievementDescription}
+                pressAchievement={pressAchievement}></ThirdCorrect>
+            );
           }
           if (item.achievementType === 'calendar') {
-            return <CalendarIcon active={item.active}></CalendarIcon>;
+            return (
+              <CalendarIcon
+                active={item.active}
+                description={item.achievementDescription}
+                pressAchievement={pressAchievement}></CalendarIcon>
+            );
           }
           if (item.achievementType === 'code') {
-            return <CodeIcon active={item.active}></CodeIcon>;
+            return (
+              <CodeIcon
+                active={item.active}
+                description={item.achievementDescription}
+                pressAchievement={pressAchievement}></CodeIcon>
+            );
           }
           if (item.achievementType === 'diploma') {
-            return <DiplomaIcon active={item.active}></DiplomaIcon>;
+            return (
+              <DiplomaIcon
+                active={item.active}
+                description={item.achievementDescription}
+                pressAchievement={pressAchievement}></DiplomaIcon>
+            );
           }
         }}
       />
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={visible}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+        }}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>{description}</Text>
+          </View>
+        </View>
+      </Modal>
     </View>
     // </LinearGradient>
   );
@@ -96,6 +166,33 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     backgroundColor: 'red',
+  },
+  modalText: {
+    color: '#00072b',
+    textAlign: 'center',
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    marginBottom: 40,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    opacity: 0.9,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   appName: {
     fontSize: 48,
