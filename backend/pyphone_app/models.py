@@ -11,6 +11,7 @@ User = get_user_model()
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     xp = models.IntegerField(default=0)
+    avatar = models.IntegerField(default=0)
     creationDate = models.DateField(default=todaysDate)
 
     def __str__(self):

@@ -29,6 +29,7 @@ export default (state = initialState, action) => {
         countDatesList: action.countDatesList,
         todaysXp: action.todaysXp,
         username: action.username,
+        avatar: action.avatar,
       };
     case CHANGE_PROFILE:
       var today = new Date();

@@ -1,10 +1,25 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import girl from '../images/girl.png';
-import monster from '../images/user/monster.png';
+import monster0 from '../images/monsters/monster0.png';
+import monster1 from '../images/monsters/monster1.png';
+import monster2 from '../images/monsters/monster2.png';
+import monster3 from '../images/monsters/monster3.png';
+import monster4 from '../images/monsters/monster4.png';
+import monster5 from '../images/monsters/monster5.png';
+import {useSelector, useDispatch} from 'react-redux';
 
 const XPBar = (props) => {
+  const [monstersList, setMonstersList] = useState([
+    monster0,
+    monster1,
+    monster2,
+    monster3,
+    monster4,
+    monster5,
+  ]);
+  const userAvatar = useSelector((state) => state.auth.avatar);
+
   const completedBar = {
     height: '100%',
     backgroundColor: '#49a9c4',
@@ -15,7 +30,9 @@ const XPBar = (props) => {
 
   return (
     <View style={styles.container}>
-      <Image source={monster} style={styles.profileImage}></Image>
+      <Image
+        source={monstersList[userAvatar]}
+        style={styles.profileImage}></Image>
 
       <View style={styles.main}>
         <View style={[styles.fullBar]}>
@@ -23,7 +40,13 @@ const XPBar = (props) => {
             colors={['#fffba9', '#ffdb00']}
             style={completedBar}></LinearGradient>
         </View>
-        <Text style={styles.XPText}>{props.xp} XP</Text>
+        <Text
+          style={styles.XPText}
+          onPress={() => {
+            console.log(userAvatar);
+          }}>
+          {props.xp} XP
+        </Text>
       </View>
     </View>
   );

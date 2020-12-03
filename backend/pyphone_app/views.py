@@ -155,22 +155,23 @@ class ProfileInfo(APIView):
         countDatesList.append({"count": 0, "date": "9999-11-29"})
         activeCourses = UsersCourse.objects.filter(
             user=user, active=True).count()
+        activeCourses = activeCourses - 1
+        print(activeCourses)
         achievements = UsersAchievement.objects.filter(
             user=user, active=True).count()
         todaysDate = datetime.date.today()
 
         profileInfo = Profile.objects.filter(
-            user=user).values('xp', 'creationDate')
-        profileInfo = Profile.objects.filter(
-            user=user).values('xp', 'creationDate')
+            user=user).values('xp', 'creationDate', 'avatar')
         todaysXp = UsersCourse.objects.filter(
             user=user, finishDate=todaysDate).aggregate((Sum('gainedPoints')))['gainedPoints__sum']
         print(todaysXp)
         xp = profileInfo[0]['xp']
         creationDate = profileInfo[0]['creationDate']
+        avatar = profileInfo[0]['avatar']
         activeDays = (todaysDate-creationDate).days
 
-        return Response({"username": user.username, "countDatesList": countDatesList, "activeCourses": activeCourses, "activeDays": activeDays, "achievements": achievements, "xp": xp, "todaysXp": todaysXp})
+        return Response({"username": user.username, "countDatesList": countDatesList, "activeCourses": activeCourses, "activeDays": activeDays, "achievements": achievements, "xp": xp, "todaysXp": todaysXp, "avatar": avatar})
 
 
 class AchievementView(APIView):

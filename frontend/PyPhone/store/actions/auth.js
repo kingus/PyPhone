@@ -35,7 +35,7 @@ export const login = (username, password) => {
 export const get_profile = () => {
   return async (dispatch, getState) => {
     let token = getState().auth.token;
-    token = '493e77275ee813c6a1aa7ab20aac0af7eb8a43bb';
+    // token = '493e77275ee813c6a1aa7ab20aac0af7eb8a43bb';
     // const endpoint = global.url + '/api/profile/';
     const endpoint = global.url + '/api/profile-info/';
     axios.defaults.timeout = 10000;
@@ -62,6 +62,7 @@ export const get_profile = () => {
           countDatesList: response.data.countDatesList,
           todaysXp: response.data.todaysXp,
           username: response.data.username,
+          avatar: response.data.avatar,
         });
       })
       .catch((error) => {
@@ -71,10 +72,10 @@ export const get_profile = () => {
   };
 };
 
-export const register = (username, password) => {
+export const register = (username, password, avatar) => {
   return async (dispatch) => {
     const endpoint = global.url + '/auth/register/';
-    const payload = {username: username, password: password};
+    const payload = {username: username, password: password, avatar: avatar};
     axios.defaults.timeout = 10000;
 
     await axios

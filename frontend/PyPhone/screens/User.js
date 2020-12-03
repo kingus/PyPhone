@@ -13,6 +13,7 @@ import {ContributionGraph} from 'react-native-chart-kit';
 const windowHeight = Dimensions.get('window').height;
 const screenWidth = Dimensions.get('window').width;
 import {useSelector} from 'react-redux';
+import UserMonster from '../components/UserMonster';
 
 const User = (props) => {
   const activeDays = useSelector((state) => state.auth.activeDays);
@@ -55,7 +56,7 @@ const User = (props) => {
           <Text style={styles.username}>{username}</Text>
           <XPBar2 completed={oblicz} xp={xp}></XPBar2>
         </View>
-        <Image source={monster} style={styles.monster}></Image>
+        <UserMonster></UserMonster>
       </View>
       <View style={styles.chartStyle}>
         <ContributionGraph
@@ -121,11 +122,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingLeft: 30,
   },
-  monster: {
-    width: 100,
-    height: 100,
-    margin: 10,
-  },
+
   container: {
     flex: 1,
     backgroundColor: '#00072b',

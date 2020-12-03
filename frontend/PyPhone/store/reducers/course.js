@@ -13,6 +13,7 @@ export default (state = initialState, action) => {
   let newCourses = state.userCourses.map((userCourse) => {
     if (userCourse.percentage > 75) {
       active++;
+      console.log(userCourse);
     }
 
     if (userCourse.id === action.course + 1 && action.unlock) {
@@ -29,6 +30,7 @@ export default (state = initialState, action) => {
     }
   });
   console.log(newCourses);
+  console.log('ACTIVE', active);
 
   switch (action.type) {
     case GET_COURSES:

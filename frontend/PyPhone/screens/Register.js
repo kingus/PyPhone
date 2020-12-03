@@ -17,6 +17,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {Dimensions} from 'react-native';
 import SpinningLogo from '../components/SpinningLogo';
 import AnimatedText from '../components/AnimatedText';
+import MonsterCarousel from '../components/MonsterCarousel';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -26,6 +27,7 @@ const Register = (props) => {
   const [password, setPassword] = useState('');
   const [rePassword, setRePassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [avatar, setAvatar] = useState();
 
   const [registerSuccess, setRegisterSuccess] = useState(false);
   const dispatch = useDispatch();
@@ -44,11 +46,13 @@ const Register = (props) => {
 
   const authHandler = async () => {
     let action;
-    action = authActions.register(username, password);
+    action = authActions.register(username, password, avatar);
+    console.log('AVATAR ', avatar);
+
     setIsLoading(true);
     if (password === rePassword) {
       try {
-        await dispatch(action);
+        dispatch(action);
         props.navigation.navigate({
           routeName: 'SignIn',
         });
@@ -77,8 +81,10 @@ const Register = (props) => {
         <Text style={styles.appName}>PyPhone</Text>
         <View style={styles.logoContainer}>
           <SpinningLogo></SpinningLogo>
-          <AnimatedText></AnimatedText>
+          {/* <AnimatedText></AnimatedText> */}
         </View>
+        <MonsterCarousel setAvatar={setAvatar}></MonsterCarousel>
+
         <View style={styles.input_group}>
           <TextInput
             name="username"
@@ -132,6 +138,7 @@ const styles = StyleSheet.create({
   scroll: {
     flex: 1,
   },
+
   appName: {
     fontSize: 50,
     paddingTop: 50,
@@ -161,7 +168,7 @@ const styles = StyleSheet.create({
     width: 350,
   },
   input_group: {
-    paddingTop: 80,
+    paddingTop: 20,
     alignItems: 'center',
   },
   logo: {
