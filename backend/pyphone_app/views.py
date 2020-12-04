@@ -196,6 +196,17 @@ class AchievementView(APIView):
         return Response("Achievements has been created.")
 
 
+class ResetCoursesView(APIView):
+
+    def get(self, request):
+        token = request.headers['Authorization'].split(" ")[1]
+        user = Token.objects.get(key=token).user
+
+        usersCourse = UsersCourse.objects.filter(
+            user=user and Course.course_name != "Zmienne").update(active=0, gainedPoints=0, finishDate="9999-12-31")
+        return Response("DATA RESET")
+
+
 class UsersAchievementView(APIView):
 
     def get(self, request):
@@ -212,34 +223,66 @@ class UsersAchievementView(APIView):
                 {"achievementName": i['achievement']['achievementName'], "active": i['active'], "achievementDescription": i['achievement']['achievementDescription'], "achievementType": i['achievement']['achievementType']})
         return Response({"achievements": response})
 
-    # def post(self, request):
-    #     # check if user is going to get 100XP achievement
-    #     token = request.headers['Authorization'].split(" ")[1]
-    #     user = Token.objects.get(key=token).user
-    #     xp = Profile.objects.filter(user=user).values('xp')[0]['xp']
-    #     achievements = UsersAchievement.objects.filter(user=user, active=False)
-    #     serializer = UsersAchievementSerializer(achievements, many=True)
-    #     achievements_data = serializer.data
-    #     for i in achievements_data:
-    #         print(i)
-    #         condition = i['achievement']['condition']
-    #         achievenmentType = i['achievement']['achievementType']
-    #         achievementId = i['achievement']['id']
-    #         # print(achievementName)
-    #         if achievenmentType == "coin":
-    #             if xp > int(condition):
-    #                 print(condition)
-    #                 UsersAchievement.objects.filter(
-    #                     user=user, achievenment_id=achievementId).update(active=True)
-    #     return Response({"achievements": "response"})
+    def post(self, request):
+        token = request.headers['Authorization'].split(" ")[1]
+        user = Token.objects.get(key=token).user
+        xp = Profile.objects.filter(user=user).values('xp')[0]['xp']
+        achievements = UsersAchievement.objects.filter(user=user, active=False)
+
+        serializer = UsersAchievementSerializer(achievements, many=True)
+        achievements_data = serializer.data
+        newAchievements = []
+        for i in achievements_data:
+            condition = i['achievement']['condition']
+            achievenmentType = i['achievement']['achievementType']
+            achievementId = i['achievement']['id']
+            if achievenmentType == "coin":
+                if xp > int(condition):
+                    print(condition)
+                    UsersAchievement.objects.filter(
+                        user=user, achievement_id=achievementId).update(active=True)
+                    newAchievements.append(i['achievement']['achievementName'])
+            if achievenmentType == "award":
+                numOfActiveCourses = UsersCourse.objects.filter(
+                    user=user, active=True).count()
+                print(numOfActiveCourses, " ", condition)
+
+                if numOfActiveCourses > int(condition):
+                    UsersAchievement.objects.filter(
+                        user=user, achievement_id=achievementId).update(active=True)
+                    newAchievements.append(i)
+            # if achievenmentType in ["1correct", "3correct"]:
+            #     numOfActiveCourses = UsersCourse.objects.filter(
+            #         user=user, active=True course.).count()
+
+        return Response({"newAchievements": newAchievements})
 
 
-class ResetCoursesView(APIView):
+class AchievementActivity(APIView):
 
-    def get(self, request):
+    def post(self, request):
         token = request.headers['Authorization'].split(" ")[1]
         user = Token.objects.get(key=token).user
 
-        usersCourse = UsersCourse.objects.filter(
-            user=user and Course.course_name != "Zmienne").update(active=0, gainedPoints=0, finishDate="9999-12-31")
-        return Response("DATA RESET")
+        creationDate = Profile.objects.filter(user=user).values(
+            'creationDate')[0]['creationDate']
+
+        achievements = UsersAchievement.objects.filter(
+            user=user, active=False, achievement__in=[13, 14])
+        serializer = UsersAchievementSerializer(achievements, many=True)
+        achievements_data = serializer.data
+
+        todaysDate = datetime.date.today()
+        activeDays = (todaysDate-creationDate).days
+
+        newAchievements = []
+        for i in achievements_data:
+            condition = i['achievement']['condition']
+            achievementId = i['achievement']['id']
+
+            if activeDays > int(condition):
+                UsersAchievement.objects.filter(
+                    user=user, achievement_id=achievementId).update(active=True)
+                newAchievements.append(i)
+
+        return Response({"newAchievements": newAchievements})

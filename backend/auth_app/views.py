@@ -3,7 +3,7 @@ from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
-from pyphone_app.models import Profile, Course, UsersCourse
+from pyphone_app.models import Profile, Course, UsersCourse, Achievement, UsersAchievement
 from rest_framework import status
 from rest_framework.views import APIView
 from .serializers import CreateUserSerializer
@@ -29,12 +29,17 @@ class CreateUserAPIView(CreateAPIView):
         courses = Course.objects.all()
         for course in courses:
             print(course.course_name)
-            if course.course_name:
+            if course.course_name == "Zmienne":
                 userCourses = UsersCourse.objects.create(
                     user=serializer.instance, course=course, active=True)
             else:
                 userCourses = UsersCourse.objects.create(
                     user=serializer.instance, course=course, active=False)
+        achievements = Achievement.objects.all()
+
+        for achievement in achievements:
+            userAchievements = UsersAchievement.objects.create(
+                user=serializer.instance, achievement=achievement, active=False)
 
         token_data = {"token": token.key}
         return Response(

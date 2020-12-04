@@ -1,6 +1,7 @@
 import {LOGIN} from '../actions/auth';
 import {SET_PROFILE} from '../actions/auth';
 import {CHANGE_PROFILE} from '../actions/auth';
+import {CHECK_CALENDAR_ACHIEVEMENT} from '../actions/auth';
 
 const initialState = {
   token: null,

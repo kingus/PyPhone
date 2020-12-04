@@ -66,7 +66,7 @@ class Achievement(models.Model):
     condition = models.CharField(max_length=350, null=False, default="")
 
     def __str__(self):
-        return self.achievementName
+        return str(self.id) + ": " + self.achievementName
 
 
 class UsersAchievement(models.Model):

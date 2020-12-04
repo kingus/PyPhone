@@ -8,7 +8,9 @@ export const user = (xp, course, unlock) => {
     axios.defaults.timeout = 10000;
 
     const headers = {
-      Authorization: 'Token 493e77275ee813c6a1aa7ab20aac0af7eb8a43bb',
+      // Authorization: 'Token 493e77275ee813c6a1aa7ab20aac0af7eb8a43bb',
+      Authorization: 'Token ' + token,
+
       'Content-Type': 'application/json',
     };
 

@@ -65,6 +65,7 @@ const Login = (props) => {
     }
     await getProfile();
     await getAchievements();
+    await checkCalendarAchievements();
   };
 
   const getProfile = async () => {
@@ -73,6 +74,16 @@ const Login = (props) => {
     try {
       dispatch(action);
       console.log('XP SUCCESS');
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+  const checkCalendarAchievements = async () => {
+    let action;
+    action = authActions.checkCalendarAchievements();
+    try {
+      dispatch(action);
+      console.log('checkCalendarAchievements SUCCESS');
     } catch (err) {
       console.log(err.message);
     }

@@ -5,6 +5,7 @@ export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const SET_PROFILE = 'SET_PROFILE';
 export const CHANGE_PROFILE = 'CHANGE_PROFILE';
+export const CHECK_CALENDAR_ACHIEVEMENT = 'CHECK_CALENDAR_ACHIEVEMENT';
 
 export const login = (username, password) => {
   return async (dispatch) => {
@@ -28,6 +29,30 @@ export const login = (username, password) => {
       .catch((error) => {
         console.log(error);
         throw new Error('Something went wrong!');
+      });
+  };
+};
+export const checkCalendarAchievements = () => {
+  return async (dispatch, getState) => {
+    let token = getState().auth.token;
+    const payload = {};
+
+    const endpoint = global.url + '/api/users-achievement-activity/';
+    axios.defaults.timeout = 10000;
+
+    const headers = {
+      Authorization: 'Token ' + token,
+      'Content-Type': 'application/json',
+    };
+
+    await axios
+      .post(endpoint, payload, {headers})
+      .then((response) => {
+        console.log(response.data.newAchievements);
+      })
+      .catch((error) => {
+        console.log(error.message);
+        throw new Error('checkCalendarAchievements something went wrong!');
       });
   };
 };

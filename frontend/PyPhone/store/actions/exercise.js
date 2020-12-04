@@ -15,8 +15,8 @@ export const exercise = (id) => {
       method: 'get',
       url: endpoint,
       headers: {
-        Authorization: 'Token 493e77275ee813c6a1aa7ab20aac0af7eb8a43bb',
-        // Authorization: 'Token ' + token,
+        // Authorization: 'Token 493e77275ee813c6a1aa7ab20aac0af7eb8a43bb',
+        Authorization: 'Token ' + token,
       },
       params: {course_id: id},
     };
