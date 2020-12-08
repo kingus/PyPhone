@@ -23,16 +23,33 @@ import LinearGradient from 'react-native-linear-gradient';
 import {useSelector, useDispatch} from 'react-redux';
 import UserBar from '../components/UserBar';
 import * as exerciseActions from '../store/actions/exercise';
+import * as achievementsActions from '../store/actions/achievements';
+import MyModal from '../components/MyModal';
+import XPModal from '../components/modals/XPModal';
+import AwardModal from '../components/modals/AwardModal';
+import FirstCorrect from '../components/icons/FirstCorrect';
+import FirstCorrectModal from '../components/modals/FirstCorrectModal';
+import ThirdCorrectModal from '../components/modals/ThirdCorrectModal';
+import AllCorrectModal from '../components/modals/AllCorrectModal';
+import Correct75Modal from '../components/modals/Correct75Modal';
 
 const Home = (props) => {
   const dispatch = useDispatch();
   const userCourses = useSelector((state) => state.course.userCourses);
+  const newAchievements = useSelector((state) => state.auth.newAchievements);
+  const newAchievementsAll = useSelector(
+    (state) => state.achievements.newAchievementsAll,
+  );
+
   const activeCoursesAmount = useSelector(
     (state) => state.course.activeCoursesAmount,
   );
   const achievements = useSelector((state) => state.auth.achievements);
 
   const [activeCourse, setActiveCourse] = useState(6);
+  const [displayModal, setDisplayModal] = useState(false);
+  const [displayModalAll, setDisplayModalAll] = useState(false);
+  const [days, setDays] = useState(0);
 
   const navToLecture = (id, course) => {
     var route = 'Lecture' + id;
@@ -71,11 +88,40 @@ const Home = (props) => {
     console.log('activeCoursesAmount ', activeCoursesAmount);
   }, [userCourses]);
 
+  useEffect(() => {
+    console.log('newAchievements ', newAchievements);
+    if (typeof newAchievements === 'undefined') {
+      console.log('ififif');
+    } else if (newAchievements.length > 0) {
+      console.log('LEN ', newAchievements.length);
+      setDisplayModal(true);
+      console.log('LISTA', newAchievements[0]['achievement']['condition']);
+      achievementName = newAchievements[0]['achievement']['achievementName'];
+      setDays(newAchievements[0]['achievement']['condition']);
+      console.log('achievementName ', achievementName);
+    }
+  }, [newAchievements]);
+
+  useEffect(() => {
+    console.log('newAchievementsAll ', newAchievementsAll);
+    if (typeof newAchievementsAll === 'undefined') {
+      console.log('newAchievementsAll ififif');
+    } else if (newAchievementsAll.length > 0) {
+      console.log('LEN  newAchievementsAll', newAchievementsAll.length);
+      setDisplayModalAll(true);
+      // let action;
+      // action = achievementsActions.resetNewAchievements();
+      // try {
+      //   dispatch(action);
+      //   console.log('resetNewAchievements SUCCESS');
+      // } catch (err) {
+      //   console.log(err.message);
+      // }
+    }
+  }, [newAchievementsAll]);
+
   return (
     <ScrollView>
-      {/* <LinearGradient
-        colors={['#34adf9', '#bae5ff', '#34adf9']}
-        style={styles.linearGradient}> */}
       <View style={styles.container}>
         <View style={styles.main}>
           <View style={styles.topBar}>
@@ -112,6 +158,35 @@ const Home = (props) => {
         </View>
         {/* </LinearGradient> */}
       </View>
+      {displayModal ? <MyModal days={days}></MyModal> : <View></View>}
+      {displayModalAll ? (
+        newAchievementsAll.map((data, index) => {
+          console.log('DATA', data);
+          {
+            if (data.achievementType === 'coin') {
+              return <XPModal key={index} data={data}></XPModal>;
+            } else if (data.achievementType === 'award') {
+              return <AwardModal key={index} data={data}></AwardModal>;
+            } else if (data.achievementType === 'firstCorrect') {
+              return (
+                <FirstCorrectModal key={index} data={data}></FirstCorrectModal>
+              );
+            } else if (data.achievementType === 'thirdCorrect') {
+              return (
+                <ThirdCorrectModal key={index} data={data}></ThirdCorrectModal>
+              );
+            } else if (data.achievementType === 'allCorrect') {
+              return (
+                <AllCorrectModal key={index} data={data}></AllCorrectModal>
+              );
+            } else if (data.achievementType === '75correct') {
+              return <Correct75Modal key={index} data={data}></Correct75Modal>;
+            }
+          }
+        })
+      ) : (
+        <View></View>
+      )}
     </ScrollView>
   );
 };

@@ -8,7 +8,7 @@ const GoldIcon = (props) => {
 
   return (
     <TouchableOpacity onPress={() => props.pressAchievement(props.description)}>
-      {active ? (
+      {props.active ? (
         <Image source={goldmedal} style={styles.image}></Image>
       ) : (
         <Image

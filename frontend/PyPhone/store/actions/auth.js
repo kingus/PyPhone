@@ -48,7 +48,11 @@ export const checkCalendarAchievements = () => {
     await axios
       .post(endpoint, payload, {headers})
       .then((response) => {
-        console.log(response.data.newAchievements);
+        console.log('ACTION NEW ACHIEVEMENTS ', response.data.newAchievements);
+        dispatch({
+          type: CHECK_CALENDAR_ACHIEVEMENT,
+          newAchievements: response.data.newAchievements,
+        });
       })
       .catch((error) => {
         console.log(error.message);
@@ -60,8 +64,6 @@ export const checkCalendarAchievements = () => {
 export const get_profile = () => {
   return async (dispatch, getState) => {
     let token = getState().auth.token;
-    // token = '493e77275ee813c6a1aa7ab20aac0af7eb8a43bb';
-    // const endpoint = global.url + '/api/profile/';
     const endpoint = global.url + '/api/profile-info/';
     axios.defaults.timeout = 10000;
 
@@ -76,8 +78,6 @@ export const get_profile = () => {
     console.log(endpoint);
     await axios(config)
       .then(async (response) => {
-        console.log('RESPO', response.data);
-        console.log('XP', response.data.countDatesList);
         await dispatch({
           type: SET_PROFILE,
           xp: response.data.xp,

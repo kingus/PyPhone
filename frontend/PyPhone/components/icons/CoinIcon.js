@@ -6,22 +6,23 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 const CoinIcon = (props) => {
   const [active, setActive] = useState(props.active);
 
+  useEffect(() => {
+    setActive(props.active);
+    console.log('PROPS ACTIVE COIN', props.active);
+  }, [props.active]);
+
   return (
     <TouchableOpacity onPress={() => props.pressAchievement(props.description)}>
-      {active ? (
-        <ImageBackground source={coin} style={styles.image}>
-          <View
-            style={{
-              position: 'absolute',
-              top: 27,
-              left: 2,
-              right: 0,
-              bottom: 0,
-              alignItems: 'center',
-            }}>
-            <Text style={styles.xpText}>{props.xp}</Text>
-          </View>
-        </ImageBackground>
+      {props.active ? (
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            margin: 0,
+          }}>
+          <Image style={styles.image} source={coin} />
+          <Text style={styles.xpText}>{props.xp}</Text>
+        </View>
       ) : (
         <ImageBackground source={coin} style={styles.image} tintColor="#5afffb">
           <View
@@ -45,6 +46,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#D37C00',
     fontSize: 12,
+    position: 'absolute',
   },
   image: {
     width: 70,

@@ -16,8 +16,8 @@ export const course = () => {
     await axios
       .get(endpoint, {
         headers: {
-          Authorization: 'Token ' + token,
-          // Authorization: 'Token 493e77275ee813c6a1aa7ab20aac0af7eb8a43bb',
+          // Authorization: 'Token ' + token,
+          Authorization: 'Token 493e77275ee813c6a1aa7ab20aac0af7eb8a43bb',
         },
       })
       .then((response) => {

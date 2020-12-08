@@ -7,6 +7,7 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import * as userActions from '../store/actions/user';
 import * as authActions from '../store/actions/auth';
 import * as courseActions from '../store/actions/course';
+import * as achievementsActions from '../store/actions/achievements';
 import {useSelector, useDispatch} from 'react-redux';
 
 const Final = (props) => {
@@ -38,6 +39,7 @@ const Final = (props) => {
     let action = userActions.user(xp, course_id, false);
     let action2 = authActions.xp(xp, course_id, activeCourses);
     let action3 = courseActions.courseSetActive(course_id, false, percentage);
+    let action4 = achievementsActions.updateAchievements();
 
     let calculateXp = (75 * maxXp) / 100;
     console.log(calculateXp);
@@ -51,6 +53,19 @@ const Final = (props) => {
       dispatch(action3);
       dispatch(action);
       dispatch(action2);
+      dispatch(action4);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  const getAchievements = async () => {
+    let action;
+    action = achievementsActions.getAchievements();
+    try {
+      dispatch(action);
+
+      console.log('getAchievements SUCCESS');
     } catch (err) {
       console.log(err.message);
     }

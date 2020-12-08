@@ -8,7 +8,7 @@ const SilverIcon = (props) => {
 
   return (
     <TouchableOpacity onPress={() => props.pressAchievement(props.description)}>
-      {active ? (
+      {props.active ? (
         <Image source={silvermedal} style={styles.image}></Image>
       ) : (
         <Image

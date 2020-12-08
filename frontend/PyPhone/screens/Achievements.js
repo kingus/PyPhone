@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -18,7 +18,7 @@ import CalendarIcon from '../components/icons/CalendarIcon';
 import CodeIcon from '../components/icons/CodeIcon';
 import DiplomaIcon from '../components/icons/DiplomaIcon';
 import {View} from 'react-native-animatable';
-// import Modal, {ModalContent} from 'react-native-modals';
+import AwardIcon2 from '../components/icons/AwardIcon2';
 
 const Achievements = (props) => {
   const [visible, setVisible] = useState(false);
@@ -27,13 +27,17 @@ const Achievements = (props) => {
   const achievementsList = useSelector(
     (state) => state.achievements.achievementsList,
   );
+  const [newList, setNewList] = useState(achievementsList);
 
   const pressAchievement = (description) => {
     setVisible(true);
     setDescription(description);
   };
 
-  console.log('ACHIEVEMENTS LIST, ', achievementsList);
+  useEffect(() => {
+    setNewList(achievementsList);
+    console.log('ACHIEVEMENTS LIST, ', achievementsList);
+  }, [achievementsList]);
 
   return (
     // <LinearGradient
@@ -48,14 +52,14 @@ const Achievements = (props) => {
       <FlatList
         numColumns={4}
         keyExtractor={(item) => item.achievementName}
-        data={achievementsList}
+        data={newList}
         renderItem={({item}) => {
           if (item.achievementType === 'coin')
             return (
               <CoinIcon
                 xp={item.achievementName}
                 description={item.achievementDescription}
-                active={item['active']}
+                active={item.active}
                 pressAchievement={pressAchievement}></CoinIcon>
             );
           if (item.achievementType === 'award')
@@ -67,7 +71,7 @@ const Achievements = (props) => {
                 pressAchievement={pressAchievement}></AwardIcon>
             );
 
-          if (item.achievementType === '100%') {
+          if (item.achievementType === 'allCorrect') {
             return (
               <GoldIcon
                 active={item.active}
@@ -75,7 +79,7 @@ const Achievements = (props) => {
                 pressAchievement={pressAchievement}></GoldIcon>
             );
           }
-          if (item.achievementType === '75%') {
+          if (item.achievementType === '75correct') {
             return (
               <SilverIcon
                 active={item.active}

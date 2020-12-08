@@ -6,6 +6,7 @@ import {createAppContainer} from 'react-navigation';
 import logout from '../images/logout.png';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import * as authActions from '../store/actions/auth';
+import * as achievementsActions from '../store/actions/achievements';
 import {useDispatch} from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import logo from '../images/logo.png';
@@ -23,10 +24,12 @@ const DrawerNavigator = createDrawerNavigator(
       const logOutHandler = async () => {
         let action;
         action = authActions.logout();
+        let action2 = achievementsActions.resetNewAchievements();
         console.log('LOG OUT HANDLER');
 
         try {
-          await dispatch(action);
+          // dispatch(action2);
+          dispatch(action);
           props.navigation.navigate({
             routeName: 'SignIn',
           });

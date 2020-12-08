@@ -4,12 +4,13 @@ export const user = (xp, course, unlock) => {
   return async (dispatch, getState) => {
     const endpoint = global.url + '/api/profile/';
     const payload = {xp: xp, course: course, unlock: unlock};
+    const token = getState().auth.token;
 
     axios.defaults.timeout = 10000;
 
     const headers = {
-      // Authorization: 'Token 493e77275ee813c6a1aa7ab20aac0af7eb8a43bb',
-      Authorization: 'Token ' + token,
+      Authorization: 'Token 493e77275ee813c6a1aa7ab20aac0af7eb8a43bb',
+      // Authorization: 'Token ' + token,
 
       'Content-Type': 'application/json',
     };

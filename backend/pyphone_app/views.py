@@ -212,6 +212,30 @@ class UsersAchievementView(APIView):
     def get(self, request):
         token = request.headers['Authorization'].split(" ")[1]
         user = Token.objects.get(key=token).user
+
+#################################################################################
+
+        creationDate = Profile.objects.filter(user=user).values(
+            'creationDate')[0]['creationDate']
+
+        achievements = UsersAchievement.objects.filter(
+            user=user, active=False, achievement__in=[13, 14, 18, 19])
+        serializer = UsersAchievementSerializer(achievements, many=True)
+        achievements_data = serializer.data
+
+        todaysDate = datetime.date.today()
+        activeDays = (todaysDate-creationDate).days
+
+        newAchievements = []
+        for i in achievements_data:
+            condition = i['achievement']['condition']
+            achievementId = i['achievement']['id']
+
+            if activeDays > int(condition):
+                newAchievement = UsersAchievement.objects.filter(
+                    user=user, achievement_id=achievementId).update(active=True)
+        #################################################################################
+
         achievements = UsersAchievement.objects.filter(
             user=user).order_by('?')
         serializer = UsersAchievementSerializer(achievements, many=True)
@@ -221,28 +245,34 @@ class UsersAchievementView(APIView):
             print(i['achievement']['achievementName'])
             response.append(
                 {"achievementName": i['achievement']['achievementName'], "active": i['active'], "achievementDescription": i['achievement']['achievementDescription'], "achievementType": i['achievement']['achievementType']})
+        print("ACHIEVEMENTS", response)
         return Response({"achievements": response})
 
     def post(self, request):
         token = request.headers['Authorization'].split(" ")[1]
         user = Token.objects.get(key=token).user
-        xp = Profile.objects.filter(user=user).values('xp')[0]['xp']
         achievements = UsersAchievement.objects.filter(user=user, active=False)
 
-        serializer = UsersAchievementSerializer(achievements, many=True)
+        serializer = UsersAchievementSerializer(
+            achievements, many=True)
         achievements_data = serializer.data
         newAchievements = []
+        xp = Profile.objects.filter(user=user).values('xp')[0]['xp']
         for i in achievements_data:
             condition = i['achievement']['condition']
-            achievenmentType = i['achievement']['achievementType']
+            achievementType = i['achievement']['achievementType']
             achievementId = i['achievement']['id']
-            if achievenmentType == "coin":
-                if xp > int(condition):
+            achievementName = i['achievement']['achievementName']
+            achievementDescription = i['achievement']['achievementDescription']
+            if achievementType == "coin":
+                if xp >= int(condition):
                     print(condition)
                     UsersAchievement.objects.filter(
                         user=user, achievement_id=achievementId).update(active=True)
-                    newAchievements.append(i['achievement']['achievementName'])
-            if achievenmentType == "award":
+                    newAchievements.append({'achievementName': achievementName, 'active': True,
+                                            "achievementDescription": achievementDescription, "achievementType": achievementType})
+                    # newAchievements.append(i)
+            if achievementType == "award":
                 numOfActiveCourses = UsersCourse.objects.filter(
                     user=user, active=True).count()
                 print(numOfActiveCourses, " ", condition)
@@ -250,11 +280,38 @@ class UsersAchievementView(APIView):
                 if numOfActiveCourses > int(condition):
                     UsersAchievement.objects.filter(
                         user=user, achievement_id=achievementId).update(active=True)
-                    newAchievements.append(i)
-            # if achievenmentType in ["1correct", "3correct"]:
-            #     numOfActiveCourses = UsersCourse.objects.filter(
-            #         user=user, active=True course.).count()
+                    newAchievements.append({'achievementName': achievementName, 'active': True,
+                                            "achievementDescription": achievementDescription, "achievementType": achievementType})
 
+            if achievementType in ["firstCorrect", "thirdCorrect", "allCorrect", "75correct"]:
+                courses = UsersCourse.objects.filter(
+                    user=user).order_by('-active')
+                serializer = UsersCourseSerializer(courses, many=True)
+                print(serializer)
+                courses_data = serializer.data
+                count100 = 0
+                count75 = 0
+                for i in courses_data:
+                    dane = i['course']
+                    sumXp = Exercise.objects.filter(
+                        course=dane['id']).aggregate((Sum('points')))['points__sum']
+                    print(i['gainedPoints'])
+                    print(sumXp)
+                    if (i['gainedPoints'] == sumXp):
+                        count100 = count100 + 1
+                    if (i['gainedPoints']/sumXp >= 0, 75):
+                        count75 = count75 + 1
+
+                print(count100)
+                print(count75)
+                if count100 >= int(condition) or count75 >= int(condition):
+                    UsersAchievement.objects.filter(
+                        user=user, achievement_id=achievementId).update(active=True)
+                    newAchievements.append({'achievementName': achievementName, 'active': True,
+                                            "achievementDescription": achievementDescription, "achievementType": achievementType})
+
+        print("XP ", xp)
+        print("newAchievements ", newAchievements)
         return Response({"newAchievements": newAchievements})
 
 
@@ -268,7 +325,7 @@ class AchievementActivity(APIView):
             'creationDate')[0]['creationDate']
 
         achievements = UsersAchievement.objects.filter(
-            user=user, active=False, achievement__in=[13, 14])
+            user=user, active=False, achievement__in=[13, 14, 18, 19])
         serializer = UsersAchievementSerializer(achievements, many=True)
         achievements_data = serializer.data
 
@@ -281,8 +338,10 @@ class AchievementActivity(APIView):
             achievementId = i['achievement']['id']
 
             if activeDays > int(condition):
-                UsersAchievement.objects.filter(
+                newAchievement = UsersAchievement.objects.filter(
                     user=user, achievement_id=achievementId).update(active=True)
                 newAchievements.append(i)
+                print(newAchievement)
+        print("NEW ACHIEVEMENTS", newAchievements)
 
         return Response({"newAchievements": newAchievements})

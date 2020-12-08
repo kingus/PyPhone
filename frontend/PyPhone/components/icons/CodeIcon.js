@@ -6,6 +6,10 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 const CodeIcon = (props) => {
   const [active, setActive] = useState(props.active);
 
+  useEffect(() => {
+    setActive(props.active);
+  }, [props.active]);
+
   return (
     <TouchableOpacity onPress={() => props.pressAchievement(props.description)}>
       {active ? (

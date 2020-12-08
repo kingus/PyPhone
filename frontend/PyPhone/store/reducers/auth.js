@@ -12,6 +12,7 @@ const initialState = {
   badges: null,
   countDatesList: [{}],
   todaysXp: null,
+  newAchievements: [{}],
 };
 
 export default (state = initialState, action) => {
@@ -28,9 +29,10 @@ export default (state = initialState, action) => {
         activeDays: action.activeDays,
         achievements: action.achievements,
         countDatesList: action.countDatesList,
-        todaysXp: action.todaysXp,
+        todaysXp: action.todaysXsp,
         username: action.username,
         avatar: action.avatar,
+        token: state.token,
       };
     case CHANGE_PROFILE:
       var today = new Date();
@@ -61,6 +63,12 @@ export default (state = initialState, action) => {
         //nie odejmuje poprzedniego wyniku dla kursu
         todaysXp: state.todaysXp + action.xp,
         username: state.username,
+        token: state.token,
+        avatar: state.avatar,
+      };
+    case CHECK_CALENDAR_ACHIEVEMENT:
+      return {
+        newAchievements: action.newAchievements,
       };
 
     default:

@@ -58,14 +58,14 @@ const Login = (props) => {
     let action;
     action = courseActions.course();
     try {
-      await dispatch(action);
+      dispatch(action);
       console.log('COURSE SUCCESS');
     } catch (err) {
       console.log(err.message);
     }
-    await getProfile();
-    await getAchievements();
-    await checkCalendarAchievements();
+    getProfile();
+    checkCalendarAchievements();
+    getAchievements();
   };
 
   const getProfile = async () => {
@@ -78,6 +78,7 @@ const Login = (props) => {
       console.log(err.message);
     }
   };
+
   const checkCalendarAchievements = async () => {
     let action;
     action = authActions.checkCalendarAchievements();
